@@ -6,4 +6,37 @@
     \item How do we define a largangian region?
     \item Matching particles
     \item Computing transfer
+    \item Redshfit evolution
 \end{enumerate}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/lagrangian_region_visualisation.png}
+    \caption{A lagrangian region of a $10^{13}$ $\mathrm{M}_\odot$, $z=0$, halo. Colour shows projected density for the whole box. Note the actual density of the initial conditions is almost completely uniform; only the particles that are part of the lagrangian region are plotted, hence the significant variation. The inset plot shows the halo at $z=0$ that forms out of the dark matter visualised here. Gas contributing to the halo at $z=0$ is not shown.}
+    \label{fig:lrpic}
+\end{figure}
+
+Lagrangian regions are a useful concept, particularly when considering a dark matter-only simulation. They describe the region in the initial conditions that will collapse to a given halo. Here we will discuss halos at redshift $z=0$, but note that this is applicable at all redshifts where bound structures exist. This concept can then be extended in a hydrodynamical simulation to include the gas in the initial conditions that overlaps with the dark matter of a given halo (see Figure \ref{fig:lrpic}). Due to the large diversity of forces on a given set of particles in a halo, though, this gas may not be the gas that ends up occupying the same spatial volume as that dark matter halo at $z=0$.
+
+To define a set of lagrangian regions for a simulation, first the halos at a given redshift must be identified. Here, the AMIGA halo finder (AHF), which uses a spherical overdensity to define the positions of halos and hence their associated particles, was used. The results are qualitatively independent of the choice of halo finder (see Appendix \ref{app:caesar} for a comparison with a simple 3D friends-of-friends algorithm).
+
+Each lagrangian region in the initial conditions is identified by ID matching the particles found in the given halo at $z=0$. Those particles are then assigned a lagrangian region ID that is equal to the halo ID of their associated $z=0$ halo. Once this has taken place, the gas particles can then be assigned a lagrangian region by spatially matching with the dark matter. In practice, the nearest dark matter neighbour for each gas particle is identified, and the same lagrangian region ID is assigned for both. There has been some discussion in the literature of alternative ways of assigning lagrangian regions (based on, for example, the convex hull of such a spatial region), but here this definition is chosen to ensure that the holes in each lagrangian region remain (see \S \ref{sec:convexhull} for more information).
+
+Now that each particle has been assigned a lagrangian region, all that remains to be done is to compare the initial and final conditions of the simulation. This, again, can be performed by ID matching the $z=0$ particles and the ones in the initial conditions. For the star particles at $z=0$, their gas progenitor in the initial conditions is used to find their original lagrangian region. Gas particles that completely disappear due to interaction with a black hole particle are discarded in this analysis.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/overall_mass_fraction.png}
+    \caption{The fraction of total baryonic mass in a given halo at $z=0$ as a function of halo mass. These values are computed using the lagrangian region IDs that were assigned to the gas and star particles in the initial conditions. See Figure \ref{fig:splitmassfrac} for a breakdown per component. The shaded regions show a single standard deviation of variance in the mass fraction for that bin. <HOW MANY ARE IN EACH BIN?>}
+    \label{fig:massfrac}
+\end{figure}
+
+Once this analysis has been performed it is possible to see the fraction of baryonic mass at $z=0$ that originates from the lagrangian region of a given galaxy (see Figure \ref{fig:massfrac}). <Some words here about the actual data>. There is a significant difference in the contributions from the gaseous and stellar components to this mass fraction; see Figure \ref{fig:splitmassfrac}.
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.495\textwidth]{figures/gas_mass_fraction.png}
+    \includegraphics[width=0.495\textwidth]{figures/stellar_mass_fraction.png}
+    \caption{Left: fraction of gaseous mass at $z=0$ in each halo from each component; right: fraction of stellar mass at $z=0$ from each component. Note that there is significantly more transfer shown in the gaseous component. Gas that is transferred between lagrangian regions must be given time to cool before being able to form stars. As the events that enable transfer are typically very energetic (AGN, stellar feedback, accretion), it is unlikely that the cooling time will be short enough to form stars by the end of the simulation for most transfer. However, approximately 10\% of the stellar mass of a given halo is still contributed by transfer. <Need to look at if this is formed in-situ or ex-situ.>}
+    \label{fig:splitmassfrac}
+\end{figure*}
