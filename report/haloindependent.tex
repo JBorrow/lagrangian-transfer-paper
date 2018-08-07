@@ -8,3 +8,44 @@
     \item Combining with halo definition
     \item Careful analysis: most of the gas in the CGM comes from other LRs
 \end{enumerate}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=\textwidth]{figures/kspafig.png}
+    \caption{A diagramatic representation of the distance measure. On the left, the initial conditions are shown. The blue dark matter particles each find their closest dark matter and gas (red) neighbour. These particles are then tracked to the final state of the simulation (right) and the distances between them calculated again.}
+    \label{fig:distancemeasure}
+\end{figure*}
+
+The above analysis depends on there being dark matter halos that can easily be identified. However, this analysis need not depend on the definition of a halo; if the gas and dark matter become decoupled, it should be possible to see this effect without having to consider bound structues at all.
+
+To find how separated the dark matter becomes from the gas, two distances are considered. First, the distance from each dark matter particle to the corresponding closest dark matter neighbour in the initial conditions, at $z=0$, i.e. the distance
+\begin{equation}
+    r_{ij, ~z=0} = \sqrt{
+        \left|
+            \mathbf{x}_{i, ~z=0} - \mathbf{x}_{j \ni \min(r_{ij, z=z_{ini}}), ~z=0}
+        \right|^2
+    }
+    \label{eqn:minimal}
+\end{equation}
+where $\mathbf{x}_i$ is the position of particle $i$, and $\mathbf{x}_i - \mathbf{x}_j$ is wrapped within the periodic box. A diagramatic representation of this is given in Figure \ref{fig:distancemeasure}. As in the halo-based analysis, star particles at $z=0$ are ID matched with their gas progenetors.
+
+The most simple version of this analysis is to look at the distribution of gas and star distances at $z=0$ compared to their dark matter neighbours for each particle. Figure \ref{fig:dmvsstarvsgas} shows this distance metric. Note how the stellar distribution is symmetric around 1, meaning that the stellar and dark matter components have very similar distributions; this is again shown in Figure \ref{fig:alldistances}. This is likely because the majority of stars are formed in the central galaxy, which is tightly coupled to the dark matter around it as it has always been the centre of the potential well.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/dm_vs_stars_vs_gas.png}
+    \caption{The distribution of relative distances for each dark matter particle to the appropriate gas and stellar particles at $z=0$ normalised by the distance to the closest dark matter particle in the initial conditions. Note the significantly diffrent distributions for gas and stars.}
+    \label{fig:dmvsstarvsgas}
+\end{figure}
+
+The distribution for the gas, however, is quite different. The distribution peaks above 1, showing that the gas ends up further away than the appropriate dark matter neighbour. The fact that this distribution is different from the stellar one also substantiates the halo mass function data that was presented in the halo-based analysis (Figure \ref{fig:splitmassfrac}); more transfer between lagrangian regions would imply that the gas should end up further away (compared to the distribution for the stellar component).
+
+Now looking at the actual, raw, distributions of distances it is clear to see where these trends originate (Figure \ref{fig:alldistances}. The gas has a tail of particles that, by the end of the simulation, are 15 Mpc away from their original neighbour. Such a tail is not seen in the stellar or dark matter component, both of which have much tighter distributions. This does not mean that the dark matter cannot become highly dynamically separated, though; two particles which were around 80 kpc away from each other in the initial conditions can still end up separated by many megaparsecs. This is likely due to scattering.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/all_distances.png}
+    \caption{The distirbution of all distances to particles at $z=0$. Note the similarity between the dark matter distribution and the stellar distribution, and how different they are to the gas with the associated long tail.}
+    \label{fig:alldistances}
+\end{figure}
+
