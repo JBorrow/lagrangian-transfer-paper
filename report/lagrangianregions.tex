@@ -9,6 +9,8 @@
     \item Redshfit evolution
 \end{enumerate}
 
+\subsection{Definition of a Lagrangian Region}
+
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{figures/lagrangian_region_visualisation.png}
@@ -20,9 +22,13 @@ Lagrangian regions are a useful concept, particularly when considering a dark ma
 
 To define a set of lagrangian regions for a simulation, first the halos at a given redshift must be identified. Here, the AMIGA halo finder (AHF), which uses a spherical overdensity to define the positions of halos and hence their associated particles, was used. The results are qualitatively independent of the choice of halo finder (see Appendix \ref{app:caesar} for a comparison with a simple 3D friends-of-friends algorithm).
 
+\subsection{Matching Lagrangian IDs}
+
 Each lagrangian region in the initial conditions is identified by ID matching the particles found in the given halo at $z=0$. Those particles are then assigned a lagrangian region ID that is equal to the halo ID of their associated $z=0$ halo. Once this has taken place, the gas particles can then be assigned a lagrangian region by spatially matching with the dark matter. In practice, the nearest dark matter neighbour for each gas particle is identified, and the same lagrangian region ID is assigned for both. There has been some discussion in the literature of alternative ways of assigning lagrangian regions (based on, for example, the convex hull of such a spatial region), but here this definition is chosen to ensure that the holes in each lagrangian region remain by construction (see \S \ref{sec:convexhull} for more information).
 
 Now that each particle has been assigned a lagrangian region, all that remains to be done is to compare the initial and final conditions of the simulation. This, again, can be performed by ID matching the $z=0$ particles and the ones in the initial conditions. For star particles, at $z=0$, their gas progenitor in the initial conditions is used to find their lagrangian region. Gas particles that completely disappear due to interaction with a black hole particle are discarded in this analysis.
+
+\subsection{Quantifying Inter-Lagrangian Transfer}
 
 \begin{figure}
     \centering
