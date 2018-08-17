@@ -47,3 +47,17 @@ Once this analysis has been performed it is possible to see the fraction of bary
 \subsection{Redshift Evolution}
 
 \blue{We should re-run the above analysis at a lower redshift, just to check that the transfer is actually lower, like we already had before the disaster.}
+
+\subsection{Radial Trends}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/gas_mass_fraction_radius.png}
+    \includegraphics[width=\columnwidth]{figures/star_mass_fraction_radius.png}
+    \caption{Top: Gas mass fraction from each component as a function of radius, scaled by virial radius. Bottom: the same plot but for the stellar component. This is shown for all halos with $10^{13} > M_{\rm halo} > 10^{12}$ $M_\odot$. Bins are spaced linearly in radius and stacked for all halos, with bins in individual halos containing no gas or stars being ignored during the normalisation process. The trends steepen with decreasing halo mass, and flatten with increasing mass.}
+    \label{fig:radialmassfrac}
+\end{figure}
+
+The mass fractions contributed from various components to each halo appear to be relatively independent of halo mass (see Figure \ref{fig:massfrac}), however this may not be true within each individual halo. In Figure \ref{fig:radialmassfrac} the mass fraction contributed to the halo is shown as a function of radius. As expected, more gas in the center of the halo comes from the corresponding lagrangian region, but interestingly this only approaches ~60\%, suggesting significant transfer \emph{into halos} still takes place for gas that ends up at the bottom of the potential well at $z=0$.
+
+Also note how the mass fraction of stars from the own lagrangian region of the halo drops as a function of radius. This suggests that a large number (~30\%) of these stars were formed ex-situ. \blue{Perhaps this is a good place to reference other work... This is a surprisingly high number}. Note, again, that around ~15\% of the stars at the center of these halos are formed from gas that was not present in the initial lagrangian region of this halo. This is surprising, as this transfer must have taken place relatively early to ensure that the gas was able to cool and form stars.
