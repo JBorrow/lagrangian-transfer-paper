@@ -1,6 +1,12 @@
 \section{The Simba Simulation Suite}
 
-This work uses the Simba simulation suite \citep{}.
+
+This work uses the Simba simulation suite \citep{}. Simba uses a variant of the GIZMO code \citep{hopkins2015}, with the Meshless-Finite-Mass (MFM) hydrodynamics solver. This solver uses a \blue{Wentland C2} kernel with 64 neighbours. In the 50 Mpc, $512^3$, box, the mass resolution for the hydrodynamically active particles is \blue{$<>$ M$_\odot$}. The gravitational forces are solved using the \blue{Tree-PM method as described in \citet{springel2005}}, of which GIZMO is a descendent. There are $512^3$ dark matter particles in the box, with a dark matter mass resolution of \blue{$<>$ M$_\odot$}. The cosmology used in Simba comes from \blue{NB: Need cosmology information here, with the values for $\Omega_\Lambda = $, $\Omega_{\rm M} = $, $\sigma_{\rm B} = $, and the universal baryon fraction $f_g = $.}
+
+On top of this base code, the Simba sub-grid model is implemented. This model is fully described in \citet{}, but it is summarised here. \blue{Star formation. Stellar feedback. AGN.}
+
+The Simba simulation suite was calibrated to \blue{Need to know how it was calibrated}.
+
 
 \blue{Need much more here.
 
