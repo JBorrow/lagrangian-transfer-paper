@@ -7,6 +7,8 @@ Invoke this in script mode as
 
 """
 
+import ltcaesar as lt
+
 import radial_distance_analysis
 import component_fraction_vs_halo_mass_analysis
 
