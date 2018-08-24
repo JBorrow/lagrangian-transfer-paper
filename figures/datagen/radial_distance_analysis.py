@@ -38,7 +38,7 @@ def run_analysis(simulation: lt.objects.Simulation):
 
     # Make the plot pretty
     bin_centers[0] = 0
-    bin_centers[1] = 1
+    bin_centers[-1] = 1
 
     np.save("radial_distance_analysis_gas.npy", output)
     np.save("radial_distance_analysis_star.npy", output_star)
