@@ -7,6 +7,8 @@ Invoke this in script mode as
 
 """
 
+import ltcaesar as lt
+
 import radial_distance_analysis
 
 import sys
