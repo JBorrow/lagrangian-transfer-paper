@@ -8,6 +8,7 @@ Invoke this in script mode as
 """
 
 import radial_distance_analysis
+import component_fraction_vs_halo_mass_analysis
 
 import sys
 
@@ -18,3 +19,6 @@ sim = lt.read_data_from_file(filename)
 
 print("Running radial_distance_analysis")
 radial_distance_analysis.run_analysis(simulation=sim)
+
+print("Running component_fraction_vs_halo_mass_analysis")
+component_fraction_vs_halo_mass_analysis.run_analysis(simulation=sim)
