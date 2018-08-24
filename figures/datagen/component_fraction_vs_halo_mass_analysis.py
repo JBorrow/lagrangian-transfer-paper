@@ -23,21 +23,21 @@ def run_analysis(simulation: lt.objects.Simulation):
     analysis scripts need to be ran at once (to avoid double-loading data).
     """
 
-    data_stellar = lt.plot.mass_fraction_transfer_from_lr_data(
+    data_stellar = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
         sim, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["stellar"]
     )
 
-    data_gas = lt.plot.mass_fraction_transfer_from_lr_data(
+    data_gas = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
         sim, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["gas"]
     )
 
-    data_both = lt.plot.mass_fraction_transfer_from_lr_data(
+    data_both = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
         sim, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["gas", "stellar"]
     )
 
     for name in ["stellar", "gas", "both"]:
         filename = "component_fraction_vs_halo_mass_{}.npy".format(name)
-        data = locals()[name]
+        data = locals()["data_{}".format(name)]
 
         np.save(filename, data)
 
