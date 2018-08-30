@@ -2,18 +2,28 @@
 
 \subsection{Code}
 
-The code used in this analysis, {\tt LTCaesar} is made available to the community for use with their own simulations\footnote{https://www.github.com/jborrow/lagrangian-transfer}. This code can also be installed with the `pip` python packaging manager.
+The code used in this analysis, {\tt LTCaesar} is made available to the
+community for use with their own
+simulations\footnote{https://www.github.com/jborrow/lagrangian-transfer}. This
+code can also be installed with the `pip` python packaging manager.
 
-{\tt LTCaesar} uses the numerical routines from {\tt numpy}, the KDTree from {\tt scipy} for nearest neighbour searching, and the halo finder wrapper from {\tt caesar} \citep{numpy, scipy, caesar}. Full documentation, and more information, can be found on the code webpages. The work in this paper in particular made use of the Intel Distribution for Python that provides optimized routines for {\tt numpy} and {\tt scipy}.
+{\tt LTCaesar} uses the numerical routines from {\tt numpy}, the KDTree from
+{\tt scipy} for nearest neighbour searching, and the halo finder wrapper from
+{\tt caesar} \citep{numpy, scipy, caesar}. Full documentation, and more
+information, can be found on the code webpages. The work in this paper in
+particular made use of the Intel Distribution for Python that provides
+optimized routines for {\tt numpy} and {\tt scipy}.
 
-The visualisations in this work made use of {\tt py-sphviewer} \citep{pysphviewer_ref}.
+The visualisations in this work made use of {\tt py-sphviewer}
+\citep{pysphviewer_ref}.
 
-\subsection{Comparison between AHF and a traditional 3D Friends-of-Friends algorithm}
+\subsection{Comparison between AHF and a traditional 3D Friends-of-Friends
+algorithm}
 
-Qualitatively, the results from both of these are the same; however we see significant variation at the high-mass end. This is likely due to significant differences in the way that the structure of these halos is shown.
+Qualitatively, the results from both of these are the same; however we see
+significant variation at the high-mass end. This is likely due to significant
+differences in the way that the structure of these halos is shown.
 
-\blue{\begin{itemize}
-\item Visualsioation of the same halo with 3D FoF and AHF 
-\item Show difference in structure
-\item Show difference in mass plots
+\blue{\begin{itemize} \item Visualsioation of the same halo with 3D FoF and AHF
+\item Show difference in structure \item Show difference in mass plots
 \end{itemize}}

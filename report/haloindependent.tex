@@ -2,47 +2,87 @@
 
 \subsection{Using Inter-Particle Distances to Describe Transfer}
 
-\begin{figure*}
-    \centering
-    \includegraphics[width=\textwidth]{figures/kspafig.png}
-    \caption{A diagramatic representation of the distance measure. On the left, the initial conditions are shown. The blue dark matter particles each find their closest dark matter and gas (red) neighbour. These particles are then tracked to the final state of the simulation (right) and the distances between them calculated again. \blue{In the final version of this plot, I would like to re-make it such that this is completely vertical and the two plots are stacked on top of each other. Then this would just take up a single column. Also $r_{gas}$ and $r_{DM}$ need to be shown in the final conditions.}}
-    \label{fig:distancemeasure}
+\begin{figure*} \centering
+	\includegraphics[width=\textwidth]{figures/kspafig.png} \caption{A
+	diagramatic representation of the distance measure. On the left, the
+	initial conditions are shown. The blue dark matter particles each find
+	their closest dark matter and gas (red) neighbour. These particles are
+	then tracked to the final state of the simulation (right) and the
+	distances between them calculated again. \blue{In the final version of
+	this plot, I would like to re-make it such that this is completely
+	vertical and the two plots are stacked on top of each other. Then this
+	would just take up a single column. Also $r_{gas}$ and $r_{DM}$ need to
+	be shown in the final conditions.}} \label{fig:distancemeasure}
 \end{figure*}
 
-The above analysis depends on there being dark matter halos that can easily be identified. However, this analysis need not depend on the definition of a halo; if the gas and dark matter become decoupled, it should be possible to see this effect without having to consider bound structues at all.
+The above analysis depends on there being dark matter halos that can easily be
+identified. However, this analysis need not depend on the definition of a halo;
+if the gas and dark matter become decoupled, it should be possible to see this
+effect without having to consider bound structues at all.
 
-To find how separated the dark matter becomes from the gas, two distances are considered. First, the distance from each dark matter particle to the corresponding closest dark matter neighbour in the initial conditions, at $z=0$, i.e. the distance
-\begin{equation}
-    r_{ij, ~z=0} = \sqrt{
-        \left|
-            \mathbf{x}_{i, ~z=0} - \mathbf{x}_{j \ni \min(r_{ij, ~z=z_{ini}}), ~z=0}
-        \right|^2
-    }
-    \label{eqn:minimal}
-\end{equation}
-where $\mathbf{x}_i$ is the position of particle $i$, and $\mathbf{x}_i - \mathbf{x}_j$ is wrapped within the periodic box. The corresponding distance between the dark matter particle and the cloest gas neighbour in the initial conditions is also considered, $r_{\rm gas}$. A diagramatic representation of this is given in Figure \ref{fig:distancemeasure}. As in the halo-based analysis, star particles at $z=0$ are ID matched with their gas progenetors.
+To find how separated the dark matter becomes from the gas, two distances are
+considered. First, the distance from each dark matter particle to the
+corresponding closest dark matter neighbour in the initial conditions, at
+$z=0$, i.e. the distance \begin{equation} r_{ij, ~z=0} = \sqrt{ \left|
+\mathbf{x}_{i, ~z=0} - \mathbf{x}_{j \ni \min(r_{ij, ~z=z_{ini}}), ~z=0}
+\right|^2 } \label{eqn:minimal} \end{equation} where $\mathbf{x}_i$ is the
+position of particle $i$, and $\mathbf{x}_i - \mathbf{x}_j$ is wrapped within
+the periodic box. The corresponding distance between the dark matter particle
+and the cloest gas neighbour in the initial conditions is also considered,
+$r_{\rm gas}$. A diagramatic representation of this is given in Figure
+\ref{fig:distancemeasure}. As in the halo-based analysis, star particles at
+$z=0$ are ID matched with their gas progenetors.
 
 \subsection{Particle-by-Particle Comparison to Dark Matter}
 
-Now that the distances at $z=0$ have been identified, it is possible to compare how much the dark matter has been able to decouple from itself, compared to the gas. For each particle, the distance that the nearest dark matter neighbour has travelled, compared to the nearest gas neighbour, is plotted in Figure \ref{fig:dmvsstarvsgas}. The stellar distribution is highly symmetric and peaks around $r_{\rm star}/r_{\rm DM} = 1$, implying that the stellar and dark matter components have a very similar dynamical distribution (see also Figure \ref{fig:alldistances}) but that this is not a \emph{local} effect. The gas that forms stars and dark matter become decoupled differently from their nearest neigbour, meaning that this is unlikely to be due to, for example, two particles ending up on different sides of a void.
+Now that the distances at $z=0$ have been identified, it is possible to compare
+how much the dark matter has been able to decouple from itself, compared to the
+gas. For each particle, the distance that the nearest dark matter neighbour has
+travelled, compared to the nearest gas neighbour, is plotted in Figure
+\ref{fig:dmvsstarvsgas}. The stellar distribution is highly symmetric and peaks
+around $r_{\rm star}/r_{\rm DM} = 1$, implying that the stellar and dark matter
+components have a very similar dynamical distribution (see also Figure
+\ref{fig:alldistances}) but that this is not a \emph{local} effect. The gas
+that forms stars and dark matter become decoupled differently from their
+nearest neigbour, meaning that this is unlikely to be due to, for example, two
+particles ending up on different sides of a void.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth]{figures/dm_vs_stars_vs_gas.png}
-    \caption{The distribution of relative distances for each dark matter particle to the appropriate gas and stellar particles at $z=0$ normalised by the distance to the closest dark matter particle in the initial conditions. Note the significantly diffrent distributions for gas and stars.}
-    \label{fig:dmvsstarvsgas}
-\end{figure}
+\begin{figure} \centering
+	\includegraphics[width=\columnwidth]{figures/dm_vs_stars_vs_gas.png}
+	\caption{The distribution of relative distances for each dark matter
+	particle to the appropriate gas and stellar particles at $z=0$
+	normalised by the distance to the closest dark matter particle in the
+	initial conditions. Note the significantly diffrent distributions for
+	gas and stars.} \label{fig:dmvsstarvsgas} \end{figure}
 
-The same distribution for the gas, however, has a different signature. $r_{\rm gas}/r_{\rm DM}$ peaks around 10, not 1, showing that gas ends up preferrentially further away than the neighbouring dark matter particle. This is unsurprising; gas particles feel repulsive forces from hydrodynamics, can be heated, and even get blown out of galaxies. All of this would work to prevent gas from falling into the center of a potential well as far as the given dark matter neighbour. The further-right peak in this plot also substantiates the claim made in Figure \ref{fig:splitmassfrac} that there is significantly more transfer of gas than stellar material. The extreme width of this and the distribution (around 8-9 orders of magnitude) shows that the gravitational dynamics still plays a significant role.
+The same distribution for the gas, however, has a different signature. $r_{\rm
+gas}/r_{\rm DM}$ peaks around 10, not 1, showing that gas ends up
+preferrentially further away than the neighbouring dark matter particle. This
+is unsurprising; gas particles feel repulsive forces from hydrodynamics, can be
+heated, and even get blown out of galaxies. All of this would work to prevent
+gas from falling into the center of a potential well as far as the given dark
+matter neighbour. The further-right peak in this plot also substantiates the
+claim made in Figure \ref{fig:splitmassfrac} that there is significantly more
+transfer of gas than stellar material. The extreme width of this and the
+distribution (around 8-9 orders of magnitude) shows that the gravitational
+dynamics still plays a significant role.
 
 \subsection{Distribution of Distances}
 
-Instead of comparing on a particle-by-particle basis, let us now consider the full distribtuion of distances. In Figure \ref{fig:alldistance} the similar dynamical distributions of the stellar and dark matter components are shown, with the gaseous component having a significantly longer tail. By the end of the simulation, gas particles can end up around 15 Mpc away from their original nearest neighbour; the only way this can occur is due to the strong wind velocities that are powered by the AGN in the simulation.
+Instead of comparing on a particle-by-particle basis, let us now consider the
+full distribtuion of distances. In Figure \ref{fig:alldistance} the similar
+dynamical distributions of the stellar and dark matter components are shown,
+with the gaseous component having a significantly longer tail. By the end of
+the simulation, gas particles can end up around 15 Mpc away from their original
+nearest neighbour; the only way this can occur is due to the strong wind
+velocities that are powered by the AGN in the simulation.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth]{figures/all_distances.png}
-    \caption{The distribution of all distances to particles at $z=0$. Note the similarity between the dark matter distribution and the stellar distribution, and how different they are to the gas with the associated long tail. The gas that ends up in this long tail will have been blown out by AGN and ends up outside halos in large superbubbles; see Figure \ref{fig:}.}
-    \label{fig:alldistances}
-\end{figure}
+\begin{figure} \centering
+	\includegraphics[width=\columnwidth]{figures/all_distances.png}
+	\caption{The distribution of all distances to particles at $z=0$. Note
+	the similarity between the dark matter distribution and the stellar
+	distribution, and how different they are to the gas with the associated
+	long tail. The gas that ends up in this long tail will have been blown
+	out by AGN and ends up outside halos in large superbubbles; see Figure
+	\ref{fig:}.} \label{fig:alldistances} \end{figure}
 

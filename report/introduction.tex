@@ -3,20 +3,20 @@
 Cosmological simulations have been used for decades to study the evolution of
 the universe. Particles, or cells, are tracked over cosmic time until their
 final resting place (usually at redshift $z=0$), where their distributions can
-be compared to observations. From the early days where single dark matter halos
-could be simulated through to the early 2000's the focus was on dark-matter
-only simulations with semi-analytic models applied on top to study galaxy
-formation. Because the only force that is numerically modeled in these
-simulations is gravity, it is possible to define a region in the initial
+be compared to observations. From the early days where the evolution of a
+single dark matter halo could be tracked through to the early 2000s, the focus
+was on dark-matter only simulations with semi-analytic models applied on top to
+study galaxy formation. Because the only force that is numerically modeled in
+these simulations is gravity, it is possible to define a region in the initial
 conditions that will collapse to a given halo in the final state. This is only
 possible because gravity is a purely attractive force, allowing energy
-conservation to be employed, with the region being referred to as a `Lagrangian
-region'.
+conservation to be employed, with the corresponding volume in the initial
+conditions being referred to as a `Lagrangian region'.
 
 As the new millenium dawned, cosmologists decided that running a dark-matter
 only simulation was no longer enough; computers had become powerful enough to
-run full hydrodynamic models using codes such as RAMSES, GADGET, and <>
-\citep{}. These codes now also include full galaxy formation models, such as
+run full hydrodynamic models using codes such as TreeSPH, RAMSES, and GADGET 
+\citep{}. These codes were adapted include full galaxy formation models, such as
 Illustris, EAGLE, and GEAR \citep{}, which can incorporate stellar and AGN
 feedback, star formation, magnetic fields, and many more physical proceses.
 These processes break the `only attractive' force field that was once present
@@ -24,13 +24,17 @@ in the simulation, making Lagrangian regions less effective as a diagnostic
 tool. There is no longer a simple, one-to-one, relationship between where
 the matter started, and where it will finish.
 
-Transfer is now possible between lagrangian regions, thanks to energetic 
-feedback processes, and from outside lagrangian regions, thanks to the
-strong attractor of cooling. The majority of analysis in the past has,
-rightly so, focused on where gas ends up, rather than where it originated.
+Transfer is now possible between lagrangian regions, thanks to these energetic
+feedback processes, as well as from outside lagrangian regions, due to the
+strong attractor of cooling. The majority of analysis in the past has focused
+on where gas ends up, rather than where it originated.
 \citet{anglesalcazar2017} looked at individual galaxies in FIRE \citep{fire}
 and how they were able to accrete gas from other nearby halos, finding that
 around 50\% of the stellar mass of a Milky-Way mass galaxy originated from
-outside. In this work, a similar analysis is extended to an entire
-cosmological simulation box, this time only using two snapshots, from
-the Simba simulation suite \citep{dave2018}.
+outside. In this work, a similar analysis is extended to an entire cosmological
+simulation box, this time only using two snapshots, from the \simba simulation
+suite \citep{dave2018}. In \S \ref{sec:simba}, the \simba suite is described.
+In \S \ref{sec:distance} a simple analysis based on the distances between particles
+is considered, with the concept of lagrangian regions being introduced in \S
+\ref{sec:lagrangianregions}. In \S \ref{sec:combined}, these two analysis pathways
+are combined, and in \S \ref{sec:conclusions} the conclusions are presented.

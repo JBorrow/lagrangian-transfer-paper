@@ -69,7 +69,7 @@ for data_type in ["gas", "stellar", "both"]:
     plt.ylim(0, min([current_ylim, 1]))
 
     plt.xlabel("Halo mass (M$_\odot$)")
-    plt.ylabel("Fraction of mass in halo from component")
+    plt.ylabel("Fraction of mass in component")
 
     plt.legend()
     plt.tight_layout()
