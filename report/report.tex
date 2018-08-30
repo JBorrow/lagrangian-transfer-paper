@@ -10,19 +10,61 @@
 
 % Macros
 \newcommand{\blue}[1]{{\color{blue} #1}}
-\newcommand{\simba}{\textsc{Simba}}
-\newcommand{\mufasa}{\textsc{Mufasa}}
+\newcommand{\kmsmpc}{\kms\;{\rm Mpc}^{-1}}
+\newcommand{\lya}{Ly$\alpha$}
+\newcommand{\HI}{\ion{H}{i}}
+\newcommand{\OHI}{\Omega_{\rm HI}}
+\newcommand{\sHI}{\sigma_{\rm HI}}
+\newcommand{\nhi}{N_{\rm HI}}
+\newcommand{\hkpc}{h^{-1}{\rm kpc}}
+\newcommand{\hmpc}{h^{-1}{\rm Mpc}}
+\newcommand{\lcdm}{$\Lambda$CDM}
+\newcommand{\ghi}{\Gamma_{\rm HI}}
+\newcommand{\kms}{\;{\rm km}\,{\rm s}^{-1}}
+\newcommand{\sgal}{\sigma_{\rm gal}}
+\newcommand{\sdm}{\sigma_{\rm DM}}
+\newcommand{\cms}{\;{\rm cm}^{-2}}
+\newcommand{\cmc}{\;{\rm cm}^{-3}}
+\newcommand{\cmsst}{\;{\rm cm}^2 {\rm s}^{-3}}
+\newcommand{\Zsolar}{\;{\rm Z}_{\odot}}
+\newcommand{\msolar}{\;{\rm M}_{\odot}}
+\newcommand{\msolaryr}{\;{\rm M}_{\odot} {\rm yr}^{-1}}\newcommand\cdunits{{\rm cm}^{-2}}
+\newcommand{\PSbox}[3]{\mbox{\rule{0in}{#3}\special{psfile=#1}\hspace{#2}}}
+\newcommand{\gad}{{\sc Gadget-3}}
+\newcommand{\gizmo}{{\sc Gizmo}}
+\newcommand{\mufasa}{{\sc Mufasa}}
+\newcommand{\simba}{{\sc Simba}}
+\newcommand{\vw}{v_{\rm w}}
+\newcommand{\cm}{\,{\rm cm}}
+\newcommand{\tdep}{t_{\rm dep}}
+\newcommand{\fgas}{f_{\rm gas}}
+\newcommand{\fedd}{f_{\rm Edd}}
+\newcommand{\mbh}{M_{\rm BH}}
 
 \title{Inter-Lagrangian Transfer}
-\author{Josh Borrow, Daniel Angles-Alcazar, Romeel Dave}
+\author[Borrow et al.]{
+Josh Borrow $^{1}$,
+Daniel Angl\'es-Alc\'azar$^{2}$ \&
+Romeel Dav\'e$^{2, 3}$
+\\
+% List of institutions
+\\$^1$ Institute for Computational Cosmology, Durham University, UK
+\\$^2$ Center for Computational Astrophysics, New York, NY
+\\$^3$ University of Edinburgh, Edinburgh, UK
+}
+
 
 \begin{document}
 \maketitle
 \input{introduction}
 \input{simba}
-\input{lagrangianregions}
 \input{haloindependent}
+\input{lagrangianregions}
 \input{combining}
 \input{conclusions}
+
+\bibliographystyle{mnras}
+\bibliography{bibliography}
+
 \input{appendix}
 \end{document}
