@@ -1,0 +1,41 @@
+\section{Ensuring the method is robust}
+\label{sec:robustness}
+
+The above results are quite striking; that only around 50\% of the gaseous
+mass in a given halo originates from the halo's own lagrangian region calls
+for a healthy dose of skepticisim. There are a number of parameters, discussed
+below, where different methodologies and definitions can be applied to see
+if the results are robust.
+
+\subsection{Variations in virial radius, \rvir{}}
+
+Mention something about splashback...
+
+\subsection{The definition of lagrangian region}
+
+In the above analysis, we considered a very diffuse notion of a lagrangian
+region, defined particle-by-particle. Whilst increasing the virial radius
+will go some way to filling the `holes' in these regions (see Figure
+\ref{fig:holes}), due to the large transfer of dark matter that still occurs
+(\S \ref{sec:haloindepdendent}), perhaps a different methodology is required.
+
+Some of the holes that are present in lagrangain regions are vitally important;
+these holes will collapse down to independent halos. An effort must be made
+to ensure that those holes remain, whilst others are erased, with lower-mass
+halos taking priority over their higher-mass cousins. With this hole-filling
+exercise, it is important to note that even dark matter particles may now
+have a different halo ID to lagrangain ID.
+
+The methodology that is proposed here is as follows:
+\begin{itemize}
+    \item Initially define lagrangian regions in the same way as before for
+          the dark matter
+    \item Find the first $n$ neighbours of every dark matter particle
+    \item Overwrite the lagrangian ID of these particles with the lowest (i.e.
+          corresponding to the lowest mass halo) in the group
+    \item Extend the lagrangian region definition to the gas particles in
+          the same way as previously, by finding the closest gas neighbour
+	  particle to every dark matter particle.
+\end{itemize}
+
+
