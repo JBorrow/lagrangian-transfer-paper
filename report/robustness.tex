@@ -9,7 +9,39 @@ if the results are robust.
 
 \subsection{Variations in virial radius, \rvir{}}
 
-Mention something about splashback...
+There is no particular, well defined, reason that the extension of the particles
+in a halo to the corresponding lagrangian region should end at the virial radius
+of that halo. In a similar fashion, there is not just a single definition of the
+`virial radius'; in this section chagning the radius at which particles are
+selected to be part of the eventual lagrangian region is explored.
+
+The procedure for extending the lagrangian region is as follows:
+\begin{itemize}
+    \item For every halo in the box, search for the centre of that halo (by
+          looking for the extreme particles in each direction and finding
+          their centre point, as well as taking into account the periodic
+          boundaries), and the corresponding radius.
+    \item Multiply this radius by a factor, such as 1.2, or 1.5
+    \item For each halo in the box, use a periodic KDTree to search for the
+          neighbours of the centre point within that radius, going from
+          highest mass (in dark matter) to lowest mass to ensure that
+          lower-mass halos `steal' from the higher mass ones, should they
+          be embedded or nearby.
+    \item Label these particles as belonging to the halo
+    \item Re-run the original analysis with these halo definitions
+\end{itemize}
+
+In Figure \ref{fig:comparevirialradii}, the mass fraction mass functions are
+shown.
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{}
+    \label{fig:comparevirialradii}
+\end{figure}
+
+I don't actually know what these results will be, we'll have to see!
 
 \subsection{The definition of lagrangian region}
 
