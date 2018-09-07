@@ -1,5 +1,7 @@
 % Basic setup. Most papers should leave these options alone.
-\documentclass[a4paper,fleqn,usenatbib]{mnras}
+\documentclass[fleqn,usenatbib]{mnras}
+
+\hypersetup{draft}
 
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
@@ -56,14 +58,21 @@ Romeel Dav\'e$^{2, 3}$
 }
 
 
+
 \begin{document}
+
 \maketitle
+
+\begin{abstract}\input{abstract}\end{abstract}
+
+\begin{keywords}galaxies:formation, galaxies:evolution: methods:N-body simulations\end{keywords}
+
 \input{introduction}
 \input{simba}
 \input{haloindependent}
 \input{lagrangianregions}
 \input{robustness}
-\input{combining}
+%\input{combining}
 \input{conclusions}
 \input{futurework}
 
