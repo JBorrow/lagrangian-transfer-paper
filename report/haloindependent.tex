@@ -10,42 +10,49 @@
 	distances between them calculated again.} \label{fig:distancemeasure}
 \end{figure*}
 
-\subsection{Using Inter-Particle Distances to Describe Transfer}
+\subsection{Using inter-particle distances to describe transfer}
 
 Usually, analysing how baryonic and dark matter move differently requires the
-use of a halo finer. However, if the gas and dark matter become decoupled, it
-should be possible to see this effect without having to consider bound
-structues at all.
+use of a halo finder, to identify structures between which gas can flow.
+However, if the gas and dark matter become decoupled, it should be possible to
+see this effect without having to consider bound structues at all.
 
-To find how separated the dark matter becomes from the gas, two distances are
+To find how separated the dark matter becomes from the gas, two distances
+\emph{in the final snapshot at $z=0$}\emph{in the final snapshot at $z=0$}  are
 considered. First, the distance from each dark matter particle to the
-corresponding closest dark matter neighbour in the initial conditions, at
-$z=0$, i.e. the distance \begin{equation} r_{ij, ~z=0} = \sqrt{ \left|
-\mathbf{x}_{i, ~z=0} - \mathbf{x}_{j \ni \min(r_{ij, ~z=z_{ini}}), ~z=0}
-\right|^2 } \label{eqn:minimal} \end{equation} where $\mathbf{x}_i$ is the
-position of particle $i$, and $\mathbf{x}_i - \mathbf{x}_j$ is wrapped within
-the periodic box. The corresponding distance between the dark matter particle
-and the cloest gas neighbour in the initial conditions is also considered,
-$r_{\rm gas}$. A diagramatic representation of this is given in Figure
-\ref{fig:distancemeasure}. Star particles at $z=0$ are ID matched with their
-gas progenetors, where at all possible. Due to a bug in the simulation code
-when this particular box was simulated, gas particles which have formed a star,
-and star particles that formed out of a gas particle which had already created
-a star particle, must be excluded. This is unfortunate, as these particles
-are the ones that would probably have extended out to the largest distances
-due to their interactions with stellar and AGN feedback. In future analysis this
-problem will be fixed; however at this time we do not expect it to have a
-significant effect as this is a very small (less than 0.1\% of gas particles).
+corresponding closest dark matter neighbour in the \emph{initial conditions},
+i.e. the distance
+\begin{equation}
+    r_{ij, ~z=0} = \sqrt{ \left| \mathbf{x}_{i,
+    ~z=0} - \mathbf{x}_{j \ni \min(r_{ij, ~z=z_{ini}}), ~z=0} \right|^2 }
+    \label{eqn:minimal}
+\end{equation}
+where $\mathbf{x}_i$ is the position of particle $i$, and $\mathbf{x}_i -
+\mathbf{x}_j$ is wrapped within the periodic box. The corresponding distance
+between the dark matter particle and the cloest gas neighbour in the initial
+conditions is also considered, $r_{\rm gas}$. A diagramatic representation of
+this is given in Figure \ref{fig:distancemeasure}. Star particles at $z=0$ are
+ID matched with their gas progenetors, where at all possible. Due to a bug in
+the simulation code when this particular box was simulated, gas particles which
+have formed a star, and star particles that formed out of a gas particle which
+had already created a star particle, must be excluded. This is unfortunate, as
+these particles are the ones that would probably have extended out to the
+largest distances due to their interactions with stellar and AGN feedback. In
+future analysis this problem will be fixed; however at this time we do not
+expect it to have a significant effect as this is a very small contribution
+(less than 0.1\% of gas particles).
 
-\subsection{Particle-by-Particle Comparison to Dark Matter}
+\subsection{Particle-by-particle comparison to dark matter}
 
 \begin{figure} \centering
 	\includegraphics[width=\columnwidth]{figures/dm_vs_stars_vs_gas.png}
-	\caption{The distribution of relative distances for each dark matter
-	particle to the appropriate gas and stellar particles at $z=0$
-	normalised by the distance to the closest dark matter particle in the
+	\caption{The distribution of relative final state distances for each
+	dark matter particle to the appropriate gas and stellar (these
+	correspond to $i$ in the bottomlabel) particles at $z=0$ normalised by
+	the distance to the dark matter particle that was closest in the
 	initial conditions. Note the significantly diffrent distributions for
-	gas and stars.} \label{fig:dmvsstarvsgas} \end{figure}
+	gas and stars.}
+\label{fig:dmvsstarvsgas} \end{figure}
 
 Now that the distances at $z=0$ have been identified, it is possible to compare
 how much the dark matter has been able to decouple from itself, compared to the
@@ -83,13 +90,11 @@ the simulation itself.
 	\caption{The distribution of all distances to particles at $z=0$. Note
 	the similarity between the dark matter distribution and the stellar
 	distribution, and how different they are to the gas with the associated
-	long tail. The gas that ends up in this long tail will have been blown
-	out by AGN and ends up outside halos in large superbubbles; see Figure
-	\ref{fig:}.} \label{fig:alldistances}
+	long tail.} \label{fig:alldistances}
 \end{figure}
 
 Instead of comparing on a particle-by-particle basis, let us now consider the
-full distribtuion of distances. In Figure \ref{fig:alldistance} the similar
+full distribtuion of distances. In Figure \ref{fig:alldistances} the similar
 dynamical distributions of the stellar and dark matter components are shown,
 with the gaseous component having a significantly longer tail. By the end of
 the simulation, gas particles can end up around 15 Mpc away from their original

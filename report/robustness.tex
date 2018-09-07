@@ -26,9 +26,9 @@ The procedure for extending the lagrangian region is as follows:
           neighbours of the centre point within that radius, going from
           highest mass (in dark matter) to lowest mass to ensure that
           lower-mass halos `steal' from the higher mass ones, should they
-          be embedded or nearby.
+          be embedded or nearby
     \item Label these particles as belonging to the halo
-    \item Re-run the original analysis with these halo definitions
+    \item Re-run the original analysis with these halo definitions.
 \end{enumerate}
 
 \begin{figure}
@@ -61,17 +61,17 @@ region remaining the same.
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{generated_figures/filled_regions/component_fraction_vs_halo_mass_both.pdf}
-    \caption{The analogue of Figure \ref{fig:massfractions}, but with lagrangian
+    \caption{The analogue of Figure \ref{fig:massfrac}, but with lagrangian
 	regions filled out with a local nearest neighbour search of the
 	nearest 64 particles, see text for details.}
     \label{fig:filledlrmass}
 \end{figure}
 
 In the above analysis, we considered a very diffuse notion of a lagrangian
-region, defined particle-by-particle. Whilst increasing the virial radius
-will go some way to filling the `holes' in these regions (see Figure
-\ref{fig:holes}), due to the large transfer of dark matter that still occurs
-(\S \ref{sec:haloindepdendent}), perhaps a different methodology is required.
+region, defined particle-by-particle. Whilst increasing the virial radius will
+go some way to filling the `holes' in these regions, due to the large transfer
+of dark matter that still occurs (\S \ref{sec:haloindependent}), perhaps a
+different methodology is required.
 
 Some of the holes that are present in lagrangian regions are vitally important;
 these holes will collapse down to independent halos. An effort must be made to
@@ -91,15 +91,15 @@ as follows:
           the same way as previously, by finding the closest gas neighbour
 	  particle to every dark matter particle.
 \end{enumerate}
-This aims to both fill out the lagrangian regions, increasing their volume-
-filling fraction, ensure that no particles are `stolen' from higher-mass
-halos, and reduce surface effects leading to spurious lagrangian transfer
-from outside any region. See Figure \ref{fig:filledlrmass} for the results
-for $n=64$ neighbours.
+This aims to both fill out the lagrangian regions, increasing their
+volume-filling fraction, ensure that no particles are `stolen' from higher-mass
+halos, and reduce surface effects leading to spurious lagrangian transfer from
+outside any region. See Figure \ref{fig:filledlrmass} for the results for
+$n=64$ neighbours.
 
 The majority of the transfer from outside of any lagrangian region has been
 transformed into transfer from other lagrangian regions; this is because the
 low-mass halos that end up being stripped of their baryons by high-mass halos
 have absorbed the majority of these particles. Note how the fraction of mass
 from the own lagrangian region of the halo has not changed; this means that the
-surface effects on these high-mass halos are negligable.
+surface effects on these high-mass halos are negligible.
