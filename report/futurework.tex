@@ -1,0 +1,98 @@
+\section{Future Work}
+\label{sec:futurework}
+
+As noted in \S \ref{sec:conclusion}, this work is preliminary and mainly
+focuses on the methods behind this kind of analysis. Below is a list of
+possbile opportunities, improvements, and science that we wish to accomplish
+using the newly developed \ltcaesar{} code. This code is highly extensible and
+can use any halo finder, simulation code (so long as it includes at least
+tracer particles), and can run on a $512^3$ particle box in under an hour
+(including the production of all of the figures in this report) on a single
+supercomputing node. The authors acknowledge that this section, unfortunately,
+is under-developed and significantly under-referenced, based on the possible
+claims presented here.
+
+\subsection{Improvements to the analysis}
+
+\subsubsection{Better halo-finder support}
+
+In the near future, we hope to add support for completely generic halo-finders.
+The majority of halo finders are currently supported through the {\tt caesar}
+and {\tt yt} framework, but for simplicity the next addition will be to
+include the ability to specify only halo centers and virial radii to perform
+the search by hand.
+
+\subsubsection{Virial radius extension work}
+
+The current methodology for increasing the virial radii of halos is not as
+clean as it could be. This involves re-finding all particles within $n$ times
+$r_{\rm vir}$ and then constructing a new halo catalogue out of this. The
+contributions to that halo are then counted within this radius, instead of
+to the original virial radius. This means that the extension to the virial
+radius is not only filling out lagrangian regions, but increasing their
+size as well; this leads to the exact same edge effects that we have seen
+previously causing more transfer from outside. In the future, the plan is to
+consider particles that lie within $r_{\rm vir}$ at $z=0$ for contribution
+to the mass fractions, but include particles within $n \cdot r_{\rm vir}$
+in the definition of the lagrangian region itself. This will significantly
+smooth the edges of the virial radius.
+
+\subsubsection{Filling-out work}
+
+Currently we fill out the lagrangian regions by using a nearest-neighbour
+search in the initial conditions. This works fine, but it would be helpful
+to include other definitions, such as the convex hull, for comparison to 
+other works and to zoom-in simulations.
+
+\subsubsection{Distance distribution improvements}
+
+The interesting thing about these distance metrics that is still not 
+well understood by the authors is the significant distances that dark matter
+particles can end up with between them despite starting the simulation
+next to each other. These particles may be on either side of a void,
+for instance, but it is unclear where the origin of this 7.5 Mpc maximal
+distance is (this appears to be independent of resolution and box size
+based on preliminary testing).
+
+It should be possible to consider various distance distribution metrics; at the
+moment only the nearest neighbour for each dark matter particle is considered.
+However, there is much more exploratory work to be done here. Consider, for
+instance, the median distance among the nearest $n$ neighbours, the variance in
+distance among neighbours as a function of position in the initial conditions.
+
+\subsection{Science work}
+
+\subsubsection{Comparison of models}
+
+In a future paper, once this methods paper is finalised, we hope to re-run
+this analysis on \emph{at least} the \mufasa{} and EAGLE simulations. We
+also hope to re-run the analysis on the Illustris and Illustris-TNG models,
+however this may require a little more code development work due to the
+tracer particle model available there for tracking the flows of gas. Ideally,
+this should be completely transparent, but this is unclear at the moment.
+This work really highlights the inherrent advantages of particle-based
+methods, and we hope that it becomes a rataionale behind people using these
+(over the often easier to conceptualise eulerian grid methods) in the future.
+
+\subsubsection{The structure of the CGM}
+
+This work shows that the baryonic matter in a given halo, as a function of
+radius, has a well-defined origin profile. This should lead to a well-defined
+metallicity profile. These can be investigated using the \simba{} simulations
+and matched to observations.
+
+This external contribution may also lead to a different density profile than
+that is expected from analytical and semi-analytical work. This differing
+density profile can then be broken into components based on their origin,
+thanks to this work. This could affect many cosmological probes, including
+weak-lensing measurements that are used to constrain modified gravity models.
+
+\subsubsection{Zoom-in simulations}
+
+This work should have some implications for zoom-in simulations. Current zoom-ins
+neglect sub-grid physics for particles outside of the high-resolution zone,
+but based on this analysis it appears that this may no longer be sufficient
+to capture the full physics; particles can travel up to 15 Mpc from their
+initial neighbour, and significant transfer is seen between galaxies. This is
+especially important in work that aims to capture the physics of the CGM in
+those galaxies.
