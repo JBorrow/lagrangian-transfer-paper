@@ -24,12 +24,9 @@ following discussion describes comparison with redshift $z=0$ compact objects
 but this definition is easily extensible to higher redshift.
 
 To determine the collapsed objects at $z=0$ the AMIGA halo finder
-\citep[AHF][]{ahf_refernces} is used. This spherical overdensity finder
+\citep[AHF][]{ahfi, ahfii} is used. This spherical overdensity finder
 determines the halo centers by using a nested grid, and then fits parameters
-based on the Nevarro-Frenk-White \citep[NFW, ][]{nfw_ref} profile. The results
-presented in the remainder of the work use this halo finder unless specified,
-and a comparison with a more traditional three-dimensional friends-of-friends
-algorithm is given in Appendix \ref{app:caesar}.
+based on the Nevarro-Frenk-White \citep[NFW, ][]{nfw} profile.
 
 It is impractical, especially considering the nature of this paper, to use the
 baryonic matter resident in a collapsed object to define the appropriate
@@ -40,7 +37,10 @@ matter particle. This ensures that the two regions overlap very tightly
 spatially, which is important when considering the very fine-grained detail
 present in these regions (see Figure \ref{fig:lrpic}).
 
-\blue{If we don't fix the ID issue we should definitely mention that here.}
+As noted previously, there was a bug in the simulation code that prevents gas
+particles that have formed stars, and star particles that have been formed
+out of gas particles which have already formed a star, from being included in
+this analysis.
 
 \subsection{Matching Lagrangian IDs}
 
@@ -60,8 +60,6 @@ used. Particles which either become black holes, or are consumed by a black
 hole, are ignored for this analysis. This re-matching also takes place for the
 dark matter particles, to ensure that the ID matching is working correctly.
 
-\blue{Perhaps a flow-chart might be nice here to make this a little clearer.}
-
 \subsection{Quantifying Inter-Lagrangian Transfer}
 
 \begin{figure} \centering
@@ -73,10 +71,7 @@ dark matter particles, to ensure that the ID matching is working correctly.
 	breakdown into stellar and gaseous components. The shaded regions show
 	a single standard deviation of variance in the mass fraction for that
 	bin, and do not include errors from halo sampling bias or cosmic
-	variabnce. \blue{Might be worth including those errors in our analysis?
-	I presume this is why our errors drop off as a function of halo mass,
-	rather than this actually being an effect of the scatter getting
-	lower.}} \label{fig:massfrac} \end{figure}
+	variabnce.} \label{fig:massfrac} \end{figure}
 
 Once this analysis has been performed it is possible to see the fraction of
 baryonic mass at $z=0$ that originates from the lagrangian region of a given
@@ -89,14 +84,6 @@ isolated halos, versus those in clusters and other noisier environments. This
 analyis shows that a significant portion (up to 20\%) of the stellar mass of a
 Milky-Way mass halo may come from the lagrangian region as defined by a
 \emph{different halo}.
-
-\blue{It would be nice at some point to include isolation criteria here. After
-speaking to some people who do zoom-ins of clusters, it seems that they
-actually only generate hydrodynamics particles that are within the LR (as
-defined by the dark matter out to ~3 Mpc of the halo of interest). If we see
-significant transfer even for isolated, milky way mass, galaxies, that would
-really break things like APOSTLE. Thankfully at the moment they have chosen
-very isolated halos, though.}
 
 \begin{figure*} \centering
 	\includegraphics[width=0.495\textwidth]{generated_figures/component_fraction_vs_halo_mass_gas.pdf}
@@ -111,10 +98,14 @@ very isolated halos, though.}
 	short enough to form stars by the end of the simulation for most
 	transfer.} \label{fig:splitmassfrac} \end{figure*}
 
-\subsection{Redshift Evolution}
-
-\blue{We should re-run the above analysis at a lower redshift, just to check
-that the transfer is actually lower, like we already had before the disaster.}
+It is important to note that this spread in mass fractions as a function of
+halo mass is still to be quantified. It could be that those halos which
+end up having less mass transfer are those which are more isolated; in future
+analysis we hope to include the isolation criteria used in, for example, the
+APOSTLE project \citep{fattahi2016} to select halos and compare their mass
+fractions. This inter-lagrangian transfer could have a significant effect
+on these high-resolution zoom-in galaxies that is not correctly captured
+using the current isolation criteria.
 
 \subsection{Radial Trends}
 
@@ -139,10 +130,21 @@ approaches ~60\%, suggesting significant transfer \emph{into halos} still takes
 place for gas that ends up at the bottom of the potential well at $z=0$.
 
 Also note how the mass fraction of stars from the own lagrangian region of the
-halo drops as a function of radius. This suggests that a large number (~30\%)
-of these stars were formed ex-situ. \blue{Perhaps this is a good place to
-reference other work... This is a surprisingly high number}. Note, again, that
-around ~15\% of the stars at the center of these halos are formed from gas that
-was not present in the initial lagrangian region of this halo. This is
-surprising, as this transfer must have taken place relatively early to ensure
-that the gas was able to cool and form stars.
+halo drops as a function of radius. This suggests that a large number ($\sim{}30$\%)
+of these stars were formed ex-situ. Note, again, that around $\sim{}$15\% of the stars
+at the center of these halos are formed from gas that was not present in the
+initial lagrangian region of this halo. This is surprising, as this transfer
+must have taken place relatively early to ensure that the gas was able to cool
+and form stars.
+
+These radial trends tell us something about the assembley of the
+Circum-Galactic Medium (CGM) \citep{tumlinson2017}. Whilst the claim can be
+that the \simba{} simulation suite does not have the requisite resolution to
+accurately simulate the CGM, these trends are very tight and show strong
+convergence when multiple halos are stacked.  \citet{Crain2013} found that the
+CGM assmembles from the `inside-out', with feedback within the galaxy
+establishing a strong negative metallicity relation.  However, these results
+seem to suggest there is a significant effect from inter-lagrangian (and hence
+inter-galactic) transfer from gas that has been blown out of \emph{other}
+galaxies falling in to add to this metallicity gradient.  Future work will
+focus on separating these two variables using this analysis.
