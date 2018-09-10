@@ -56,7 +56,7 @@ old_ylim = ax.get_ylim()
 ax.plot([1, 1], [1e-5, 1e8], color="white", ls="dashed")
 ax.set_ylim(old_ylim)
 
-ax.set_xlabel("$r_{f, x}/r_{f, DM}")
+ax.set_xlabel("$r_{x, f}/r_{DM, f}")
 ax.set_ylabel("Abundance of particles in box")
 
 fig.legend()
@@ -74,14 +74,23 @@ ax.semilogy()
 bin_max = max([data_gas.max(), data_star.max(), data_dm.max()])
 bins = np.linspace(0, bin_max, 100)
 
-ax.hist(data_gas[1] / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Gas")
-ax.hist(data_star[1] / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Stars")
-ax.hist(data_dark_matter[1] / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Dark Matter")
+ax.hist(
+    data_gas[1] / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Gas"
+)
+ax.hist(
+    data_star[1] / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Stars"
+)
+ax.hist(
+    data_dark_matter[1] / 1000.0,
+    bins=bins,
+    density=True,
+    histtype="step",
+    label="$x$ = Dark Matter",
+)
 
 plt.ylabel("Normalised fraction of particles in bin")
-plt.xlabel("$r_{f, x}$ (Mpc)")
+plt.xlabel("$r_{x, f}$ (Mpc)")
 
 fig.legend()
 fig.tight_layout()
 fig.savefig("neighbour_analysis_simple_histogram.pdf")
-
