@@ -11,6 +11,7 @@ import ltcaesar as lt
 
 import radial_distance_analysis
 import component_fraction_vs_halo_mass_analysis
+import neighbour_analysis
 
 import sys
 
@@ -24,3 +25,7 @@ radial_distance_analysis.run_analysis(simulation=sim)
 
 print("Running component_fraction_vs_halo_mass_analysis")
 component_fraction_vs_halo_mass_analysis.run_analysis(simulation=sim)
+
+print("Running neighbour_anaylsis")
+neighbour_analysis.run_analysis(simulation=sim)
+
