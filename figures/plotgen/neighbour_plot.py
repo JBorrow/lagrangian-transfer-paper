@@ -22,9 +22,9 @@ import numpy as np
 
 plt.style.use("mnras_flatiron")
 
-data_gas = np.load("neighbour_analysis_data_gas.npy")
-data_dark_matter = np.load("neighbour_analysis_data_dark_matter.npy")
-data_star = np.load("neighbour_analysis_data_star.npy")
+data_gas = np.load("neighbour_analysis_gas_data.npy")
+data_dark_matter = np.load("neighbour_analysis_dark_matter_data.npy")
+data_star = np.load("neighbour_analysis_star_data.npy")
 radii_dm_g = np.load("neighbour_analysis_radii_dm_g.npy")
 radii_dm_s = np.load("neighbour_analysis_radii_dm_s.npy")
 radii_gas = np.load("neighbour_analysis_radii_gas.npy")
