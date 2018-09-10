@@ -18,7 +18,7 @@ Invoke this in script mode as
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.style.use("mnras_durham")
+plt.style.use("mnras_flatiron")
 
 output = np.load("radial_distance_analysis_gas.npy")
 output_star = np.load("radial_distance_analysis_star.npy")
