@@ -16,11 +16,16 @@ Invoke this in script mode as
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.style.use("mnras_durham")
+plt.style.use("mnras_flatiron")
 
 data_gas = np.load("component_fraction_vs_halo_mass_gas.npy").item()
 data_stellar = np.load("component_fraction_vs_halo_mass_stellar.npy").item()
 data_both = np.load("component_fraction_vs_halo_mass_both.npy").item()
+try:
+    data_dm = np.load("component_fraction_vs_halo_mass_dm.npy").item()
+except:
+    # No stuff :(
+    pass
 
 def get_fancy_halo_mass(data):
     """
@@ -42,8 +47,12 @@ colors = ["C{}".format(x) for x in range(3)]
 
 # Make the three plots
 
-for data_type in ["gas", "stellar", "both"]:
-    this_data = locals()["data_{}".format(data_type)]
+for data_type in ["gas", "stellar", "both", "dm"]:
+    try:
+        this_data = locals()["data_{}".format(data_type)]
+    except:
+        # Skip this one
+        continue
     halo_mass = get_fancy_halo_mass(this_data)
 
     for color, label in zip(colors, switch.keys()):
@@ -64,7 +73,7 @@ for data_type in ["gas", "stellar", "both"]:
 
     plt.semilogx()
 
-    plt.xlim(halo_mass[0], halo_mass[-1])
+    plt.xlim(halo_mass[0], halo_mass[-2])
     current_ylim = plt.ylim()[1]
     plt.ylim(0, min([current_ylim, 1]))
 
