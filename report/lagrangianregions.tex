@@ -11,83 +11,75 @@
 	particle density in this region is approximately constant; the
 	structure shown here is due to the particle selection, rather than any
 	real structure in the overall distribution. Colour encodes projected
-	denisity.}
+	density.}
     \label{fig:lrpic}
 \end{figure}
 
 A lagrangian region is defined as the region in the initial conditions where
-the dark matter from a given collapsed object at lower redshift resides. This
-definition is somewhat open to interpretation; there may be particles enclosed
-in the convex hull of such a region that do not end up in the collapsed object,
-especially if an incorrect choice is made for the gravitational softening. The
+the dark matter from a given collapsed object at lower redshift resides. The
 following discussion describes comparison with redshift $z=0$ compact objects
 but this definition is easily extensible to higher redshift.
 
-To determine the collapsed objects at $z=0$ the AMIGA halo finder
-\citep[AHF][]{ahfi, ahfii} is used. This spherical overdensity finder
+To extract the collapsed objects at $z=0$ the AMIGA halo finder
+\citep[AHF,][]{ahfi, ahfii} is used. This spherical overdensity finder
 determines the halo centers by using a nested grid, and then fits parameters
-based on the Nevarro-Frenk-White \citep[NFW, ][]{nfw} profile.
-
-It is impractical, especially considering the nature of this paper, to use the
-baryonic matter resident in a collapsed object to define the appropriate
-`baryonic' lagrangian region. Instead, a nearest neighbour search for each gas
-particle at $z=z_{\rm ini}$ is performed and each particle assigned a
-lagrangian region identifier that corresponds to that of the nearest dark
-matter particle. This ensures that the two regions overlap very tightly
-spatially, which is important when considering the very fine-grained detail
-present in these regions (see Figure \ref{fig:lrpic}).
-
-As noted previously, there was a bug in the simulation code that prevents gas
-particles that have formed stars, and star particles that have been formed
-out of gas particles which have already formed a star, from being included in
-this analysis.
+based on the Navarro-Frenk-White \citep[NFW, ][]{nfw} profile.
 
 \subsection{Matching lagrangian IDs}
 
 Each dark matter particle in the simulation is assigned, based on the known
-unique particle ID, a largangian region identifier that cooresponds to the halo
+unique particle ID, a lagrangian region identifier that corresponds to the halo
 ID of the associated $z=0$ collapsed object. Particles which end up outside of
-any halo at $z=0$ are assigned a lagrangian region identifier of -1. Once this
-has been performed, the gas particles may be matched as described above, with
-the nearest neighbour search. Once all particles in the initial conditions have
-been assigned a lagrangian region, they must be ID matched with particles in
-the final $z=0$ snapshot of the simulation. This is performed by looping
-through all of the (sorted) particles and assigning a lagrangian region ID for
-the final-state particles that is equal to that of their initial state
-progenitor. To assign a largrangian region to the star particles at $z=0$,
-their gas progenitor (which can be tracked using the unique particle ID) is
-used. Particles which either become black holes, or are consumed by a black
-hole, are ignored for this analysis. This re-matching also takes place for the
-dark matter particles, to ensure that the ID matching is working correctly.
+any halo at $z=0$ are assigned a lagrangian region identifier of -1. 
+To extend the definition of the lagrangian region from dark matter to the
+baryonic particles, a nearest neighbour search for each gas
+particle at $z=z_{\rm ini}$ is performed and each particle assigned a
+lagrangian region identifier that corresponds to that of the nearest dark
+matter particle. This ensures that the very fine-grained detail present in the
+lagrangian region is preserved (see Figure \ref{fig:lrpic}).
+
+Once all particles in the initial conditions have been assigned a lagrangian
+region, they must be ID matched with particles in the final, $z=0$, snapshot of
+the simulation. This is performed by looping through all of the (sorted)
+particles and assigning a lagrangian region ID for the final-state particles
+that is equal to that of their initial state progenitor. To assign a
+lagrangian region to the star particles at $z=0$, their gas progenitor
+(which can be tracked using the unique particle ID) is used. Particles which
+either become black holes, or are consumed by a black hole, are ignored for
+this analysis. This re-matching also takes place for the dark matter
+particles, to ensure that the ID matching is working correctly.
 
 \subsection{Quantifying inter-lagrangian transfer}
 
 \begin{figure} \centering
-	\includegraphics[width=\columnwidth]{generated_figures/component_fraction_vs_halo_mass_both.pdf}
-	\caption{The fraction of total baryonic mass in a given halo at $z=0$
-	as a function of halo mass. These values are computed using the
-	lagrangian region IDs that were assigned to the gas and star particles
-	in the initial conditions. See Figure \ref{fig:splitmassfrac} for a
-	breakdown into stellar and gaseous components. The shaded regions show
-	a single standard deviation of variance in the mass fraction for that
-	bin, and do not include errors from halo sampling bias or cosmic
-	variance.} \label{fig:massfrac} \end{figure}
+\includegraphics[width=\columnwidth]{generated_figures/basic_halos/component_fraction_vs_halo_mass_both.pdf}
+ \caption{The fraction of total baryonic mass in a given halo at $z=0$ as a
+ function of halo mass, originating from the lagrangian region defined by the
+ halo (blue), from outside any lagrangian region (purple), and from the
+ lagrangian region defined by another halo (red). These values are computed
+ using the lagrangian region IDs that were assigned to the gas and star
+ particles in the initial conditions. See Figure \ref{fig:splitmassfrac} for
+ a breakdown into stellar and gaseous components. The shaded regions show a
+ single standard deviation of variance in the mass fraction for that bin, and
+ do not include errors from halo sampling bias or cosmic variance.}
+ \label{fig:massfrac}
+ \end{figure}
 
-Once this analysis has been performed it is possible to see the fraction of
+Once this analysis has been performed it is possible to calculate the fraction of
 baryonic mass at $z=0$ that originates from the lagrangian region of a given
 halo (see Figure \ref{fig:massfrac}). There is a significant difference in the
 contributions from the gaseous and stellar components to this mass fraction;
 see Figure \ref{fig:splitmassfrac}. This data is for every halo in the box, and
-hence does not include any cuts based on the particlar neighbourhood of these
+hence does not include any cuts based on the particular neighbourhood of these
 halos; a significant fraction of the scatter here is likely to come from
 isolated halos, versus those in clusters and other noisier environments. This
-analyis shows that a significant portion (up to 20\%) of the stellar mass of a
+analysis shows that a significant portion (up to 20\%) of the stellar mass of a
 Milky-Way mass halo may come from the lagrangian region as defined by a
 \emph{different halo}.
 
 \begin{figure*} \centering
-	\includegraphics[width=0.495\textwidth]{generated_figures/component_fraction_vs_halo_mass_gas.pdf}
-	\includegraphics[width=0.495\textwidth]{generated_figures/component_fraction_vs_halo_mass_stellar.pdf}
+	\includegraphics[width=0.495\textwidth]{generated_figures/basic_halos/component_fraction_vs_halo_mass_gas.pdf}
+	\includegraphics[width=0.495\textwidth]{generated_figures/basic_halos/component_fraction_vs_halo_mass_stellar.pdf}
 	\caption{Left: fraction of gaseous mass at $z=0$ in each halo from each
 	component; right: fraction of stellar mass at $z=0$ from each
 	component. Note that there is significantly more transfer shown in the
@@ -110,7 +102,7 @@ using the current isolation criteria.
 \subsection{Radial trends}
 
 \begin{figure} \centering
-	\includegraphics[width=\columnwidth]{generated_figures/radial_distance_plot.pdf}
+	\includegraphics[width=\columnwidth]{generated_figures/basic_halos/radial_distance_plot.pdf}
 	\caption{The dependence of mass fraction split by component as a
 	function of radius, normalised by the virial radius for each halo.
 	Every halo with $10^{12} \leq $ M$_{\rm halo}$ $ < 10^{13}$ M$_\odot$
@@ -121,30 +113,28 @@ using the current isolation criteria.
 \end{figure}
 
 The mass fractions contributed from various components to each halo appear to
-be relatively independent of halo mass (see Figure \ref{fig:massfrac}), however
-this may not be true within each individual halo. In Figure
-\ref{fig:radialmassfrac} the mass fraction contributed to the halo is shown as
-a function of radius. As expected, more gas in the center of the halo comes
-from the corresponding lagrangian region, but interestingly this only
-approaches ~60\%, suggesting significant transfer \emph{into halos} still takes
-place for gas that ends up at the bottom of the potential well at $z=0$.
+be relatively independent of halo mass (see Figure \ref{fig:massfrac}). In
+Figure \ref{fig:radialmassfrac} the mass fraction contributed to the halo by
+each component is shown as a function of radius. As expected, more gas in the
+center of the halo comes from the corresponding lagrangian region, but
+interestingly this only approaches 70\%, suggesting significant transfer
+\emph{into halos} still takes place for gas that ends up at the bottom of the
+potential well at $z=0$.
 
-Also note how the mass fraction of stars from the own lagrangian region of the
-halo drops as a function of radius. This suggests that a large number ($\sim{}30$\%)
-of these stars were formed ex-situ. Note, again, that around $\sim{}$15\% of the stars
-at the center of these halos are formed from gas that was not present in the
-initial lagrangian region of this halo. This is surprising, as this transfer
-must have taken place relatively early to ensure that the gas was able to cool
-and form stars.
+Also note how the mass fraction of stars originating from the lagrangian
+region defined by each halo drops as a function of radius. Note that around
+$10$\% of the stars at the center of these halos (within 0.1\rvir{})
+are formed from gas that was not present in the initial lagrangian region of
+this halo. This is surprising, as this transfer must have taken place
+relatively early to ensure that the gas was able to cool and form stars.
 
-These radial trends tell us something about the assembley of the
-Circum-Galactic Medium (CGM) \citep{tumlinson2017}. Whilst the claim can be
-that the \simba{} simulation suite does not have the requisite resolution to
-accurately simulate the CGM, these trends are very tight and show strong
-convergence when multiple halos are stacked.  \citet{Crain2013} found that the
-CGM assmembles from the `inside-out', with feedback within the galaxy
-establishing a strong negative metallicity relation.  However, these results
-seem to suggest there is a significant effect from inter-lagrangian (and hence
-inter-galactic) transfer from gas that has been blown out of \emph{other}
-galaxies falling in to add to this metallicity gradient.  Future work will
-focus on separating these two variables using this analysis.
+These radial trends tell us something about the assembly of the
+Circumgalactic Medium (CGM) \citep{tumlinson2017}. These trends are very
+tight and show strong convergence when multiple halos are stacked.
+\citet{Crain2013} found that the CGM assembles from the `inside-out', with
+feedback within the galaxy establishing a strong negative metallicity
+gradient. However, these results seem to suggest there is a significant
+effect from inter-lagrangian (and hence inter-galactic) transfer from gas
+that has been blown out of \emph{other} galaxies falling in to add to this
+metallicity gradient. Future work will focus on separating these two
+variables using this analysis.

@@ -2,13 +2,23 @@
 \label{sec:appendix}
 
 \subsection{Code}
+\label{app:code}
 
-The code used in this analysis, {\tt LTCaesar} is made available to the
+The code used in this analysis, \ltcaesar{} is made available to the
 community for use with their own
-simulations\footnote{https://www.github.com/jborrow/lagrangian-transfer}. This
-code can also be installed with the `pip` python packaging manager.
+simulations\footnote{https://www.github.com/jborrow/lagrangian-transfer}.
+This code can also be installed with the `{\tt pip}' python packaging
+manager. In the repository, there is also a series of scripts that can be
+used to convert between halo catalogues, and a robust suite of unit tests
+that ensure that \ltcaesar{} performs the analysis that we claim it does.
+This code is highly extensible and can use any halo finder, simulation code
+(so long as it includes at least tracer particles), and can run on a $512^3$
+particle box in under an hour (including the production of all of the figures
+in this report) on a single supercomputing node. The authors acknowledge that
+this section, unfortunately, is under-developed and significantly
+under-referenced, based on the possible claims presented here.
 
-{\tt LTCaesar} uses the numerical routines from {\tt numpy}, the KDTree from
+\ltcaesar{} uses the numerical routines from {\tt numpy}, the KDTree from
 {\tt scipy} for nearest neighbour searching, and the halo finder wrapper from
 {\tt caesar} \citep{NumPy2018, Jones2001, Thompson2018}. Full documentation,
 and more information, can be found on the code webpages. The work in this paper

@@ -2,40 +2,22 @@
 \label{sec:futurework}
 
 As noted in \S \ref{sec:conclusions}, this work is preliminary and mainly
-focuses on the methods behind this kind of analysis. Below is a list of
-possbile opportunities, improvements, and science that we wish to accomplish
-using the newly developed \ltcaesar{} code. This code is highly extensible and
-can use any halo finder, simulation code (so long as it includes at least
-tracer particles), and can run on a $512^3$ particle box in under an hour
-(including the production of all of the figures in this report) on a single
-supercomputing node. The authors acknowledge that this section, unfortunately,
-is under-developed and significantly under-referenced, based on the possible
-claims presented here.
+focuses on the methods behind this new approach. Below is a list of possible
+opportunities, improvements, and science that we wish to accomplish using the
+newly developed \ltcaesar{} code.
 
 \subsection{Improvements to the analysis}
 
-\subsubsection{Better halo-finder support}
+\subsubsection{Improvements to particle ID handling}
 
-In the near future, we hope to add support for completely generic halo-finders.
-The majority of halo finders are currently supported through the {\tt caesar}
-and {\tt yt} framework, but for simplicity the next addition will be to
-include the ability to specify only halo centers and virial radii to perform
-the search by hand.
-
-\subsubsection{Virial radius extension work}
-
-The current methodology for increasing the virial radii of halos is not as
-clean as it could be. This involves re-finding all particles within $n$ times
-$r_{\rm vir}$ and then constructing a new halo catalogue out of this. The
-contributions to that halo are then counted within this radius, instead of
-to the original virial radius. This means that the extension to the virial
-radius is not only filling out lagrangian regions, but increasing their
-size as well; this leads to the exact same edge effects that we have seen
-previously causing more transfer from outside. In the future, the plan is to
-consider particles that lie within $r_{\rm vir}$ at $z=0$ for contribution
-to the mass fractions, but include particles within $n \cdot r_{\rm vir}$
-in the definition of the lagrangian region itself. This will significantly
-smooth the edges of the virial radius.
+Due to a bug in the simulation code when this particular box was simulated,
+gas particles which have formed a star, and star particles that formed out of
+a gas particle which had already created a star particle, must be excluded.
+This is unfortunate, as these particles are the ones that would probably have
+extended out to the largest distances due to their interactions with stellar
+and AGN feedback. In future analysis this problem will be fixed; however at
+this time we do not expect it to have a significant effect as this is a very
+small contribution (less than 0.1\% of gas particles).
 
 \subsubsection{Filling-out work}
 

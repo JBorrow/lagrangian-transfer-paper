@@ -1,7 +1,7 @@
 % Basic setup. Most papers should leave these options alone.
 \documentclass[fleqn,usenatbib]{mnras}
 
-\hypersetup{draft}
+%\hypersetup{draft}
 
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
@@ -9,6 +9,9 @@
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{color}
+
+\usepackage{mathptmx}
+\usepackage{txfonts}
 
 % Macros
 \newcommand{\blue}[1]{{\color{blue} #1}}
@@ -42,19 +45,18 @@
 \newcommand{\tdep}{t_{\rm dep}}
 \newcommand{\fgas}{f_{\rm gas}}
 \newcommand{\fedd}{f_{\rm Edd}}
-\newcommand{\mbh}{M_{\rm BH}}
 \newcommand{\ltcaesar}{{\tt LTCaesar}}
 
-\title{Inter-Lagrangian Transfer}
+\title{Where did it all come from? Inter-Lagrangian baryon transfer in the \simba{} simulations}
 \author[Borrow et al.]{
-Josh Borrow $^{1}$,
+Josh Borrow$^{1}$,
 Daniel Angl\'es-Alc\'azar$^{2}$ \&
 Romeel Dav\'e$^{2, 3}$
 \\
 % List of institutions
-\\$^1$ Institute for Computational Cosmology, Durham University, UK
-\\$^2$ Center for Computational Astrophysics, New York, NY
-\\$^3$ University of Edinburgh, Edinburgh, UK
+\\$^1$ Institute for Computational Cosmology, Department of Physics, University of Durham, South Road, Durham, DH1 3LE, UK
+\\$^2$ Center for Computational Astrophysics, Flatiron Institute, 162 Fifth Avenue, New York, NY 10010, USA 
+\\$^3$ Institute for Astronomy, University of Edinburgh, Royal Observatory, Edinburgh EH9 3HJ, UK
 }
 
 
@@ -65,16 +67,16 @@ Romeel Dav\'e$^{2, 3}$
 
 \begin{abstract}\input{abstract}\end{abstract}
 
-\begin{keywords}galaxies:formation, galaxies:evolution: methods:N-body simulations\end{keywords}
+\begin{keywords}galaxies: formation, galaxies: evolution, methods: N-body simulations\end{keywords}
 
 \input{introduction}
 \input{simba}
 \input{haloindependent}
 \input{lagrangianregions}
 \input{robustness}
-%\input{combining}
 \input{conclusions}
 \input{futurework}
+\input{acknowledgements}
 
 \bibliographystyle{mnras}
 \bibliography{bibliography}
