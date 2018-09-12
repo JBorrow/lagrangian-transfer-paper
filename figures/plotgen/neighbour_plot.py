@@ -38,14 +38,14 @@ ax.loglog()
 
 ax.hist(
     radii_gas / radii_dm_g,
-    bins=np.logspace(-4, 4, 256),
+    bins=np.logspace(-4, 5, 256),
     range=(0, 5000),
     alpha=0.8,
     label="$x$ = Gas",
 )
 ax.hist(
     radii_star / radii_dm_s,
-    bins=np.logspace(-4, 4, 256),
+    bins=np.logspace(-4, 5, 256),
     range=(0, 5000),
     alpha=0.8,
     label="$x$ = Stars",
@@ -56,10 +56,10 @@ old_ylim = ax.get_ylim()
 ax.plot([1, 1], [1e-5, 1e8], color="white", ls="dashed")
 ax.set_ylim(old_ylim)
 
-ax.set_xlabel("$r_{x, f}/r_{DM, f}")
+ax.set_xlabel("$r_{x, f}/r_{DM, f}$")
 ax.set_ylabel("Abundance of particles in box")
 
-fig.legend()
+ax.legend()
 
 fig.tight_layout()
 fig.savefig("neighbour_analysis_ratio_histogram.pdf")
@@ -71,14 +71,16 @@ fig, ax = plt.subplots()
 
 ax.semilogy()
 
-bin_max = max([data_gas.max(), data_star.max(), data_dm.max()])
-bins = np.linspace(0, bin_max, 100)
+bin_max = 16000
+bins = np.linspace(0, bin_max / 1000.0, 100)
 
 ax.hist(
     data_gas[1] / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Gas"
 )
+# We have ~10 particles that make up a confusing tail in the stars.
+cut_stars = data_star[1][data_star[1] < 7500]
 ax.hist(
-    data_star[1] / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Stars"
+    cut_stars / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Stars",
 )
 ax.hist(
     data_dark_matter[1] / 1000.0,
@@ -88,9 +90,11 @@ ax.hist(
     label="$x$ = Dark Matter",
 )
 
-plt.ylabel("Normalised fraction of particles in bin")
-plt.xlabel("$r_{x, f}$ (Mpc)")
+ax.set_xlim(0, bin_max / 1000.0)
 
-fig.legend()
+plt.ylabel("Normalised fraction of particles in bin")
+plt.xlabel("$r_{x, f}$ (Mpc/$h$)")
+
+ax.legend()
 fig.tight_layout()
 fig.savefig("neighbour_analysis_simple_histogram.pdf")
