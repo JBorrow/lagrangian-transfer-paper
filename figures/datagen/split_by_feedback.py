@@ -32,7 +32,7 @@ def mass_fraction_binned_by_feedback(mask, halo, simulation, ptype):
     lagrangian regions, in a given mass bin.
     """
 
-    radii, masses, lagrangian_regions, halos = lt.analaysis.radial.get_relevant_baryonic_quantities(
+    radii, masses, lagrangian_regions, halos = lt.analysis.radial.get_relevant_baryonic_quantities(
         halo, simulation, ptype
     )
 
@@ -50,7 +50,7 @@ def mass_fraction_binned_by_feedback(mask, halo, simulation, ptype):
     relevant_other = other[mask]
 
     # Create an indexing array based on those masks
-    feedback_indicies = np.zeros_like(relevant_masses)
+    feedback_indicies = np.zeros_like(relevant_masses, dtype=int)
     feedback_indicies[relevant_agn] = 2
     feedback_indicies[relevant_stellar] = 1
 
