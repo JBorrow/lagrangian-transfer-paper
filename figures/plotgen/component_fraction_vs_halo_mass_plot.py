@@ -86,3 +86,48 @@ for data_type in ["gas", "stellar", "both", "dm"]:
     plt.savefig("component_fraction_vs_halo_mass_{}.pdf".format(data_type))
 
     plt.close()
+
+
+# Now we make the plot of the three next to each other.
+
+fig, ax = plt.subplots(1, 3, figsize=[6.973, 3], sharey=True, sharex=True)
+
+for axis, data_type in zip(ax, ["both", "gas", "stellar"]):
+    try:
+        this_data = locals()["data_{}".format(data_type)]
+    except:
+        # Skip this one
+        continue
+    halo_mass = get_fancy_halo_mass(this_data)
+
+    for color, label in zip(colors, switch.keys()):
+        name_of_item = switch[label]
+        name_of_error = "{}_stddev".format(name_of_item)
+
+        axis.fill_between(
+            halo_mass,
+            this_data[name_of_item] - this_data[name_of_error],
+            this_data[name_of_item] + this_data[name_of_error],
+            alpha=0.2,
+            color=color,
+            lw=0,
+        )
+        axis.plot(
+            halo_mass, this_data[name_of_item], color=color, label=label
+        )
+
+ax[1].semilogx()
+
+current_ylim = max([axis.get_ylim()[1] for axis in ax])
+ax[1].set_xlim(halo_mass[0], halo_mass[-2])
+ax[1].set_ylim(0, min([current_ylim, 1]))
+
+ax[1].set_xlabel("Halo mass (M$_\odot$)")
+ax[0].set_ylabel("Fraction of mass in component")
+
+ax[2].legend()
+
+fig.tight_layout()
+fig.subplots_adjust(wspace=0, hspace=0)
+
+fig.savefig("component_fraction_mixed.pdf")
