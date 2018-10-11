@@ -29,20 +29,29 @@ current_plot = np.zeros(len(bins), dtype=float)
 order = np.array([1, 2, 0])
 
 for data, name, color in zip(
-    np.swapaxes(output, 0, 1)[order], np.array(["Own LR", "Other LR", "Outside LR"])[order], np.array(["C0", "C1", "C2"])[order]
+    np.swapaxes(output, 0, 1)[order],
+    np.array(["Own LR", "Other LR", "Outside LR"])[order],
+    np.array(["C0", "C1", "C2"])[order],
 ):
-    for x, style, fb, a in zip(data, ["", "/", "."], ["No FB", "Stellar", "AGN"], [0.6, 0.8, 1.0]):
+    for x, style, fb, a in zip(
+        data, ["", "/", "."], ["No FB", "Stellar", "AGN"], [0.6, 0.8, 1.0]
+    ):
         if style == "":
             label = name
         else:
-            label=None
-        
+            label = None
+
         ax.fill_between(
-            bins, current_plot, current_plot+x, hatch=style,
-            label=label, facecolor=color, edgecolor="white",
-            alpha=a
+            bins,
+            current_plot,
+            current_plot + x,
+            hatch=style,
+            label=label,
+            facecolor=color,
+            edgecolor="white",
+            alpha=a,
         )
-        
+
         current_plot += x
 
 

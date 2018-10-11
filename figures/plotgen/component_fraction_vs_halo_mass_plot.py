@@ -27,6 +27,7 @@ except:
     # No stuff :(
     pass
 
+
 def get_fancy_halo_mass(data):
     """
     Returns the halo mass 10^x'd and in physical units.
@@ -67,9 +68,7 @@ for data_type in ["gas", "stellar", "both", "dm"]:
             color=color,
             lw=0,
         )
-        plt.plot(
-            halo_mass, this_data[name_of_item], color=color, label=label
-        )
+        plt.plot(halo_mass, this_data[name_of_item], color=color, label=label)
 
     plt.semilogx()
 
@@ -112,9 +111,7 @@ for axis, data_type in zip(ax, ["both", "gas", "stellar"]):
             color=color,
             lw=0,
         )
-        axis.plot(
-            halo_mass, this_data[name_of_item], color=color, label=label
-        )
+        axis.plot(halo_mass, this_data[name_of_item], color=color, label=label)
 
 ax[1].semilogx()
 

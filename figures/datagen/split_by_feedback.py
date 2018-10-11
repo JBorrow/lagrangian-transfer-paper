@@ -2,6 +2,7 @@ import numpy as np
 import ltcaesar as lt
 from functools import lru_cache
 
+
 @lru_cache(128)
 def grab_feedback_numbers(halo, simulation, ptype):
     """
@@ -11,12 +12,9 @@ def grab_feedback_numbers(halo, simulation, ptype):
     + Which particle shave been touched by stellar feedback only
     + Which particles have not been touched by any kind of feedback
     """
-    
+
     raw = lt.analysis.radial.get_extra_baryonic_quantity(
-        halo,
-        simulation,
-        "NWindLaunches",
-        ptype
+        halo, simulation, "NWindLaunches", ptype
     )
 
     agn = raw >= 1000
@@ -62,7 +60,9 @@ def mass_fraction_binned_by_feedback(mask, halo, simulation, ptype):
     from_other_lr = np.zeros(3, dtype=float)
     from_outside_lr = np.zeros(3, dtype=float)
 
-    for lr, halo, mass, fb in zip(relevant_lr, relevant_halos, relevant_masses, feedback_indicies):
+    for lr, halo, mass, fb in zip(
+        relevant_lr, relevant_halos, relevant_masses, feedback_indicies
+    ):
         if lr == halo:
             from_own_lr[fb] += mass
         elif lr == -1:
