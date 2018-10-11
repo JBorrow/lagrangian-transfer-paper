@@ -29,6 +29,8 @@ radii_dm_g = np.load("neighbour_analysis_radii_dm_g.npy")
 radii_dm_s = np.load("neighbour_analysis_radii_dm_s.npy")
 radii_gas = np.load("neighbour_analysis_radii_gas.npy")
 radii_star = np.load("neighbour_analysis_radii_star.npy")
+fb_gas = np.load("neighbour_analysis_fb_gas.npy")
+fb_star = np.load("neighbour_analysis_fb_star.npy")
 
 # Make the first histogram plot.
 
@@ -92,9 +94,70 @@ ax.hist(
 
 ax.set_xlim(0, bin_max / 1000.0)
 
-plt.ylabel("Normalised fraction of particles in bin")
-plt.xlabel("$r_{x, f}$ (Mpc/$h$)")
+ax.set_ylabel("Normalised fraction of particles in bin")
+ax.set_xlabel("$r_{x, f}$ (Mpc/$h$)")
 
 ax.legend()
 fig.tight_layout()
 fig.savefig("neighbour_analysis_simple_histogram.pdf")
+
+
+### Now we can make the one that uses the binned data from feedback.
+
+fig, ax = plt.subplots()
+
+ax.semilogy()
+
+bin_max = 16000
+bins = np.linspace(0, bin_max / 1000.0, 100)
+
+gas = {
+    "AGN": data_gas[1][fb_gas == 2],
+    "Stellar": data_gas[1][fb_gas == 1],
+    "None": data_gas[1][fb_gas == 0]
+}
+star = {
+    "AGN": data_star[1][fb_star == 2],
+    "Stellar": data_star[1][fb_star == 1],
+    "None": data_star[1][fb_star == 0]
+}
+linestyles = {
+    "AGN": "dotted",
+    "Stellar": "dashed",
+    "None": "solid"
+}
+
+for name, this_data in gas.items():
+    ls = linestyles[name]
+    label = "$x$ = Gas ({})".format(name)
+    ax.hist(
+        this_data / 1000.0, bins=bins, density=True, histtype="step", label=label,
+        linestyle=ls
+    )
+
+for name, this_data in star.items():
+    ls = linestyles[name]
+    label = "$x$ = Gas ({})".format(name)
+    # We have ~10 particles that make up a confusing tail in the stars.
+    cut_stars = this_data[this_data[1] < 7500]
+    ax.hist(
+        cut_stars / 1000.0, bins=bins, density=True, histtype="step", label=label,
+        linestyle=ls
+    )
+
+ax.hist(
+    data_dark_matter[1] / 1000.0,
+    bins=bins,
+    density=True,
+    histtype="step",
+    label="$x$ = Dark Matter",
+)
+
+ax.set_xlim(0, bin_max / 1000.0)
+
+ax.set_ylabel("Normalised fraction of particles in bin")
+ax.set_xlabel("$r_{x, f}$ (Mpc/$h$)")
+
+ax.legend()
+fig.tight_layout()
+fig.savefig("neighbour_analysis_feedback_histogram.pdf")
