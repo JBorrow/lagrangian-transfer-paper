@@ -23,6 +23,32 @@ import numpy as np
 import ltcaesar as lt
 
 
+def grab_feedback_numbers(simulation, ptype):
+    """
+    Returns a single array that tells you:
+
+    + Which particles have been touched by AGN feedback (2 in array)
+    + Which particle shave been touched by stellar feedback only (1)
+    + Which particles have not been touched by any kind of feedback (0)
+    """
+    
+    raw = simulation.snapshot_end.baryonic_matter.read_extra_array(
+        "NWindLaunches",
+        ptype
+    )
+    
+    agn = raw >= 1000
+    stellar = np.logical_and(raw < 1000, raw > 0)
+    other = raw == 0
+
+    output = np.empty(len(other), dtype="u1")
+    output[other] = 0
+    output[stellar] = 1
+    output[agn] = 2
+
+    return output
+
+
 def run_analysis(simulation: lt.objects.Simulation):
     """
     Runs the analysis and saves it; this is a function in case multiple
@@ -38,6 +64,9 @@ def run_analysis(simulation: lt.objects.Simulation):
     gas_data = lt.analysis.plot.find_distances_to_nearest_neighbours_data(
         simulation, "gas"
     )
+
+    feedback_gas = grab_feedback_numbers(simulation, "gas")
+    feedback_star = grab_feedback_numbers(simulation, "star")
 
     # Data for the histogram
 
@@ -69,15 +98,23 @@ def run_analysis(simulation: lt.objects.Simulation):
     radii_dm_s = dark_matter_data[1][indicies_dm_s]
     radii_star = star_data[1][indicies_star]
 
+    fb_gas = feedback_gas[indicies_gas]
+    fb_star = feedback_star[indicies_star]
+
     # Now we can dump these to arrays
     for x in ["dm_g", "gas", "dm_s", "star"]:
         full_name = "radii_{}".format(x)
         np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
 
+    # Dump the two feedback arrays
+    for x in ["gas", "star"]:
+        full_name = "fb_{}".format(x)
+        np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
+
     # Move on to the more basic analysis
     for x in ["gas", "star", "dark_matter"]:
         full_name = "data_{}".format(x)
-        np.save("neighbour_analysis_{}".format(full_name), locals()[full_name])
+        np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
 
     return
 
