@@ -110,7 +110,7 @@ def run_analysis(simulation: lt.objects.Simulation):
 
     # Move on to the more basic analysis
     for x in ["gas", "star", "dark_matter"]:
-        full_name = "data_{}".format(x)
+        full_name = "{}_data".format(x)
         np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
 
     return
