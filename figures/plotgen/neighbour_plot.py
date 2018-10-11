@@ -30,7 +30,6 @@ radii_dm_s = np.load("neighbour_analysis_radii_dm_s.npy")
 radii_gas = np.load("neighbour_analysis_radii_gas.npy")
 radii_star = np.load("neighbour_analysis_radii_star.npy")
 fb_gas = np.load("neighbour_analysis_fb_gas.npy")
-fb_star = np.load("neighbour_analysis_fb_star.npy")
 
 # Make the first histogram plot.
 
