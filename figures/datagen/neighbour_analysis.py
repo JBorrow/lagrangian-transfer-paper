@@ -31,12 +31,11 @@ def grab_feedback_numbers(simulation, ptype):
     + Which particle shave been touched by stellar feedback only (1)
     + Which particles have not been touched by any kind of feedback (0)
     """
-    
+
     raw = simulation.snapshot_end.baryonic_matter.read_extra_array(
-        "NWindLaunches",
-        ptype
+        "NWindLaunches", ptype
     )
-    
+
     agn = raw >= 1000
     stellar = np.logical_and(raw < 1000, raw > 0)
     other = raw == 0
@@ -66,7 +65,6 @@ def run_analysis(simulation: lt.objects.Simulation):
     )
 
     feedback_gas = grab_feedback_numbers(simulation, "gas")
-    feedback_star = grab_feedback_numbers(simulation, "star")
 
     # Data for the histogram
 
@@ -99,15 +97,14 @@ def run_analysis(simulation: lt.objects.Simulation):
     radii_star = star_data[1][indicies_star]
 
     fb_gas = feedback_gas[indicies_gas]
-    fb_star = feedback_star[indicies_star]
 
     # Now we can dump these to arrays
     for x in ["dm_g", "gas", "dm_s", "star"]:
         full_name = "radii_{}".format(x)
         np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
 
-    # Dump the two feedback arrays
-    for x in ["gas", "star"]:
+    # Dump the feedback arrays
+    for x in ["gas"]:
         full_name = "fb_{}".format(x)
         np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
 

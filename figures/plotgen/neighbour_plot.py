@@ -82,7 +82,7 @@ ax.hist(
 # We have ~10 particles that make up a confusing tail in the stars.
 cut_stars = data_star[1][data_star[1] < 7500]
 ax.hist(
-    cut_stars / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Stars",
+    cut_stars / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Stars"
 )
 ax.hist(
     data_dark_matter[1] / 1000.0,
@@ -114,36 +114,33 @@ bins = np.linspace(0, bin_max / 1000.0, 100)
 gas = {
     "AGN": data_gas[1][fb_gas == 2],
     "Stellar": data_gas[1][fb_gas == 1],
-    "None": data_gas[1][fb_gas == 0]
+    "None": data_gas[1][fb_gas == 0],
 }
-star = {
-    "AGN": data_star[1][fb_star == 2],
-    "Stellar": data_star[1][fb_star == 1],
-    "None": data_star[1][fb_star == 0]
-}
-linestyles = {
-    "AGN": "dotted",
-    "Stellar": "dashed",
-    "None": "solid"
-}
+linestyles = {"AGN": "dotted", "Stellar": "dashed", "None": "solid"}
 
 for name, this_data in gas.items():
     ls = linestyles[name]
     label = "$x$ = Gas ({})".format(name)
     ax.hist(
-        this_data / 1000.0, bins=bins, density=True, histtype="step", label=label,
-        linestyle=ls
+        this_data / 1000.0,
+        bins=bins,
+        density=True,
+        histtype="step",
+        label=label,
+        linestyle=ls,
+        color="C0",
     )
 
-for name, this_data in star.items():
-    ls = linestyles[name]
-    label = "$x$ = Gas ({})".format(name)
-    # We have ~10 particles that make up a confusing tail in the stars.
-    cut_stars = this_data[this_data[1] < 7500]
-    ax.hist(
-        cut_stars / 1000.0, bins=bins, density=True, histtype="step", label=label,
-        linestyle=ls
-    )
+# We have ~10 particles that make up a confusing tail in the stars.
+cut_stars = data_star[1][data_star[1] < 7500]
+ax.hist(
+    cut_stars / 1000.0,
+    bins=bins,
+    density=True,
+    histtype="step",
+    label="$x$ = Stars",
+    color="C1",
+)
 
 ax.hist(
     data_dark_matter[1] / 1000.0,
@@ -151,6 +148,7 @@ ax.hist(
     density=True,
     histtype="step",
     label="$x$ = Dark Matter",
+    color="C2",
 )
 
 ax.set_xlim(0, bin_max / 1000.0)
