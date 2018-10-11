@@ -19,6 +19,32 @@ import numpy as np
 import ltcaesar as lt
 
 
+def grab_feedback_numbers(simulation, ptype):
+    """
+    Returns a single array that tells you:
+
+    + Which particles have been touched by AGN feedback (2 in array)
+    + Which particle shave been touched by stellar feedback only (1)
+    + Which particles have not been touched by any kind of feedback (0)
+    """
+    
+    raw = simulation.snapshot_end.baryonic_matter.read_extra_array(
+        "NWindLaunches",
+        ptype
+    )
+    
+    agn = raw >= 1000
+    stellar = np.logical_and(raw < 1000, raw > 0)
+    other = raw == 0
+
+    output = np.empty(len(other))
+    output[other] = 0
+    output[stellar] = 1
+    output[agn] = 2
+
+    return output
+
+
 def run_analysis(simulation: lt.objects.Simulation):
     """
     Runs the analysis and saves it; this is a function in case multiple
@@ -33,6 +59,9 @@ def run_analysis(simulation: lt.objects.Simulation):
     output_star, output_star_std = lt.analysis.radial.run_analysis_on_mass_bin(
         simulation, 1e12, 1e13, radial_bins, ptype="star"
     )
+    feedback_gas = grab_feedback_numbers(simulation, "gas")
+    feedback_star = grab_feedback_numbers(simulation, "star")
+
 
     bin_centers = [0.5 * (x + y) for x, y in zip(bin_edges[:-1], bin_edges[1:])]
 
@@ -45,6 +74,9 @@ def run_analysis(simulation: lt.objects.Simulation):
     np.save("radial_distance_analysis_gas_stderr.npy", output_std)
     np.save("radial_distance_analysis_star_stderr.npy", output_star_std)
     np.save("radial_distance_analysis_radial_bins.npy", bin_centers)
+    np.save("radial_distance_analysis_feedback_gas.npy", feedback_gas)
+    np.save("radial_distance_analysis_feedback_star.npy", feedback_star)
+
 
     return
 
