@@ -103,7 +103,7 @@ fig.savefig("neighbour_analysis_simple_histogram.pdf")
 
 ### Now we can make the one that uses the binned data from feedback.
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(6.974, 3.4))
 
 ax.semilogy()
 
