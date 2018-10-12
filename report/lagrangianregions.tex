@@ -51,19 +51,24 @@ particles, to ensure that the ID matching is working correctly.
 
 \subsection{Quantifying inter-lagrangian transfer}
 
-\begin{figure} \centering
-\includegraphics[width=\columnwidth]{generated_figures/basic_halos/component_fraction_vs_halo_mass_both.pdf}
- \caption{The fraction of total baryonic mass in a given halo at $z=0$ as a
- function of halo mass, originating from the lagrangian region defined by the
- halo (blue), from outside any lagrangian region (purple), and from the
- lagrangian region defined by another halo (red). These values are computed
- using the lagrangian region IDs that were assigned to the gas and star
- particles in the initial conditions. See Figure \ref{fig:splitmassfrac} for
- a breakdown into stellar and gaseous components. The shaded regions show a
- single standard deviation of variance in the mass fraction for that bin, and
- do not include errors from halo sampling bias or cosmic variance.}
- \label{fig:massfrac}
- \end{figure}
+\begin{figure*}
+	\centering
+	\includegraphics[width=\textwidth]{generated_figures/basic_halos/component_fraction_mixed.pdf}
+	\caption{
+		\emph{Left}: The total fraction of total baryonic mass in a given halo at
+		$z=0$ as a function of (dark matter) halo mass. The fraciton of baryonic
+		mass originating from the lagrangian region defined by the halo is shown
+		in blue, from other lagrangian regions in red, and from outside any
+		lagrangian region in purple. The shaded regions show a single standard
+		deviation of variance in the mass fraction for that bin, and do not include
+		errors from halo sampling bias or cosmic variance; this is why the errors
+		appear to decrease as a function of halo mass. \emph{Center}: The same 
+		fractions are shown, but now only for the gas in the halo. \emph{Right}:
+		the same fractions are again shown, but now only for the stars present in
+		the halo.
+	}
+	\label{fig:massfracall}
+\end{figure*}
 
 Once this analysis has been performed it is possible to calculate the fraction of
 baryonic mass at $z=0$ that originates from the lagrangian region of a given
@@ -76,19 +81,6 @@ isolated halos, versus those in clusters and other noisier environments. This
 analysis shows that a significant portion (up to 20\%) of the stellar mass of a
 Milky-Way mass halo may come from the lagrangian region as defined by a
 \emph{different halo}.
-
-\begin{figure*} \centering
-	\includegraphics[width=0.495\textwidth]{generated_figures/basic_halos/component_fraction_vs_halo_mass_gas.pdf}
-	\includegraphics[width=0.495\textwidth]{generated_figures/basic_halos/component_fraction_vs_halo_mass_stellar.pdf}
-	\caption{Left: fraction of gaseous mass at $z=0$ in each halo from each
-	component; right: fraction of stellar mass at $z=0$ from each
-	component. Note that there is significantly more transfer shown in the
-	gaseous component. Gas that is transferred between lagrangian regions
-	must be given time to cool before being able to form stars. As the
-	events that enable transfer are typically very energetic (AGN, stellar
-	feedback, accretion), it is unlikely that the cooling time will be
-	short enough to form stars by the end of the simulation for most
-	transfer.} \label{fig:splitmassfrac} \end{figure*}
 
 It is important to note that this spread in mass fractions as a function of
 halo mass is still to be quantified. It could be that those halos which
