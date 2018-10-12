@@ -96,7 +96,7 @@ def run_analysis(simulation: lt.objects.Simulation):
     radii_dm_s = dark_matter_data[1][indicies_dm_s]
     radii_star = star_data[1][indicies_star]
 
-    fb_gas = feedback_gas[indicies_gas]
+    fb_gas = feedback_gas
 
     # Now we can dump these to arrays
     for x in ["dm_g", "gas", "dm_s", "star"]:
