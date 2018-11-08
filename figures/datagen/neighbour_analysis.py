@@ -127,7 +127,7 @@ def run_analysis(simulation: lt.objects.Simulation):
 
     for name, data in gas.items():
         hist, _ = np.histogram(data, bins=bins_distance)
-        np.save(f"neighbour_analysis_gas_fb_{name.lower()}.npy")
+        np.save(f"neighbour_analysis_gas_fb_{name.lower()}.npy", hist)
 
     return
 
