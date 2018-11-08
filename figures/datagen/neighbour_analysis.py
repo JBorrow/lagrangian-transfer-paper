@@ -112,7 +112,7 @@ def run_analysis(simulation: lt.objects.Simulation):
 
     # Create the basic distance histograms
     for ptype in ["gas", "star", "dark_matter"]:
-        data_name = f"data_{ptype}"
+        data_name = f"{ptype}_data"
         this_data = locals()[data_name][1]
         distance, _ = np.histogram(this_data, bins=bins_distance)
         np.save(f"neighbour_analysis_{ptype}_distance.npy", distance)
@@ -120,9 +120,9 @@ def run_analysis(simulation: lt.objects.Simulation):
     # Create the gas distances, binned by feedback method.
 
     gas = {
-        "AGN": data_gas[1][fb_gas == 2],
-        "Stellar": data_gas[1][fb_gas == 1],
-        "None": data_gas[1][fb_gas == 0],
+        "AGN": gas_data[1][fb_gas == 2],
+        "Stellar": gas_data[1][fb_gas == 1],
+        "None": gas_data[1][fb_gas == 0],
     }
 
     for name, data in gas.items():
