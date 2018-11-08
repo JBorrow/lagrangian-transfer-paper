@@ -1,18 +1,17 @@
 """
 Generates data files:
 
-    + neighbour_analysis_data_gas.npy
-    + neighbour_analysis_data_dark_matter.npy
-    + neighbour_analysis_data_star.npy
-    + neighbour_analysis_radii_dm_g.npy
-    + neighbour_analysis_radii_dm_s.npy
-    + neighbour_analysis_radii_gas.npy
-    + neighbour_analysis_radii_star.npy
+    + neighbour_analysis_ratio_gas.npy
+    + neighbour_analysis_ratio_star.npy
+    + neighbour_analysis_gas_distance.npy
+    + neighbour_analysis_star_distance.npy
+    + neighbour_analysis_dark_matter_distance.npy
+    + neighbour_analysis_gas_fb_agn.npy
+    + neighbour_analysis_gas_fb_stellar.npy
+    + neighbour_analysis_gas_fb_none.npy
 
 which are numpy arrays that can be analysed and properly described in the
 accompanying plotting script.
-
-Note that these arrays end up being quite large.
 
 Invoke this in script mode as
     
@@ -98,20 +97,37 @@ def run_analysis(simulation: lt.objects.Simulation):
 
     fb_gas = feedback_gas
 
-    # Now we can dump these to arrays
-    for x in ["dm_g", "gas", "dm_s", "star"]:
-        full_name = "radii_{}".format(x)
-        np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
+    # Perform the binning, finally...
+    bins_ratio = np.logspace(-4, 5, 256)
+    bins_distance = np.linspace(0, 15000, 256)
 
-    # Dump the feedback arrays
-    for x in ["gas"]:
-        full_name = "fb_{}".format(x)
-        np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
+    # Create the "ratio" histogram.
+    ratio_gas, _ = np.histogram(radii_gas / radii_dm_g, bins=bins_ratio)
+    ratio_star, _ = np.histogram(radii_star / radii_dm_s, bins=bins_ratio)
 
-    # Move on to the more basic analysis
-    for x in ["gas", "star", "dark_matter"]:
-        full_name = "{}_data".format(x)
-        np.save("neighbour_analysis_{}.npy".format(full_name), locals()[full_name])
+    # Dump ratio items
+    for x in ["gas", "star"]:
+        full_name = f"ratio_{x}"
+        np.save(f"neighbour_analysis_{full_name}.npy", locals()[full_name])
+
+    # Create the basic distance histograms
+    for ptype in ["gas", "star", "dark_matter"]:
+        data_name = f"{ptype}_data"
+        this_data = locals()[data_name][1]
+        distance, _ = np.histogram(this_data, bins=bins_distance)
+        np.save(f"neighbour_analysis_{ptype}_distance.npy", distance)
+
+    # Create the gas distances, binned by feedback method.
+
+    gas = {
+        "AGN": data_gas[1][fb_gas == 2],
+        "Stellar": data_gas[1][fb_gas == 1],
+        "None": data_gas[1][fb_gas == 0],
+    }
+
+    for name, data in gas.items():
+        hist, _ = np.histogram(data, bins=bins_distance)
+        np.save(f"neighbour_analysis_gas_fb_{name.lower()}.npy")
 
     return
 
