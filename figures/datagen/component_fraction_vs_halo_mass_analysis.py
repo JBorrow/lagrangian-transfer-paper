@@ -24,15 +24,15 @@ def run_analysis(simulation: lt.objects.Simulation):
     """
 
     data_stellar = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
-        sim, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["stellar"]
+        simulation, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["stellar"]
     )
 
     data_gas = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
-        sim, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["gas"]
+        simulation, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["gas"]
     )
 
     data_both = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
-        sim, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["gas", "stellar"]
+        simulation, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["gas", "stellar"]
     )
 
     for name in ["stellar", "gas", "both"]:
