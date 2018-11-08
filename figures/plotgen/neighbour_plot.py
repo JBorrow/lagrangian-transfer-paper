@@ -1,13 +1,14 @@
 """
 Uses data files:
 
-    + neighbour_analysis_data_gas.npy
-    + neighbour_analysis_data_dark_matter.npy
-    + neighbour_analysis_data_star.npy
-    + neighbour_analysis_radii_dm_g.npy
-    + neighbour_analysis_radii_dm_s.npy
-    + neighbour_analysis_radii_gas.npy
-    + neighbour_analysis_radii_star.npy
+    + neighbour_analysis_ratio_gas.npy
+    + neighbour_analysis_ratio_star.npy
+    + neighbour_analysis_gas_distance.npy
+    + neighbour_analysis_star_distance.npy
+    + neighbour_analysis_dark_matter_distance.npy
+    + neighbour_analysis_gas_fb_agn.npy
+    + neighbour_analysis_gas_fb_stellar.npy
+    + neighbour_analysis_gas_fb_none.npy
 
 This script makes a plot that is the fraction of mass from given components
 as a function of radius, normalised by the virial radius.
@@ -22,14 +23,26 @@ import numpy as np
 
 plt.style.use("mnras_flatiron")
 
-data_gas = np.load("neighbour_analysis_gas_data.npy")
-data_dark_matter = np.load("neighbour_analysis_dark_matter_data.npy")
-data_star = np.load("neighbour_analysis_star_data.npy")
-radii_dm_g = np.load("neighbour_analysis_radii_dm_g.npy")
-radii_dm_s = np.load("neighbour_analysis_radii_dm_s.npy")
-radii_gas = np.load("neighbour_analysis_radii_gas.npy")
-radii_star = np.load("neighbour_analysis_radii_star.npy")
-fb_gas = np.load("neighbour_analysis_fb_gas.npy")
+
+ratio_gas = np.load("neighbour_analysis_ratio_gas.npy")
+ratio_star = np.load("neighbour_analysis_ratio_star.npy")
+
+distance_gas = np.load("neighbour_analysis_gas_distance.npy")
+distance_star = np.load("neighbour_analysis_star_distance.npy")
+distance_dark_matter = np.load("neighbour_analysis_dark_matter_distance.npy")
+
+fb_agn = np.load("neighbour_analysis_gas_fb_agn.npy")
+fb_stellar = np.load("neighbour_analysis_gas_fb_stellar.npy")
+fb_none = np.load("neighbour_analysis_gas_fb_none.npy")
+
+
+# Same bins as data gen script
+bins_ratio = np.logspace(-4, 5, 256)
+# These were given as kpc, but we'd like to plot mpc.
+bins_distance = np.linspace(0, 15000, 256) / 1000.0
+lambda find_centers b: [0.5 * (x + y) for x, y in zip(b[:-1], b[1:])]
+centers_ratio = find_centers(bins_ratio)
+centers_distance = find_centers(bins_distance)
 
 # Make the first histogram plot.
 
@@ -37,25 +50,13 @@ fig, ax = plt.subplots()
 
 ax.loglog()
 
-ax.hist(
-    radii_gas / radii_dm_g,
-    bins=np.logspace(-4, 5, 256),
-    range=(0, 5000),
-    alpha=0.8,
-    label="$x$ = Gas",
-)
-ax.hist(
-    radii_star / radii_dm_s,
-    bins=np.logspace(-4, 5, 256),
-    range=(0, 5000),
-    alpha=0.8,
-    label="$x$ = Stars",
-)
+ax.fill_between(centers_ratio, np.ones_like(ratio_gas), ratio_gas, alpha=0.8, label="$x$ = gas")
+ax.fill_between(centers_ratio, np.ones_like(ratio_star), ratio_star, alpha=0.8, label="$x$ = stars")
 
 old_ylim = ax.get_ylim()
 # Plot central position to guide the eye
 ax.plot([1, 1], [1e-5, 1e8], color="white", ls="dashed")
-ax.set_ylim(old_ylim)
+ax.set_ylim(1, old_ylim[1])
 
 ax.set_xlabel("$r_{x, f}/r_{DM, f}$")
 ax.set_ylabel("Abundance of particles in box")
@@ -65,33 +66,36 @@ ax.legend()
 fig.tight_layout()
 fig.savefig("neighbour_analysis_ratio_histogram.pdf")
 
-
 # Now we can move on to the simple distance histogram plot.
 
 fig, ax = plt.subplots()
 
+def trim_and_norm(data, min_particles=8):
+    """
+    Trims out any bins that have less than min_particles in them, as well
+    as normalising the whole thing (after trimming, of course).
+    """
+    
+    new_data = np.zeros_like(data)
+    new_data[data >= min_particles] = data
+    new_data /= new_data.sum()
+
+    return new_data
+
 ax.semilogy()
 
-bin_max = 16000
-bins = np.linspace(0, bin_max / 1000.0, 100)
+fancy_names = {
+    "gas": "gas",
+    "star": "stars",
+    "dark_matter": "dark matter"
+}
 
-ax.hist(
-    data_gas[1] / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Gas"
-)
-# We have ~10 particles that make up a confusing tail in the stars.
-cut_stars = data_star[1][data_star[1] < 7500]
-ax.hist(
-    cut_stars / 1000.0, bins=bins, density=True, histtype="step", label="$x$ = Stars"
-)
-ax.hist(
-    data_dark_matter[1] / 1000.0,
-    bins=bins,
-    density=True,
-    histtype="step",
-    label="$x$ = Dark Matter",
-)
+for name, fancy_name in fancy_names.items():
+    raw_data = locals()[f"distance_{name}"]
+    trimmed = trim_and_norm(raw_data)
+    ax.plot(centers_distance, trimmed, label=f"$x$ = {fancy_name}")
 
-ax.set_xlim(0, bin_max / 1000.0)
+ax.set_xlim(0, 15)
 
 ax.set_ylabel("Normalised fraction of particles in bin")
 ax.set_xlabel("$r_{x, f}$ (Mpc/$h$)")
@@ -103,54 +107,36 @@ fig.savefig("neighbour_analysis_simple_histogram.pdf")
 
 ### Now we can make the one that uses the binned data from feedback.
 
-fig, ax = plt.subplots(figsize=(6.974, 3.4))
+fig, ax = plt.subplots()
 
 ax.semilogy()
 
-bin_max = 16000
-bins = np.linspace(0, bin_max / 1000.0, 100)
-
-gas = {
-    "AGN": data_gas[1][fb_gas == 2],
-    "Stellar": data_gas[1][fb_gas == 1],
-    "None": data_gas[1][fb_gas == 0],
+fb_types = {
+    "agn": "AGN",
+    "stellar": "Stellar",
+    "none": "No Feedback"
 }
-linestyles = {"AGN": "dotted", "Stellar": "dashed", "None": "solid"}
 
-for name, this_data in gas.items():
-    ls = linestyles[name]
-    label = "$x$ = Gas ({})".format(name)
-    ax.hist(
-        this_data / 1000.0,
-        bins=bins,
-        density=True,
-        histtype="step",
-        label=label,
-        linestyle=ls,
-        color="C0",
-    )
+fb_styles = {
+    "agn": "dotted",
+    "stellar": "dashed",
+    "none": "solid"
+}
 
-# We have ~10 particles that make up a confusing tail in the stars.
-cut_stars = data_star[1][data_star[1] < 7500]
-ax.hist(
-    cut_stars / 1000.0,
-    bins=bins,
-    density=True,
-    histtype="step",
-    label="$x$ = Stars",
-    color="C1",
-)
+for name, fancy_name in fb_types.items():
+    raw_data = locals()[f"fb_{name}"]
+    trimmed = trim_and_norm(raw_data)
+    style = fb_styles[name]
+    ax.plot(centers_distance, trimmed, label=f"$x$ = Gas, $f$ = {fancy_name}", color="C0", linestyle=style)
 
-ax.hist(
-    data_dark_matter[1] / 1000.0,
-    bins=bins,
-    density=True,
-    histtype="step",
-    label="$x$ = Dark Matter",
-    color="C2",
-)
+for name, fancy_name in fancy_names.items():
+    if name != gas:
+        raw_data = locals()[f"distance_{name}"]
+        trimmed = trim_and_norm(raw_data)
+        ax.plot(centers_distance, trimmed, label=f"$x$ = {fancy_name}")
 
-ax.set_xlim(0, bin_max / 1000.0)
+ax.set_xlim(0, 15)
+ax.semilogy()
 
 ax.set_ylabel("Normalised fraction of particles in bin")
 ax.set_xlabel("$r_{x, f}$ (Mpc/$h$)")
