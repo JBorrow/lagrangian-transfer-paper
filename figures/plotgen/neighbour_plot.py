@@ -179,7 +179,7 @@ for name, fancy_name in fb_types.items():
     )
 
 for name, fancy_name in fancy_names.items():
-    if name != gas:
+    if name != "gas":
         raw_data = locals()[f"distance_{name}"]
 
         trimmed = trim_and_norm(raw_data, centers_distance)

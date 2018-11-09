@@ -31,4 +31,4 @@ print("Running neighbour_anaylsis")
 neighbour_analysis.run_analysis(simulation=sim)
 
 print("Running feedback analysis")
-split_by_feedback.run_analysis(sim=sim)
+split_by_feedback.run_analysis(simulation=sim)
