@@ -77,10 +77,10 @@ def run_analysis(simulation: lt.objects.Simulation):
         np.in1d(np.unique(dark_matter_data[3]), np.unique(star_data[3]))
     ]
 
-    ids_dm_g = np.take(sim.snapshot_end.dark_matter.ids, unique_indicies_dm_gas)
-    ids_gas = np.take(sim.snapshot_end.dark_matter.ids, unique_indicies_dm_gas)
-    ids_dm_s = np.take(sim.snapshot_end.dark_matter.ids, unique_indicies_dm_star)
-    ids_star = np.take(sim.snapshot_end.dark_matter.ids, unique_indicies_dm_star)
+    ids_dm_g = np.take(simulation.snapshot_end.dark_matter.ids, unique_indicies_dm_gas)
+    ids_gas = np.take(simulation.snapshot_end.dark_matter.ids, unique_indicies_dm_gas)
+    ids_dm_s = np.take(simulation.snapshot_end.dark_matter.ids, unique_indicies_dm_star)
+    ids_star = np.take(simulation.snapshot_end.dark_matter.ids, unique_indicies_dm_star)
 
     assert len(ids_gas) == len(ids_dm_g)
     assert len(ids_star) == len(ids_dm_s)
