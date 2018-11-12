@@ -23,16 +23,18 @@ def run_analysis(simulation: lt.objects.Simulation):
     analysis scripts need to be ran at once (to avoid double-loading data).
     """
 
+    bins = np.linspace(1, 5, 30)
+
     data_stellar = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
-        simulation, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["stellar"]
+        simulation, bins=bins, average_func=np.mean, use=["stellar"]
     )
 
     data_gas = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
-        simulation, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["gas"]
+        simulation, bins=bins, average_func=np.mean, use=["gas"]
     )
 
     data_both = lt.analysis.plot.mass_fraction_transfer_from_lr_data(
-        simulation, bins=np.linspace(1, 5, 30), average_func=np.mean, use=["gas", "stellar"]
+        simulation, bins=bins, average_func=np.mean, use=["gas", "stellar"]
     )
 
     for name in ["stellar", "gas", "both"]:
@@ -40,6 +42,14 @@ def run_analysis(simulation: lt.objects.Simulation):
         data = locals()["data_{}".format(name)]
 
         np.save(filename, data)
+
+    # Now we need to run the "inverse" analysis
+
+    data_inverse = lt.analysis.plot.mass_fraction_transfer_to_halo_data(
+        simulation, bins=bins, average_func=np.mean
+    )
+
+    np.save("inverse_component_fraction_vs_lr_mass.npy", data_inverse)
 
     return
 
