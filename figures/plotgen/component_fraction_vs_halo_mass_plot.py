@@ -26,7 +26,10 @@ try:
 except:
     # No stuff :(
     pass
-
+try:
+    data_inverse = np.load("inverse_component_fraction_vs_lr_mass.npy").item()
+except:
+    pass
 
 def get_fancy_halo_mass(data):
     """
@@ -128,3 +131,36 @@ fig.tight_layout()
 fig.subplots_adjust(wspace=0, hspace=0)
 
 fig.savefig("component_fraction_mixed.pdf")
+
+# Now for the inverse plot!
+
+fig, ax = plt.subplots(1)
+
+lr_mass = get_fancy_halo_mass(data_inverse)
+
+halo_switch = {
+    "Own Halo": "mass_fraction_to_halo",
+    "Other Halos": "mass_fraction_to_other_halo",
+    "Outside Halos": "mass_fraction_to_outside_halo" 
+}
+
+for color, label in zip(colors, switch.keys()):
+    name_of_item = switch[label]
+    name_of_error = "{}_stddev".format(name_of_item)
+
+    ax.fill_between(
+        halo_mass,
+        data_inverse[name_of_item] - data_inverse[name_of_error],
+        data_inverse[name_of_item] + data_inverse[name_of_error],
+        alpha=0.2,
+        color=color,
+        lw=0,
+    )
+    ax.plot(halo_mass, data_inverse[name_of_item], color=color, label=label)
+
+ax.semilogx()
+ax.set_ylim("Fraction of baryonic mass at $z=0$ from LR")
+ax.set_xlim("Mass of Lagrangian Region (LR) [M$_\odot$]")
+
+fig.tight_layout()
+fig.savefig("inverse_component_fraction.pdf")
