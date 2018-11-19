@@ -178,6 +178,7 @@ for name, fancy_name in fb_types.items():
         *trimmed, label=f"$x$ = Gas, $f$ = {fancy_name}", color="C0", linestyle=style
     )
 
+c = 1
 for name, fancy_name in fancy_names.items():
     if name != "gas":
         raw_data = locals()[f"distance_{name}"]
@@ -185,7 +186,8 @@ for name, fancy_name in fancy_names.items():
         trimmed = trim_and_norm(raw_data, centers_distance)
         min_nonzero = min(min(trimmed[1][trimmed[1] != 0]), 0)
 
-        ax.plot(*trimmed, label=f"$x$ = {fancy_name}")
+        ax.plot(*trimmed, label=f"$x$ = {fancy_name}", color=f"C{c}")
+        c += 1
 
 ax.set_xlim(0, 15)
 ax.set_ylim(min_nonzero, ax.get_ylim()[1])
