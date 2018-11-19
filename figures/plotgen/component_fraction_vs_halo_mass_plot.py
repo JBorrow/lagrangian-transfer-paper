@@ -35,7 +35,12 @@ def get_fancy_halo_mass(data):
     """
     Returns the halo mass 10^x'd and in physical units.
     """
-    fancy_halo_mass = (1e10 / 0.7) * 10 ** (data["halo_mass"])
+    try:
+        hm = data["halo_mass"]
+    except KeyError:
+        hm = data["lr_mass"]
+
+    fancy_halo_mass = (1e10 / 0.7) * 10 ** (hm)
 
     return fancy_halo_mass
 
@@ -75,7 +80,7 @@ for data_type in ["gas", "stellar", "both", "dm"]:
 
     plt.semilogx()
 
-    plt.xlim(halo_mass[0], halo_mass[-2])
+    plt.xlim(halo_mass[0], halo_mass[-1])
     current_ylim = plt.ylim()[1]
     plt.ylim(0, min([current_ylim, 1]))
 
@@ -119,7 +124,7 @@ for axis, data_type in zip(ax, ["both", "gas", "stellar"]):
 ax[1].semilogx()
 
 current_ylim = max([axis.get_ylim()[1] for axis in ax])
-ax[1].set_xlim(halo_mass[0], halo_mass[-2])
+ax[1].set_xlim(halo_mass[0], halo_mass[-1])
 ax[1].set_ylim(0, min([current_ylim, 1]))
 
 ax[1].set_xlabel("Halo mass (M$_\odot$)")
@@ -144,23 +149,29 @@ halo_switch = {
     "Outside Halos": "mass_fraction_to_outside_halo" 
 }
 
-for color, label in zip(colors, switch.keys()):
-    name_of_item = switch[label]
+for color, label in zip(colors, halo_switch.keys()):
+    name_of_item = halo_switch[label]
     name_of_error = "{}_stddev".format(name_of_item)
 
     ax.fill_between(
-        halo_mass,
+        lr_mass,
         data_inverse[name_of_item] - data_inverse[name_of_error],
         data_inverse[name_of_item] + data_inverse[name_of_error],
         alpha=0.2,
         color=color,
         lw=0,
     )
-    ax.plot(halo_mass, data_inverse[name_of_item], color=color, label=label)
+    ax.plot(lr_mass, data_inverse[name_of_item], color=color, label=label)
 
 ax.semilogx()
-ax.set_ylim("Fraction of baryonic mass at $z=0$ from LR")
-ax.set_xlim("Mass of Lagrangian Region (LR) [M$_\odot$]")
+ax.set_ylabel("Fraction of baryonic mass at $z=0$ from LR")
+ax.set_xlabel("Mass of Lagrangian Region (LR) [M$_\odot$]")
+
+current_ylim = ax.get_ylim()[1]
+ax.set_xlim(lr_mass[0], lr_mass[-1])
+ax.set_ylim(0, min([current_ylim, 1]))
+
+ax.legend()
 
 fig.tight_layout()
 fig.savefig("inverse_component_fraction.pdf")
