@@ -112,22 +112,22 @@ for axis, data_type in zip(ax, ["both", "gas", "stellar"]):
         name_of_error = "{}_stddev".format(name_of_item)
 
         axis.fill_between(
-            halo_mass,
-            this_data[name_of_item] - this_data[name_of_error],
-            this_data[name_of_item] + this_data[name_of_error],
+            halo_mass[:-1],
+            (this_data[name_of_item] - this_data[name_of_error])[:-1],
+            (this_data[name_of_item] + this_data[name_of_error])[:-1],
             alpha=0.2,
             color=color,
             lw=0,
         )
-        axis.plot(halo_mass, this_data[name_of_item], color=color, label=label)
+        axis.plot(halo_mass[:-1], this_data[name_of_item][:-1], color=color, label=label)
 
 ax[1].semilogx()
 
 current_ylim = max([axis.get_ylim()[1] for axis in ax])
-ax[1].set_xlim(halo_mass[0], halo_mass[-1])
+ax[1].set_xlim(halo_mass[0], halo_mass[-2])
 ax[1].set_ylim(0, min([current_ylim, 1]))
 
-ax[1].set_xlabel("Halo mass (M$_\odot$)")
+ax[1].set_xlabel("Halo mass [M$_\odot$]")
 ax[0].set_ylabel("Fraction of mass in component")
 
 ax[2].legend()
@@ -154,21 +154,21 @@ for color, label in zip(colors, halo_switch.keys()):
     name_of_error = "{}_stddev".format(name_of_item)
 
     ax.fill_between(
-        lr_mass,
-        data_inverse[name_of_item] - data_inverse[name_of_error],
-        data_inverse[name_of_item] + data_inverse[name_of_error],
+        lr_mass[:-1],
+        (data_inverse[name_of_item] - data_inverse[name_of_error])[:-1],
+        (data_inverse[name_of_item] + data_inverse[name_of_error])[:-1],
         alpha=0.2,
         color=color,
         lw=0,
     )
-    ax.plot(lr_mass, data_inverse[name_of_item], color=color, label=label)
+    ax.plot(lr_mass[:-1], data_inverse[name_of_item][:-1], color=color, label=label)
 
 ax.semilogx()
 ax.set_ylabel("Fraction of baryonic mass at $z=0$ from LR")
 ax.set_xlabel("Mass of Lagrangian Region (LR) [M$_\odot$]")
 
 current_ylim = ax.get_ylim()[1]
-ax.set_xlim(lr_mass[0], lr_mass[-1])
+ax.set_xlim(lr_mass[0], lr_mass[-2])
 ax.set_ylim(0, min([current_ylim, 1]))
 
 ax.legend()
