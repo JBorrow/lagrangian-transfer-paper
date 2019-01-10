@@ -13,6 +13,7 @@ import radial_distance_analysis
 import component_fraction_vs_halo_mass_analysis
 import neighbour_analysis
 import split_by_feedback
+import breakdown_of_baryon_fraction
 
 import sys
 
@@ -21,11 +22,14 @@ print("Reading data from {}".format(filename))
 
 sim = lt.read_data_from_file(filename)
 
-print("Running radial_distance_analysis")
-radial_distance_analysis.run_analysis(simulation=sim)
+print("Running baryon fraction analysis")
+breakdown_of_baryon_fraction.run_analysis(simulation=sim)
 
 print("Running component_fraction_vs_halo_mass_analysis")
 component_fraction_vs_halo_mass_analysis.run_analysis(simulation=sim)
+
+print("Running radial_distance_analysis")
+radial_distance_analysis.run_analysis(simulation=sim)
 
 print("Running neighbour_anaylsis")
 neighbour_analysis.run_analysis(simulation=sim)
