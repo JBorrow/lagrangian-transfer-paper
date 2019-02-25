@@ -25,30 +25,25 @@ def get_fancy_halo_mass(data):
     """
     Returns the halo mass 10^x'd and in physical units.
     """
-    try:
-        hm = data["halo_mass"]
-    except KeyError:
-        hm = data["lr_mass"]
-
-    fancy_halo_mass = (1e10 / 0.7) * 10 ** (hm)
+    fancy_halo_mass = (1e10 / 0.7) * 10 ** (data)
 
     return fancy_halo_mass
 
 
-own = np.load("baryon_fraction_vs_halo_mass_own.npy").item()
-other = np.load("baryon_fraction_vs_halo_mass_other.npy").item()
-outside = np.load("baryon_fraction_vs_halo_mass_outside.npy").item()
+own = np.load("baryon_fraction_vs_halo_mass_own.npy")
+other = np.load("baryon_fraction_vs_halo_mass_other.npy")
+outside = np.load("baryon_fraction_vs_halo_mass_outside.npy")
 halo_mass = get_fancy_halo_mass(
     np.load("baryon_fraction_halo_masses.npy")
 )
 
 switch = {
-    "Own LR": "own",
-    "Other LR": "other",
     "Outside LR": "outside",
+    "Other LR": "other",
+    "Own LR": "own",
 }
 
-colors = ["C{}".format(x) for x in range(3)]
+colors = ["C{}".format(x) for x in reversed(range(3))]
 
 previous = [np.zeros_like(own)]
 
@@ -61,7 +56,7 @@ for (label, name), c in zip(switch.items(), colors):
         halo_mass,
         sum(previous),
         sum(previous) + current_data, 
-        color=c, label=label, alpha=0.2, linewidth=0
+        color=c, label=label, alpha=0.6, linewidth=0
     )
 
     previous.append(current_data)

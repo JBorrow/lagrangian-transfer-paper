@@ -171,7 +171,7 @@ current_ylim = ax.get_ylim()[1]
 ax.set_xlim(lr_mass[0], lr_mass[-2])
 ax.set_ylim(0, min([current_ylim, 1]))
 
-ax.legend()
+ax.legend(loc=(0.4, 0.4))
 
 fig.tight_layout()
 fig.savefig("inverse_component_fraction.pdf")

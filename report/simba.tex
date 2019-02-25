@@ -1,7 +1,7 @@
 \section{The \simba{} Simulation Suite}
 \label{sec:simba}
 
-This work uses the \simba{} simulation suite \citep{Dave2018}, which inherits a
+This work uses the \simba{} simulation suite \citep{Dave2019}, which inherits a
 large amount of physics from \mufasa{} \citep{Dave2016}. \simba{} uses a
 variant of the GIZMO code \citep{Hopkins2015}, with the Meshless-Finite-Mass
 (MFM) hydrodynamics solver. This solver uses a Wentland C2 kernel with 64
@@ -16,7 +16,7 @@ $7\times10^7h^{-1}$ M$_\odot$. The cosmology used in \simba{} comes from
 $n_s=0.97$.
 
 On top of this base code, the \simba{} sub-grid model is implemented. This
-model is fully described in \citet{Dave2018}, but it is summarised here.
+model is fully described in \citet{Dave2019}, but it is summarised here.
 Radiative cooling and photoionisation are included from Grackle-3.1
 \citep{Smith2016}. Stellar feedback is modelled using decoupled two-phase winds
 that have 30\% of their ejected particles set at a temperature given by the
@@ -26,14 +26,26 @@ loading factor of these winds scales with stellar mass using scalings from
 \citep{Hopkins2014}.
 
 Black holes are now fully modelled in \simba{}, using the torque-limited
-accretion model from \citet{AnglesAlcazar2017b} and \citet{Bondi1952} accretion
-for the hot gas. The model for the black holes includes both kinetic (winds)
-and energetic (X-ray) feedback. At high Eddington ratios, the radiative-mode
-winds are ejected at ISM temperature at low velocity $\sim 10^3 \kms{}$.
-At low Eddington ratios, the jet-mode winds are ejected at a much higher ($\sim
-10^4\kms{}$) velocity; these high-velocity winds are however only allowed
-for black hole masses $M_{\rm BH} > 10^8$ M$_\odot$. We refer the interested
-reader to the full description of this feedback model in \citet{Dave2018}.
+accretion model from \citet{AnglesAlcazar2017b} and \citet{Bondi1952}
+accretion for the hot gas. The model for the black holes includes both kinetic
+(winds) and energetic (X-ray) feedback. At high Eddington ratios, the
+radiative-mode winds are ejected at interstellar medium (ISM) temperature at
+low velocity $\sim 10^3 \kms{}$. At low Eddington ratios, the jet-mode winds
+are ejected at a much higher ($\sim 10^4\kms{}$) velocity; these high-velocity
+winds are however only allowed for black hole masses $M_{\rm BH} > 10^8$
+M$_\odot$. We refer the interested reader to the full description of this
+feedback model in \citet{Dave2019}.
 
-% To Do: Add table of runs that are used in this paper here, or at least
-% describe the no-jet run.
+In addition to the fiducial model, we also use two comparison models. The
+first, described as \nojet{}, includes all of the \simba{} physics, has the
+high-energy black hole jet-mode winds disabled. The second, described as non-
+radiative, uses the same initial conditions as the fiducial model but only
+includes gravitational dynamics and hydrodynamics, i.e. without a sub-grid
+model. This latter simulation was performed with the {\sc Swift} simulation
+code \citep{Schaller2016} using a Density-Entropy Smoothed Particle
+Hydrodynamics (SPH) solver as it performs orders of magnitude faster than the
+original GIZMO code \citep{Borrow2018}. The use of this hydrodynamics model,
+over the MFM solver, will have a negligeable effect on the quantities of
+interest in this paper (i.e. positions of particles at $z=0$), as it has been
+shown that such a solver produces halos of the same baryonic mass when ran in
+non-radiative mode \citep[see e.g.][]{Sembolini2016}.

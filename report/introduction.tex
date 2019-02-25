@@ -1,24 +1,23 @@
-\section{Introduction}
-\label{sec:introduction}
-Cosmological simulations have been used for decades to study the evolution of
-the universe. Particles or cells, depending on the choice of numerical
-method, are tracked over cosmic time until their final resting place (usually
-at redshift $z=0$), where the distribution of matter can be compared to
-observations. In classic galaxy formation theory, dark matter collapses early
-to form virialised halos, into which gas is also pulled and can cool to form
-stars at the center \citep{Mo2010}. Early cosmological simulations were only
-powerful enough to include gravitational forces, and the choice was made to
-only include the dominant gravitational fluid, dark matter. These dark matter
-only simulations \citep[see e.g.][]{Frenk1988, Springel2005a}
-then had a semi-analytic galaxy formation model applied on top to study the
-expected properties of bound objects \citep[see e.g.][]{Porter2014,
-Henriques2015, Lacey2016}. Even these galaxy formation models, to
-accurately predict properties of galaxies, require the consideration of
-baryonic effects. Feedback from stars and black holes is critical to explain
-the observed properties of galaxies. Large-scale winds eject gas from
-galaxies, which can re-accrete back, remain in the Circumgalactic Medium
-(CGM), or reach the Intergalactic Medium (IGM) outside of halos. This cycling
-of baryons is an integral part of modern galaxy formation theory.
+\section{Introduction} \label{sec:introduction} Cosmological simulations have
+been used for decades to study the evolution of the universe. Particles or
+cells, depending on the choice of numerical method, are tracked over cosmic
+time until their final resting place (usually at redshift $z=0$), where the
+distribution of matter can be compared to observations. In classic galaxy
+formation theory, dark matter collapses early to form virialised halos, into
+which gas is also pulled and can cool to form stars at the center
+\citep{Mo2010}. Early cosmological simulations were only powerful enough to
+include gravitational forces, and the choice was made to only include the
+dominant gravitational fluid, dark matter. These dark matter only simulations
+\citep[see e.g.][]{Frenk1988, Springel2005a} then had a semi-analytic galaxy
+formation model (SAM) applied on top to study the expected properties of bound
+objects \citep[see e.g.][for modern examples of SAM frameworks]{Porter2014,
+Henriques2015, Lacey2016}. Even these galaxy formation models, to accurately
+predict properties of galaxies, require the consideration of baryonic effects.
+Feedback from stars and black holes is critical to explain the observed
+properties of galaxies. Large-scale winds eject gas from galaxies, which can
+re-accrete back, remain in the Circumgalactic Medium (CGM), or reach the
+Intergalactic Medium (IGM) outside of halos. This cycling of baryons is an
+integral part of modern galaxy formation theory.
 
 It is now possible to run full hydrodynamical models of the universe that
 explicitly include the baryonic component. Using codes such as TreeSPH,
@@ -40,12 +39,20 @@ cannot be addressed in `zoom-in' simulations of individual galaxies
 
 In this work, we extend the intergalactic transfer analysis of
 \citet{AnglesAlcazar2017} to a large cosmological volume using the \simba{}
-simulations \citep{Dave2018}. More generally, we present a framework for
+simulations \citep{Dave2019}. More generally, we present a framework for
 analysing the relative motion of dark matter and baryons on large scales
 owing to hydrodynamic and feedback processes. We connect the distribution of
 dark matter and baryonic lagrangian resolution elements at $z=0$ with their
-original distributions at the initial conditions, identifying the `Lagrangian
+original distributions at the initial conditions, identifying the `lagrangian
 region' of $z=0$ halos as the region in the initial conditions that will
 collapse into each dark matter halo. We quantify for the first time the large
-scale gas flows between Lagrangian regions and the surrounding IGM and the
-importance of `inter-Lagrangian transfer' in galaxy evolution.
+scale gas flows between lagrangian regions and the surrounding IGM and the
+importance of `inter-lagrangian transfer' in galaxy evolution.
+
+The remainder of this paper is organised as follows: in \S\ref{sec:simba}, we
+discuss the underlying \simba{} simulation suite that is used for anaylsis;
+in \S\ref{sec:feedbackmetrics}, we discuss a distance-based metric for the
+investigation of feedback strength; in \S\ref{sec:transfer} we discuss
+halo-level metrics based on lagrangian regions to study inter-lagrangian
+transfer; in \S\ref{sec:convergence} we discuss the convergence of the method;
+and in \S\ref{sec:conclusions} we conclude and summarise the results.
