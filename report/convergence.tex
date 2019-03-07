@@ -7,8 +7,8 @@ from such factors, the above analysis was repeated both with the 3D
 friends-of-friends halo finder included in the {\tt yt} package \citep{Turk2011}.
 This is simpler than the \velociraptor{} method used for the main analysis, and
 is unable to disentangle mergers. However, as active mergers make up a small
-fraction of the galaxy population, the above results are qualatitively
-unaffected and are only change quantitiately to the 5\% level. The above
+fraction of the galaxy population, the above results are qualitatively
+unaffected and are only change quantitatively to the 5\% level. The above
 analyses were also re-ran with the \velociraptor{} catalogue by re-finding
 halos manually by selecting all particles within $R_{\rm BN98}$, the halo
 radius as defined by \citet{Bryan1998}, of the halo center, rather than using
@@ -20,15 +20,15 @@ qualitatively and quantitatively unchanged.
 
 
 One valid criticism of our methodology for producing lagrangian regions is that
-they are realtively spotty; simply using the dark matter particles from a given
+they are relatively spotty; simply using the dark matter particles from a given
 halo naturally leads to a very diffuse lagrangian region. To remedy this, it is
-possible to smooth out the lagranigan regions, by extending the procedure
+possible to smooth out the lagrangian regions, by extending the procedure
 that was used to extend the regions from the dark matter to the gas.
 This works as follows:
 \begin{enumerate}
 	\item For every dark matter particle that does not end up in a halo 
 	      in the initial conditions, find the nearest $n$ neighbours.
-	\item Find among the neighbours the maximal lagranigan region ID,
+	\item Find among the neighbours the maximal lagrangian region ID,
 	      corresponding to the lowest mass $z=0$ halo.
 	\item Assign the particle the same lagrangian region ID.
 \end{enumerate}
@@ -37,7 +37,7 @@ higher mass halo, was made to ensure that spurious transfer into the lower mass
 halo was avoided wherever possible. This means that the expectation is that
 with this metric the level of inter-lagrangian transfer will increase with
 respect to the fiducial lagrangian region identification method. The results
-with the particles given to the halos of a higher mass show negligeable
+with the particles given to the halos of a higher mass show negligible
 deviation from the fiducial result.
 
 \begin{figure}
@@ -57,7 +57,7 @@ deviation from the fiducial result.
 \end{figure}
 
 The results are shown in Fig. \ref{fig:smoothconv}. Note how smoothing the
-lagranigan regions does have the expected effect of inducing more internal
+lagrangian regions does have the expected effect of inducing more internal
 transfer, and does increase the proportion of baryons that are classified
 as retained as the lagrangian regions are filled out.
 
