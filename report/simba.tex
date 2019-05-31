@@ -4,13 +4,9 @@
 This work uses the \simba{} simulation suite \citep{Dave2019}, which inherits a
 large amount of physics from \mufasa{} \citep{Dave2016}. \simba{} uses a
 variant of the GIZMO code \citep{Hopkins2015}, with the Meshless-Finite-Mass
-(MFM) hydrodynamics solver. This solver uses a Wentland C2 kernel with 64
-neighbours. In the $50 \hmpc{}$, $512^3$, box used here, the mass resolution for the
-hydrodynamically active particles is $1\times10^7h^{-1}$ M$_\odot$. The
+(MFM) hydrodynamics solver using a Wentland C2 kernel with 64 neighbours. The
 gravitational forces are solved using the Tree-PM method as described in
-\citet{Springel2005b} for Gadget-2, of which GIZMO is a descendent. There are
-$512^3$ dark matter particles in the box, with a dark matter mass resolution of
-$7\times10^7h^{-1}$ M$_\odot$. The cosmology used in \simba{} comes from
+\citet{Springel2005b} for Gadget-2, of which GIZMO is a descendent. In the $50 \hmpc{}$, $512^3$ particle box used here, the mass resolution for the gas elements is $1.7\times10^7h^{-1}$ M$_\odot$, and for the dark matter is $7\times10^7h^{-1}$ M$_\odot$. The cosmology used in \simba{} is consistent with results from
 \citet{PlanckCollaboration2016}, with $\Omega_\Lambda = 0.7$, $\Omega_{\rm m} =
 0.3$, $\Omega_{\rm b} = 0.048$, $H_0 = 68$ km s$^{-1}$, $\sigma_8=0.82$, and
 $n_s=0.97$.
@@ -20,25 +16,19 @@ model is fully described in \citet{Dave2019}, but it is summarised here.
 Radiative cooling and photoionisation are included from Grackle-3.1
 \citep{Smith2016}. Stellar feedback is modelled using decoupled two-phase winds
 that have 30\% of their ejected particles set at a temperature given by the
-supernova energy minus the kinetic energy of the wind. In \simba{}, the mass
+supernova energy minus the kinetic energy of the wind. The mass
 loading factor of these winds scales with stellar mass using scalings from
-\citet{Muratov2015} that were calibrated using the FIRE zoom-in simulations
-\citep{Hopkins2014}.
+\citet{AnglesAlcazar2017}, obtained from particle tracking in the FIRE zoom-in simulations.
 
-Black holes are now fully modelled in \simba{}, using the torque-limited
-accretion model from \citet{AnglesAlcazar2017b} and \citet{Bondi1952}
-accretion for the hot gas. The model for the black holes includes both kinetic
-(winds) and energetic (X-ray) feedback. At high Eddington ratios, the
-radiative-mode winds are ejected at interstellar medium (ISM) temperature at
-low velocity $\sim 10^3 \kms{}$. At low Eddington ratios, the jet-mode winds
-are ejected at a much higher ($\sim 10^4\kms{}$) velocity; these high-velocity
-winds are however only allowed for black hole masses $M_{\rm BH} > 10^8$
-M$_\odot$. We refer the interested reader to the full description of this
+Black hole growth and feedback is included in \simba{}, using the torque-limited
+accretion model from \citet{AnglesAlcazar2017b} for cold gas and \citet{Bondi1952}
+accretion for the hot gas. The AGN feedback model includes both kinetic
+(winds) and energetic (X-ray) feedback. At high Eddington ratios or low black holes mass ($M_{\rm BH} < 10^{7.5}$
+M$_\odot$), the
+radiative-mode winds are ejected at interstellar medium (ISM) temperature at low velocity $\sim 10^3 \kms{}$. At low Eddington ratios and high black holes mass, the jet-mode winds are ejected at velocities approaching $\sim 10^4\kms{}$. We refer the interested reader to the full description of this
 feedback model in \citet{Dave2019}.
 
-In addition to the fiducial model, we also use two comparison models. The
-first, described as \nojet{}, includes all of the \simba{} physics, has the
-high-energy black hole jet-mode winds disabled. The second, described as non-
+In addition to the fiducial model, we also use two comparison models. The first, described as \nojet{}, includes all of the \simba{} physics, has the high-energy black hole jet-mode winds disabled.  All other star formation and AGN feedback is included.  The second, described as non-
 radiative, uses the same initial conditions as the fiducial model but only
 includes gravitational dynamics and hydrodynamics, i.e. without a sub-grid
 model. This latter simulation was performed with the {\sc Swift} simulation

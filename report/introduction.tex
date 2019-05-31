@@ -1,58 +1,109 @@
-\section{Introduction} \label{sec:introduction} Cosmological simulations have
-been used for decades to study the evolution of the universe. Particles or
-cells, depending on the choice of numerical method, are tracked over cosmic
-time until their final resting place (usually at redshift $z=0$), where the
-distribution of matter can be compared to observations. In classic galaxy
-formation theory, dark matter collapses early to form virialised halos, into
-which gas is also pulled and can cool to form stars at the center
-\citep{Mo2010}. Early cosmological simulations were only powerful enough to
-include gravitational forces, and the choice was made to only include the
-dominant gravitational fluid, dark matter. These dark matter only simulations
-\citep[see e.g.][]{Frenk1988, Springel2005a} then had a semi-analytic galaxy
-formation model (SAM) applied on top to study the expected properties of bound
-objects \citep[see e.g.][for modern examples of SAM frameworks]{Porter2014,
-Henriques2015, Lacey2016}. Even these galaxy formation models, to accurately
-predict properties of galaxies, require the consideration of baryonic effects.
-Feedback from stars and black holes is critical to explain the observed
-properties of galaxies. Large-scale winds eject gas from galaxies, which can
-re-accrete back, remain in the Circumgalactic Medium (CGM), or reach the
-Intergalactic Medium (IGM) outside of halos. This cycling of baryons is an
-integral part of modern galaxy formation theory.
+\section{Introduction}
+\label{sec:introduction}
 
-It is now possible to run full hydrodynamical models of the universe that
-explicitly include the baryonic component. Using codes such as TreeSPH,
-RAMSES, and GADGET \citep{Hernquist1989, Teyssier2002, Springel2005b}, along
-with full galaxy formation models, such as GEAR, Illustris, and EAGLE
-\citep{Revaz2012, Vogelsberger2014, Schaye2015}, it is now
-possible to reproduce a large number of observed properties of galaxies.
-These codes can include stellar and AGN feedback, star formation, magnetic
-fields, and many more physical processes that are believed to be important
-for galaxy formation. Recent cosmological `zoom-in' simulations from the FIRE
-project \citep{Hopkins2014} have shown that gas ejected in winds from
-satellite galaxies can accrete onto the central galaxy, and this
-intergalactic transfer of material can be a primary contributor to galaxy
-growth. Galaxies providing intergalactic transfer material often end up
-merging with the central galaxy, but the extent to which galactic winds can
-push gas to larger scales and connect individual central halos at $z=0$
-cannot be addressed in `zoom-in' simulations of individual galaxies
-\citep{AnglesAlcazar2017}.
+Cosmological simulations are an important tool to study the evolution of the
+universe. Mass elements of various matter components are tracked over cosmic
+time under the influence of gravity and other forces until a desired
+redshift, where the distribution of matter can be compared to observations.
+The earliest simulations included only dark matter acting under gravity
+\citep[see e.g.][]{Frenk1988, Springel2005a}, which remains an important
+approach to this day because such simulations are computationally efficient
+and can model very large volumes required for, e.g., dark energy studies
+\citep{Knabenhans2019}. However, such simulations do not directly model the
+observable component. As such, techniques such as semi-analytic models (SAMs)
+have been developed \citep{FrenkWhite1990,Kauffmann1996,Somerville1998} to
+populate dark matter halos with galaxies \citep[see e.g.][for modern examples
+of SAM frameworks]{Porter2014, Henriques2015, Lacey2016}. Crucially, it has
+been recognized that feedback processes from the formation of stars and black
+holes have an important effect on the resulting observable baryonic
+component, though they have a small effect on the collisionless dark matter.
+Such feedback often takes the form of large-scale winds that eject
+substantial amounts of gas from galaxies owing to energetic input from young
+stars, supernovae, and active galactic nuclei (AGN). This gas can then be
+deposited far out in the intergalactic medium (IGM), remain as halo gas in
+the Circumgalactic Medium (CGM), or be re-accreted as `wind
+recycling' \citep{Oppenheimer2010}. This cycling of baryons is an integral
+part of modern galaxy formation theory, and is believed to be a key factor in
+establishing the observed properties of both galaxies and intergalactic
+gas \citep{Somerville2015}.
+
+With advancing computational speed and algorithmic developments, it has
+become possible to run full hydrodynamical models of the universe that
+explicitly track the baryonic component. %\citep[e.g.][]{Hernquist1989, Teyssier2002, Springel2005b}. 
+Beyond modelling hydrodynamical processes,
+sub-grid prescriptions have been implemented in order to cool the gas and
+produce stars, with increasing levels of refinement and sophistication
+\citep[e.g.][]{Revaz2012, Vogelsberger2014, Schaye2015}. Using these models
+it is now possible to reproduce many of the key observed properties of
+galaxies at a range of cosmic epochs. Modern galaxy formation simulations
+typically include radiative cooling, chemical enrichment, star formation,
+stellar feedback, and AGN feedback. At times, other (non sub-grid) processes
+such as magnetic fields, that are believed to be important for forming
+galaxies as observed, are included. Feedback processes are poorly understood,
+despite playing a critical role in regulating galaxy growth \citep{Naab2017}.
+These models must prevent too much star formation, as well as the `overcooling',
+suffered by the earliest hydrodynamical simulations
+\citep{Dave2001,Balogh2001}.
+
+Feedback processes also transport baryons far
+from their originating dark matter halos. Early observational evidence for
+this was that the diffuse intergalactic medium at high redshift is enriched
+with metals produced by supernovae, requiring winds with speeds of hundreds
+of km/s to be ejected ubiquitously \citep[e.g.][]{Aguirre2001, Springel2003,
+ Oppenheimer2006}. More recently, feedback from AGN is seen to eject ionised
+and molecular gas outflows with velocities exceeding 1000 km/s
+\citep[e.g.][]{Sturm2001, Maiolino2012}. It has long been known that some AGN
+also power jets, carrying material out at relativistic velocities. These
+processes decouple the baryonic matter from the dark matter on cosmological
+scales, which could potentially complicate approaches to populating dark
+matter simulations with baryons. Hence it is important to quantify the amount
+of baryons that are participating in such large-scale motions, within the
+context of modern galaxy formation models that broadly reproduce the observed
+galaxy population.
+
+This paper thus examines the large-scale redistribution of baryons relative
+to the dark matter, using cosmological simulations that include kinetic
+feedback processes which plausibly reproduces the observed galaxy population.
+To do this, we pioneer a suite of tools to compare the initial and final
+location of baryons relative to their initial `Lagrangian region', defined as
+the region in the initial conditions that collapses into a given dark matter
+halo. In classical galaxy formation theory, the baryons initially neighbouring
+the dark matter would follow the dark matter into the halo, and only then
+would significantly decouple owing to radiative processes; this would result
+in the baryons lying mostly within its own Lagrangian region. However,
+outflows can disrupt this process, and result in transfer outside the
+Lagrangian region or even transfer \emph{between} Lagrangian regions. It is
+these effects we seek to quantify in this work.
+
+The importance of ejecting baryons and the resulting transfer of material to
+other galaxies was highlighted using recent cosmological `zoom-in'
+simulations from the FIRE project \citep{Hopkins2014,Hopkins2018}.
+\citet{AnglesAlcazar2017} showed that gas ejected in winds from one galaxy
+(often a satellite galaxy) can accrete onto another (often the central
+galaxy). This was dubbed `inter-galactic transfer', and this can be a
+significant or even dominant contributor to galaxy fuelling. The galaxies
+that provided the inter-galactic transfer material often ended up merging
+with the central galaxy by redshift $z=0$, and so in some sense the fuelling
+from satellites only sped up the growth of the central object. In particular,
+this work did not examine the extent to which galactic winds can push gas to
+larger scales and connect other halos at $z=0$, since it is not feasible to
+examine this in zoom-in simulations that by construction are focused on
+modelling a single halo.
 
 In this work, we extend the intergalactic transfer analysis of
 \citet{AnglesAlcazar2017} to a large cosmological volume using the \simba{}
-simulations \citep{Dave2019}. More generally, we present a framework for
+simulations \citep{Dave2019}, whose star formation feedback employs scalings
+from FIRE, and whose black hole model includes various forms of AGN feedback
+including high-velocity jets. More generally, we present a framework for
 analysing the relative motion of dark matter and baryons on large scales
-owing to hydrodynamic and feedback processes. We connect the distribution of
-dark matter and baryonic lagrangian resolution elements at $z=0$ with their
-original distributions at the initial conditions, identifying the `lagrangian
-region' of $z=0$ halos as the region in the initial conditions that will
-collapse into each dark matter halo. We quantify for the first time the large
-scale gas flows between lagrangian regions and the surrounding IGM and the
-importance of `inter-lagrangian transfer' in galaxy evolution.
+owing to hydrodynamic and feedback processes. We quantify for the first time
+the large scale gas flows out of Lagrangian regions into the surrounding IGM,
+and the importance of `inter-Lagrangian transfer' in galaxy evolution.
 
 The remainder of this paper is organised as follows: in \S\ref{sec:simba}, we
 discuss the underlying \simba{} simulation suite that is used for analysis;
 in \S\ref{sec:feedbackmetrics}, we discuss a distance-based metric for the
 investigation of feedback strength; in \S\ref{sec:transfer} we discuss
 halo-level metrics based on lagrangian regions to study inter-lagrangian
-transfer; in \S\ref{sec:convergence} we discuss the convergence of the method;
-and in \S\ref{sec:conclusions} we conclude and summarise the results.
+transfer; in \S\ref{sec:convergence} we discuss the convergence of the
+method; and in \S\ref{sec:conclusions} we conclude and summarise the results.

@@ -23,6 +23,36 @@ The source code that performs all of the below analysis is made available by
 the authors on \github{}\footnote{\url{https://github.com/jborrow/lagrangian-
 transfer}} as a python package.
 
+\subsection{The different origins of baryonic and dark matter}
+
+\begin{figure*}
+	\centering
+	\vspace{1cm}
+	\includegraphics{report/figures/fancy-figure-full-pu.pdf}
+	\caption{
+  Visualisation of the baryonic lagrangian regions of halos (shown in blue)
+  and the regions from which baryons resident in the $z=0$ halo, for halos of
+  various masses, shown in red. In the background, the $z=0$ dark matter
+  distribution is shown to show that lagrangian regions may be spatially
+  separated from the final resting place of the halo at $z=0$. The individual
+  bar charts show the lagrangian origins of the baryons in the halo at $z=0$,
+  which can be directly connected to the mis-match in overlap between the
+  lagranigan region and the spatial region from which the baryons originate.
+  Halo 263, which shows a high level of transfer from outside any lagrangian
+  region, has a large collection of particles that originate from outside the
+  largrangian region. Halo $364$ is undergoing an active merger, hence the
+  two spatially separated regions that are only loosely connected by $z=0$.
+  The inset image shows, for the largest halo in the box, the spatially
+  resolved fraction of baryons that originate from the lagrangian region of
+  the halo.
+	}
+	\vspace{1cm}
+	\label{fig:bigtransferpic}
+\end{figure*}
+
+\blue{TODO: Include some text here describing the above figure and discusisng
+differences in the origins of gas and dark matter.}
+
 \subsection{Defining lagrangian regions}
 
 
@@ -55,43 +85,6 @@ they are from the same simulation.
 
 \subsection{Calculating transfer between lagrangian regions}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\columnwidth]{figures/s50gadget/component_fraction_vs_halo_mass_gas.pdf}
-	\vspace{-0.7cm}
-	\caption{
-	The fraction of baryonic mass originating from each lagrangian component is
-	shown as a function of redshift $z=0$ halo mass, later referred to as the
-	Baryon Transfer Mass Function (BTMF). This is only provided for comparison to
-	the full model result in Fig. \ref{fig:maintransferresult}.
-	}
-	\label{fig:nonradiativetransfer}
-\end{figure}
-
-\begin{figure*}
-	\centering
-	\vspace{1cm}
-	\includegraphics{figures/fancy-figure-full.pdf}
-	\caption{
-  Visualisation of the baryonic lagrangian regions of halos (shown in blue)
-  and the regions from which baryons resident in the $z=0$ halo, for halos of
-  various masses, shown in red. In the background, the $z=0$ dark matter
-  distribution is shown to show that lagrangian regions may be spatially
-  separated from the final resting place of the halo at $z=0$. The individual
-  bar charts show the lagrangian origins of the baryons in the halo at $z=0$,
-  which can be directly connected to the mis-match in overlap between the
-  lagranigan region and the spatial region from which the baryons originate.
-  Halo 263, which shows a high level of transfer from outside any lagrangian
-  region, has a large collection of particles that originate from outside the
-  largrangian region. Halo $364$ is undergoing an active merger, hence the
-  two spatially separated regions that are only loosely connected by $z=0$.
-  The inset image shows, for the largest halo in the box, the spatially
-  resolved fraction of baryons that originate from the lagrangian region of
-  the halo.
-	}
-	\vspace{1cm}
-	\label{fig:bigtransferpic}
-\end{figure*}
 
 Now that the lagrangian regions have been defined, it is possible to consider on
 a particle-by-particle basis where particles started and where they ended up.
@@ -121,8 +114,28 @@ The algorithm is as follows:
 	      of the above components is computed and stored.
 \end{enumerate}
 
-A visualisation of the results of this process is shown in Fig. \ref{fig:bigtransferpic}.
+\begin{figure*}
+    \centering
+    \vspace{1cm}
+    \includegraphics{report/figures/four_images-3.pdf}
+    \caption{Gas in the \simba{} full model shown for the whole box, but split by lagrangian
+            component. All images are shown with the same (lograithmic) normalisation and 
+            colour-map. Taking a linear sum of all of these images (ignoring the fact that
+            the logarithmic density is plotted) will reproduce the full gas distirbution
+            at $z=0$. The components are (clockwise, starting from top left): particles
+            that began in lagrangian region and have remained in the associated halo;
+            particles that began in a lagrangian region and have ended up outside of the
+            destination halo; particles that began outside any lagrangian region and ended
+            the simulation outside any halo; and particles that ended up in a halo but originated
+            outside any lagrangian region. Particles that began in the lagrangian region but
+            ended up outside the halo show a striking similarity to those particles that
+            have travelled large distances in Figure \ref{fig:bigdistanceimage}. Those particles
+            that began outside, and remained outside, trace the filaments and voids.}
+    \vspace{1cm}
+    \label{fig:lrtransfer}
+\end{figure*}
 
+A visualisation of the results of this process is shown in Fig. \ref{fig:lrtransfer}.
 
 \begin{figure*}
 	\centering
@@ -143,6 +156,19 @@ A visualisation of the results of this process is shown in Fig. \ref{fig:bigtran
 \end{figure*}
 
 \subsection{Transfer in a non-radiative Model}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\columnwidth]{figures/s50gadget/component_fraction_vs_halo_mass_gas.pdf}
+	\vspace{-0.7cm}
+	\caption{
+	The fraction of baryonic mass originating from each lagrangian component is
+	shown as a function of redshift $z=0$ halo mass, later referred to as the
+	Baryon Transfer Mass Function (BTMF). This is only provided for comparison to
+	the full model result in Fig. \ref{fig:maintransferresult}.
+	}
+	\label{fig:nonradiativetransfer}
+\end{figure}
 
 To begin with, let us consider a null model. In this case, we run the simulation
 in non-radiative mode; i.e. without cooling, star formation, or feedback. This
@@ -171,16 +197,18 @@ by feedback events from halos, and are re-captured by other halos. These particl
 be very hot (either through direct or shock heating) and so do not have the time to cool to
 form stars at $z=0$.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\columnwidth]{figures/s50j7k_z2/component_fraction_vs_halo_mass_both.pdf}
-	\vspace{-0.7cm}
-	\caption{The BTMF for all baryons at redshift $z=2$, shown for
-	the full \simba{} model. Note the very low proportion of mass transfer
-	between halos, but that the transfer from outside lagrangian regions
-	is significant even by this redshift.}
-	\label{fig:z2resultlt}
-\end{figure}
+\blue{TODO: Remove $z=2$ information}.
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=\columnwidth]{figures/s50j7k_z2/component_fraction_vs_halo_mass_both.pdf}
+%	\vspace{-0.7cm}
+%	\caption{The BTMF for all baryons at redshift $z=2$, shown for
+%	the full \simba{} model. Note the very low proportion of mass transfer
+%	between halos, but that the transfer from outside lagrangian regions
+%	is significant even by this redshift.}
+%	\label{fig:z2resultlt}
+%\end{figure}
 
 The transfer between these regions is slightly lower, but is still at the
 $5-10\%$ level even for the \nojet{} run. As shown by the non-radiative run
