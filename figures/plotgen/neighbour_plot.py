@@ -79,6 +79,8 @@ def trim_and_norm(data, bin_centers):
     """
     Trims out any bins are after the first zero bin, as well
     as normalising the whole thing (after trimming, of course).
+    
+    Assumes bins are equal widths.
     """
 
     # Stop when we get two bins next to each other that are zero.
@@ -92,7 +94,9 @@ def trim_and_norm(data, bin_centers):
         # There is no double zero!
         first_double_zero = 2 * data.size
 
-    new_data, new_centers = [], []
+    new_data, new_centers, new_widths = [], [], []
+
+    current_width = 0.0
 
     for bin_number in range(data.size):
         n_parts = data[bin_number]
@@ -123,7 +127,8 @@ def trim_and_norm(data, bin_centers):
             new_data.append(n_parts)
             new_centers.append(bin_centers[bin_number])
 
-    new_data = new_data / sum(new_data)
+    width = bin_centers[1] - bin_centers[0]
+    new_data = new_data / (sum(new_data) * width)
 
     return np.array(new_centers), np.array(new_data)
 

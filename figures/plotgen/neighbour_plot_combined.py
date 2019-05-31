@@ -32,11 +32,7 @@ import numpy as np
 
 plt.style.use("mnras_flatiron")
 
-sims = {
-    "Full" : {},
-    "NoJet" : {},
-    "NonRadiative" : {}
-}
+sims = {"Full": {}, "NoJet": {}, "NonRadiative": {}}
 
 filenames = sys.argv[1:]
 
@@ -47,8 +43,12 @@ for index, path in enumerate(filenames):
     sims[name]["ratio_star"] = np.load(f"{path}/neighbour_analysis_ratio_star.npy")
 
     sims[name]["distance_gas"] = np.load(f"{path}/neighbour_analysis_gas_distance.npy")
-    sims[name]["distance_star"] = np.load(f"{path}/neighbour_analysis_star_distance.npy")
-    sims[name]["distance_dark_matter"] = np.load(f"{path}/neighbour_analysis_dark_matter_distance.npy")
+    sims[name]["distance_star"] = np.load(
+        f"{path}/neighbour_analysis_star_distance.npy"
+    )
+    sims[name]["distance_dark_matter"] = np.load(
+        f"{path}/neighbour_analysis_dark_matter_distance.npy"
+    )
 
     sims[name]["fb_agn"] = np.load(f"{path}/neighbour_analysis_gas_fb_agn.npy")
     sims[name]["fb_stellar"] = np.load(f"{path}/neighbour_analysis_gas_fb_stellar.npy")
@@ -65,12 +65,17 @@ centers_distance = find_centers(bins_distance)
 
 # Now we can move on to the simple distance histogram plot.
 
-fig, axes = plt.subplots(1, 3, figsize=(6.972, 3.0), sharex=False, sharey=True, squeeze=True)
+fig, axes = plt.subplots(
+    1, 3, figsize=(6.972, 3.0), sharex=False, sharey=True, squeeze=True
+)
+
 
 def trim_and_norm(data, bin_centers):
     """
     Trims out any bins are after the first zero bin, as well
     as normalising the whole thing (after trimming, of course).
+    
+    Assumes bins are equal widths.
     """
 
     # Stop when we get two bins next to each other that are zero.
@@ -84,7 +89,9 @@ def trim_and_norm(data, bin_centers):
         # There is no double zero!
         first_double_zero = 2 * data.size
 
-    new_data, new_centers = [], []
+    new_data, new_centers, new_widths = [], [], []
+
+    current_width = 0.0
 
     for bin_number in range(data.size):
         n_parts = data[bin_number]
@@ -115,7 +122,8 @@ def trim_and_norm(data, bin_centers):
             new_data.append(n_parts)
             new_centers.append(bin_centers[bin_number])
 
-    new_data = new_data / sum(new_data)
+    width = bin_centers[1] - bin_centers[0]
+    new_data = new_data / (sum(new_data) * width)
 
     return np.array(new_centers), np.array(new_data)
 
@@ -144,7 +152,10 @@ for index, path in enumerate(filenames):
         print(trimmed)
 
         ax.plot(
-            *trimmed, label=f"$x$ = Gas, $f$ = {fancy_name}", color="C0", linestyle=style
+            *trimmed,
+            label=f"$x$ = Gas, $f$ = {fancy_name}",
+            color="C0",
+            linestyle=style,
         )
 
     c = 1
@@ -161,7 +172,7 @@ for index, path in enumerate(filenames):
 for ax in axes:
     ax.set_xlim(0, 15)
 axes[0].set_ylim(1e-9, 1e0)
-#axes[0].set_ylim(min_nonzero, axes[0].get_ylim()[1])
+# axes[0].set_ylim(min_nonzero, axes[0].get_ylim()[1])
 axes[0].semilogy()
 
 ticks = [0, 2.5, 5.0, 7.5, 10.0, 12.5, 15.0]
