@@ -1,2 +1,8 @@
 *compiled*
 *.png
+*.pdf
+
+*.DS_Store
+*.afdesign
+*.txt
+*.AHF_halos

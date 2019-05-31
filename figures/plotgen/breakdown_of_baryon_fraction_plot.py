@@ -33,15 +33,9 @@ def get_fancy_halo_mass(data):
 own = np.load("baryon_fraction_vs_halo_mass_own.npy")
 other = np.load("baryon_fraction_vs_halo_mass_other.npy")
 outside = np.load("baryon_fraction_vs_halo_mass_outside.npy")
-halo_mass = get_fancy_halo_mass(
-    np.load("baryon_fraction_halo_masses.npy")
-)
+halo_mass = get_fancy_halo_mass(np.load("baryon_fraction_halo_masses.npy"))
 
-switch = {
-    "Outside LR": "outside",
-    "Other LR": "other",
-    "Own LR": "own",
-}
+switch = {"Outside LR": "outside", "Other LR": "other", "Own LR": "own"}
 
 colors = ["C{}".format(x) for x in reversed(range(3))]
 
@@ -55,26 +49,19 @@ for (label, name), c in zip(switch.items(), colors):
     ax.fill_between(
         halo_mass,
         sum(previous),
-        sum(previous) + current_data, 
-        color=c, label=label, alpha=0.6, linewidth=0
+        sum(previous) + current_data,
+        color=c,
+        label=label,
+        alpha=0.6,
+        linewidth=0,
     )
 
     previous.append(current_data)
 
 # Now to draw the overall trend.
 
-ax.plot(
-    halo_mass,
-    sum(previous),
-    color="black",
-    label="Overall"
-)
-ax.scatter(
-    halo_mass,
-    sum(previous),
-    color="black",
-    s=5
-)
+ax.plot(halo_mass, sum(previous), color="black", label="Overall")
+ax.scatter(halo_mass, sum(previous), color="black", s=5)
 
 ax.semilogx()
 ax.set_ylabel("Baryon fraction $f_b / f_{b, c}$")
@@ -87,4 +74,3 @@ ax.legend()
 
 fig.tight_layout()
 fig.savefig("baryon_fraction_breakdown.pdf")
-
