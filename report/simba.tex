@@ -39,3 +39,39 @@ over the MFM solver, will have a negligible effect on the quantities of
 interest in this paper (i.e. positions of particles at $z=0$), as it has been
 shown that such a solver produces halos of the same baryonic mass when ran in
 non-radiative mode \citep[see e.g.][]{Sembolini2016}.
+
+
+\subsection{Defining halos}
+
+Halos in the following discussion are defined using the Amiga Halo Finder
+\citep[AHF, ][]{Gill2004, Knollmann2009} version 1.0-100. This spherical
+overdensity finder determines the halo centers by using a nested grid, and
+then fits parameters based on the Navarro-Frenk-White \citep[NFW,
+][]{Navarro1995} profile. Here we define the virial radius, $R_{vir}$, as the
+spherical overdensity radius retrieved from AHF consistent with
+\citet{Lacey1994}. Substructure search was turned off, such that the code
+only returned main halos.
+
+\subsection{Defining lagrangian regions}
+
+Many methods exist for defining lagrangian regions, but these are mostly used for
+zoom-in simulations and some, for example using a cube of particles around a given
+halo, could be seen as being non-lagrangian and over-conservative. In the below
+discussion the lagrangian regions are defined in the initial conditions in the
+following way:
+\begin{enumerate}
+	\item Find all halos at $z=0$.
+
+    \item For each halo, ID match the particles contained within it with those
+		  in the initial conditions. This defines the initial lagrangian region
+		  based on the dark matter.
+
+	\item In some cases, discussed below, fill in the holes in this lagrangian
+	      region by using a nearest-neighbour search.
+
+	\item For every gas particle in the initial conditions, find the nearest dark
+	      matter neighbour. This gas particle is assigned to the same lagrangian
+	      region as that dark matter particle.
+\end{enumerate}
+This allows the definition of the lagrangian region to also extend to the gas
+that should be gravitationally bound by that halo at $z=0$.

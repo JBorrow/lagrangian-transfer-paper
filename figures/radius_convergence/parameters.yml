@@ -1,0 +1,23 @@
+# Example yaml parameter file for the simba runner.
+
+snapshots:
+    ini: /mnt/ceph/users/dangles/simba/m50n512/s50j7k/snap_m50n512_000.hdf5
+    end: /mnt/ceph/users/dangles/simba/m50n512/s50j7k/snapshot_151.hdf5
+
+halo_catalogue:
+    type: ahf # velociraptor, ahf, caesar, velociraptor-particles
+    run_caesar: False # If true, run caesar on end snapshot
+    path: /mnt/ceph/users/dangles/simba/m50n512/s50j7k/AHF/snap151Rpep..z0.000.AHF_halos
+    pickle_name: halo_catalogue.pickle # For those that need to be pickled e.g. ahf
+
+ltcaesar:
+    # Various LTCaesar parameters that you will need
+    notrunc: 0
+    yt: 0
+    otherhalofinder: 1
+    lagrangianregions: 1
+    aboveid: 0
+    virialradius: RADIUS_PLACEHOLDER
+
+meta:
+    code_location: "../../lagrangian-transfer-scripts"

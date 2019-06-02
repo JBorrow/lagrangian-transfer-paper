@@ -296,6 +296,62 @@ to large distances. The full model constrains about 90\% of the mass within
 around $3\hmpc{}$, with a slow tail off ending with nearly all of the mass
 being constrained to be spread less than $5\hmpc{}$.
 
+% Placed here for organisational reasons
+\begin{figure*}
+	\centering
+	\vspace{0.5cm}
+	\includegraphics{figures/fancy-figure.pdf}
+  \caption{ This visualisation shows two epochs at once, simultaneously
+  showing the initial conditions (in blue and red) and the final simulation
+  volume at redshift $z=0$ in white/grey. The blue and red show the positions
+  of the gas and dark matter (respectively) \emph{in the initial conditions}
+  for particles that reside in selected halos at redshift $z=0$. The overlaid
+  white/grey map shows the dark matter at redshift $z=0$ to enable
+  comparisons between the initial and final comoving positions for various
+  bound structures. For each selected halo, the dashed black circles show
+  their virial radii as defined in \S \ref{sec:simba}. For some halos in
+  crowded regions, we have overlaid a circle and arrows showing which blob of
+  dark matter and gas in the initial conditions collapses to form this halo.
+  Finally, for each halo we show a small bar chart showing their final
+  lagrangian make-up, as described later in the text. We recommend that
+  readers on their first pass consider the differences in origin between the
+  gas (blue) and dark matter (red) for these selected halos of various
+  masses. On a second pass, stop to consider how the environment of each halo
+  changes its lagrangian make-up. In particular, group 431 shows a large
+  baryonic component originating from the lagrangian region of another halo,
+  with this halo entering a small cluster environment near the end of the
+  simulation. Note that individual regions are colour-mapped separately, i.e.
+  the intensity of colour for a single halo is unique to that halo only, as
+  to enable all lagrangian regions to be seen. Without this choice, the
+  structure for the lower mass halos would be completely washed out.}
+	\vspace{1cm}
+	\label{fig:bigtransferpic}
+\end{figure*}
+
+
+\begin{figure*}
+    \centering
+    \vspace{1cm}
+    \includegraphics{figures/s50j7kAHF/four_images_magma_AHF.pdf}
+    \caption{Gas in the \simba{} full model shown for the whole box, but
+    split by lagrangian component. All images are shown with the same
+    (lograithmic) normalisation and colour-map. Taking a linear sum of all of
+    these images (ignoring the fact that the logarithmic density is plotted)
+    will reproduce the full gas distirbution at $z=0$. The components are
+    (clockwise, starting from top left): particles that began in lagrangian
+    region and have remained in the associated halo; particles that began in
+    a lagrangian region and have ended up outside of the destination halo;
+    particles that began outside any lagrangian region and ended the
+    simulation outside any halo; and particles that ended up in a halo but
+    originated outside any lagrangian region. Particles that began in the
+    lagrangian region but ended up outside the halo show a striking
+    similarity to those particles that have travelled large distances in
+    Figure \ref{fig:bigdistanceimage}. Those particles that began outside,
+    and remained outside, trace the filaments and voids.}
+    \vspace{1cm}
+    \label{fig:lrtransfer}
+\end{figure*}
+
 These results show that gaseous and stellar matter can be transferred out to
 significantly further (by $z=0$) than is assumed by typical zoom-in
 simulation suites. For example, the Latte \citep{Wetzel2016} suite uses an

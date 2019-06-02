@@ -1,90 +1,38 @@
 \section{Transfer between halos}
 \label{sec:transfer}
 
-Looking at particle-level metrics can be informative, but the majority of
-analysis performed on cosmological simulations occurs on bound structures for
-good reason; they are what can be accurately observed and easily identified.
-The below analysis considers transfer of baryonic material between halos and
-their associated lagrangian regions in the initial conditions of the
-simulation.
-
-\subsection{Defining halos}
-
-Halos in the following discussion are defined by using the \velociraptor{} structure
-finder \citep{Elahi2019}. This structure finder uses a 6D friends-of-friends (FoF) algorithm
-with an adaptive linking length for each halo to disentangle mergers. A standard
-linking length of $\ell = 0.2$ is used for the initial 3D FoF search for field halos.
-The parameter files that were used to find the halos can be found on our \github{}
-page here\footnote{\url{https://github.com/jborrow/simba-velociraptor-tools} using
-revision {\tt 6444583}} and used the revision {\tt baa2c2c} of
-\velociraptor{}. As the analysis presented here uses halo-level metrics, no galaxy
-finder was used, and \velociraptor{} was not ran in galaxy-finding mode.
-The source code that performs all of the below analysis is made available by
-the authors on \github{}\footnote{\url{https://github.com/jborrow/lagrangian-
-transfer}} as a python package.
+Now that we have fully considered our particle-level metric, which has shown
+that dark matter and baryons in the \simba{} cosmological simulations have
+vastly different dynamics, let us move on to considering the movement of
+baryons between bound structures. The below analysis considers the transfer
+of baryons between halos and their associated lagrangian regions. For our
+definitions of these, please see \S \ref{sec:simba}.
 
 \subsection{The different origins of baryonic and dark matter}
 
-\begin{figure*}
-	\centering
-	\vspace{1cm}
-	\includegraphics{report/figures/fancy-figure-full-pu.pdf}
-	\caption{
-  Visualisation of the baryonic lagrangian regions of halos (shown in blue)
-  and the regions from which baryons resident in the $z=0$ halo, for halos of
-  various masses, shown in red. In the background, the $z=0$ dark matter
-  distribution is shown to show that lagrangian regions may be spatially
-  separated from the final resting place of the halo at $z=0$. The individual
-  bar charts show the lagrangian origins of the baryons in the halo at $z=0$,
-  which can be directly connected to the mis-match in overlap between the
-  lagranigan region and the spatial region from which the baryons originate.
-  Halo 263, which shows a high level of transfer from outside any lagrangian
-  region, has a large collection of particles that originate from outside the
-  largrangian region. Halo $364$ is undergoing an active merger, hence the
-  two spatially separated regions that are only loosely connected by $z=0$.
-  The inset image shows, for the largest halo in the box, the spatially
-  resolved fraction of baryons that originate from the lagrangian region of
-  the halo.
-	}
-	\vspace{1cm}
-	\label{fig:bigtransferpic}
-\end{figure*}
+% For bigtransferpic please see feedbackmetrics.tex.
 
-\blue{TODO: Include some text here describing the above figure and discusisng
-differences in the origins of gas and dark matter.}
+Figure \ref{fig:bigtransferpic} shows simultaneously the initial and final
+states of the simulation, with the main purpose of this figure being to show
+the mixed origins of the gas and dark matter in bound structures at redshift $z=0$.
+A common trend for all halos is a shell of gas around the main dark matter component
+in the initial conditions, showing that gas in general is able to collapse
+further (due to cooling) than the dark matter, which is unable to lose angular
+momentum as efficiently. This corresponds to the slightly further mean spread metric
+for halo gas shown in Figure \ref{fig:distbaryon} than dark matter resident in
+halos.
 
-\subsection{Defining lagrangian regions}
+Note that the origin of the dark matter in the initial conditions corresponds
+exactly to our definition of lagrangian region for that component in \S \ref{sec:simba}.
+These lagrangian regions have very complex shapes, with them becoming more complex with
+lower halo mass (as objects become less powerful attractors) and increasing amounts
+of transfer (see below). These non-spherical shapes are why we chose to identify
+our lagrangian regions for gas in the way that we did (i.e. through neighbour searching,
+rather than through a fixed 3D aperture), as anything else would leave us unable to 
+capture the surprisingly intricate structure that is at play here.
 
-
-Many methods exist for defining lagrangian regions, but these are mostly used for
-zoom-in simulations and some, for example using a cube of particles around a given
-halo, could be seen as being non-lagrangian and over-conservative. In the below
-discussion the lagrangian regions are defined in the initial conditions in the
-following way:
-\begin{enumerate}
-	\item Find all halos at $z=0$.
-
-    \item For each halo, ID match the particles contained within it with those
-		  in the initial conditions. This defines the initial lagrangian region
-		  based on the dark matter.
-
-	\item In some cases, discussed below, fill in the holes in this lagrangian
-	      region by using a nearest-neighbour search.
-
-	\item For every gas particle in the initial conditions, find the nearest dark
-	      matter neighbour. This gas particle is assigned to the same lagrangian
-	      region as that dark matter particle.
-\end{enumerate}
-This allows the definition of the lagrangian region to also extend to the gas
-that should be gravitationally bound by that halo at $z=0$. For results quoted
-at higher redshifts, the above approach is repeated, except the halos are
-found at the quoted redshift and the particle data from that snapshot is used.
-There is no attempt made to lagrangian-region match, i.e. the lagrangian regions
-that are defined at $z=2$ have no relation to the ones at $z=0$ other than that
-they are from the same simulation.
 
 \subsection{Calculating transfer between lagrangian regions}
-
 
 Now that the lagrangian regions have been defined, it is possible to consider on
 a particle-by-particle basis where particles started and where they ended up.
@@ -114,46 +62,36 @@ The algorithm is as follows:
 	      of the above components is computed and stored.
 \end{enumerate}
 
-\begin{figure*}
-    \centering
-    \vspace{1cm}
-    \includegraphics{report/figures/four_images-3.pdf}
-    \caption{Gas in the \simba{} full model shown for the whole box, but split by lagrangian
-            component. All images are shown with the same (lograithmic) normalisation and 
-            colour-map. Taking a linear sum of all of these images (ignoring the fact that
-            the logarithmic density is plotted) will reproduce the full gas distirbution
-            at $z=0$. The components are (clockwise, starting from top left): particles
-            that began in lagrangian region and have remained in the associated halo;
-            particles that began in a lagrangian region and have ended up outside of the
-            destination halo; particles that began outside any lagrangian region and ended
-            the simulation outside any halo; and particles that ended up in a halo but originated
-            outside any lagrangian region. Particles that began in the lagrangian region but
-            ended up outside the halo show a striking similarity to those particles that
-            have travelled large distances in Figure \ref{fig:bigdistanceimage}. Those particles
-            that began outside, and remained outside, trace the filaments and voids.}
-    \vspace{1cm}
-    \label{fig:lrtransfer}
-\end{figure*}
+% for lrtransfer see feedbackmetrics.tex
 
-A visualisation of the results of this process is shown in Fig. \ref{fig:lrtransfer}.
+A visualisation of the results of this process is shown in Fig. \ref{fig:lrtransfer},
+split by four main lagrangian components that we will be considering in the
+remainder of this paper. Considering each panel clockwise from the top left
+we see first the gas that is in the same halo as the dark matter that resides there.
+Here, we see points corresponding to every halo in the box in characteristic (for
+AHF) spherical shapes. The centers of these spheres, where the gas is densest,
+are the brightest.
 
-\begin{figure*}
-	\centering
-	\includegraphics{figures/s50j7k/component_fraction_mixed.pdf}
-	\vspace{-0.7cm}
-	\caption{
-		The fraction of baryonic mass originating from each lagrangian component is
-		shown as a function of redshift $z=0$ halo mass, later referred to as the
-		Baryon Transfer Mass Function (BTMF). Different panels show different
-		particle selections with all baryonic
-		mass (left), gas mass (center), and stellar mass (right). Shaded
-		regions show the $1\sigma$ scatter in a given bin, with one standard
-		deviation of variation being shown. There is no attempt made to include
-		halo assembly bias or the finite halo sampling in a $50\hmpc{}$ box in
-		these regions.
-	}
-	\label{fig:maintransferresult}
-\end{figure*}
+Second we have the gas that is outside any halo at redshift $z=0$, but is assigned
+to a lagrangian region; this is the gas that `should' have ended up in the halos by
+the end of the simulation. We see that this gas traces the large-scale bubbles that
+the AGN power, with some of this gas piling up just outside the virial radius for
+the halos. A lot of this gas lives in filaments, but very little in of it resides
+in voids.
+
+
+The gas that is always outside any lagrangian region traces the majority of the
+filamentary structure, and shows all of the structure in the voids. This is
+gas whose initial closest neighbour also resides outside of a halo at redshift
+$z=0$ (approximately half of the dark matter).
+
+Finally we have the gas that is in halos but from outside any lagrangian
+region. This shows a very similar structure (albeit less bright) to the gas
+that resides in its own halo, but it originated from a region where the dark
+matter now resides outside of a halo. This gas is likely dragged into these
+bound structures by cooling flows, while the dark matter is not able to lose
+angular momentum quickly enough to assemble by $z=0$.
+
 
 \subsection{Transfer in a non-radiative Model}
 
@@ -170,60 +108,95 @@ A visualisation of the results of this process is shown in Fig. \ref{fig:lrtrans
 	\label{fig:nonradiativetransfer}
 \end{figure}
 
-To begin with, let us consider a null model. In this case, we run the simulation
-in non-radiative mode; i.e. without cooling, star formation, or feedback. This
-simulation only includes hydrodynamics, cosmology, and gravity. In Fig.
-\ref{fig:nonradiativetransfer} we present the fraction of baryonic mass for
-each halo contributed from each lagrangian component, as a function of halo
-mass. There is no dependence on halo mass (as the simulation is effectively
-scale-free above some resolution limit), and apart from some small level of 
-transfer from outside any lagrangian region, the baryonic mass in each halo
-consists of that which originated in its own lagrangian region.
+Now that we have seen the significant differences in the spatial distributions
+of gas in various lagrangian components, let us see if there are any trends
+with halo mass.
 
-\subsection{Transfer \emph{into} Halos}
+To begin with, let us consider a null model. In this case, we run the
+simulation in non-radiative mode; i.e. without cooling, star formation, or
+feedback. This simulation only includes hydrodynamics, cosmology, and
+gravity. In Fig. \ref{fig:nonradiativetransfer} we present the fraction of
+baryonic mass for each halo contributed from each lagrangian component, as a
+function of halo mass. There is no dependence on halo mass (as the simulation
+is effectively scale-free above some resolution limit), and apart from some
+small level of transfer from outside any lagrangian region, the baryonic mass
+in each halo consists of that which originated in its own lagrangian region.
+This difference, as described in \S \ref{sec:feedbackmetrics}, is likely
+caused by gas that piles up on the outside of each halo due to accretion
+shocks while the collisionless dark matter is stripped by passing straight
+through or around the bound structure
 
-The results of the full model, transfer as a function of halo mass, are shown in Fig.
-\ref{fig:maintransferresult}. The general trend is that for an increasing halo mass,
-a lagrangian region is able to hold on to more of the original baryonic mass, with
-this flattening off around $M_H = 10^{12} \msolar$. For a given halo, significantly
-more of the gaseous mass originates outside the original lagrangian region as compared
-to the stellar mass ($\sim 60 \%$ versus $\sim 90 \%$). The transfer between halos is
-at around the $\sim 5-10\%$ baryonic mass level, with this transfer predominantly
-originating from the gaseous component, as compared to the stellar component. This combines
-nicely with the distance metrics shown in \S \ref{sec:feedbackmetrics}, which
-showed that the dark matter and stars have very similar dynamics and hence should be
-similarly well bound. The physical reason for this is clear; many gas particles are ejected
-by feedback events from halos, and are re-captured by other halos. These particles must then
-be very hot (either through direct or shock heating) and so do not have the time to cool to
-form stars at $z=0$.
+\subsection{Transfer \emph{into} halos in \simba{}}
 
-\blue{TODO: Remove $z=2$ information}.
+\begin{figure*}
+	\centering
+	\includegraphics{figures/s50j7kAHF/component_fraction_mixed.pdf}
+	\vspace{-0.7cm}
+	\caption{
+		The fraction of baryonic mass originating from each lagrangian component is
+		shown as a function of redshift $z=0$ halo mass, later referred to as the
+		Baryon Transfer Mass Function (BTMF). Different panels show different
+		particle selections with all baryonic
+		mass (left), gas mass (center), and stellar mass (right). Shaded
+		regions show the $1\sigma$ scatter in a given bin, with one standard
+		deviation of variation being shown. There is no attempt made to include
+		halo assembly bias or the finite halo sampling in a $50\hmpc{}$ box in
+		these regions.
+	}
+	\label{fig:maintransferresult}
+\end{figure*}
 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=\columnwidth]{figures/s50j7k_z2/component_fraction_vs_halo_mass_both.pdf}
-%	\vspace{-0.7cm}
-%	\caption{The BTMF for all baryons at redshift $z=2$, shown for
-%	the full \simba{} model. Note the very low proportion of mass transfer
-%	between halos, but that the transfer from outside lagrangian regions
-%	is significant even by this redshift.}
-%	\label{fig:z2resultlt}
-%\end{figure}
+The results of the full model, transfer as a function of halo mass, are shown
+in Fig. \ref{fig:maintransferresult}. The general trend is that for an
+increasing halo mass, a lagrangian region is able to hold on to more of the
+original baryonic mass, with this flattening off around $M_H = 10^{12}
+\msolar$. For a given halo, significantly more of the gaseous mass originates
+outside the original lagrangian region as compared to the stellar mass ($\sim
+40 \%$ versus $\sim 10 \%$). The transfer between halos is at around the
+$\sim 10\%$ baryonic mass level, with this transfer predominantly
+originating from the gaseous component, as compared to the stellar component.
+This combines nicely with the distance metrics shown in \S
+\ref{sec:feedbackmetrics}, which showed that the dark matter and stars have
+very similar dynamics and hence should be similarly well bound.
 
-The transfer between these regions is slightly lower, but is still at the
-$5-10\%$ level even for the \nojet{} run. As shown by the non-radiative run
-in Fig. \ref{fig:nonradiativetransfer}, this is not simply a consequence of
-the definition of lagrangian region, or the dynamics (which are provably
-similar in terms of separation between dark matter and gas in a statistical
-sense, see Fig. \ref{fig:feedbackdistance}. This transfer is caused by the
-effects of the sub-grid (galaxy formation model).
+This transfer can have several physical origins. The first, as shown in the
+non-radiative run, is caused by the collisional dynamics of the gas preventing
+gas from following the dark matter in all cases. We see that this can account
+for up to 15\% of the baryonic mass of a bound structure at redshift $z=0$ originating
+from a different region than the dark matter, but this could not account for any
+\emph{inter-lagrangian} region transfer.
 
-In all of the relations there is a high level of scatter. The scatter in these
-relations, as with other metrics in astronomy, likely contains more information 
-than the relations themselves. A given mass bin contains halos that entertain a range
-of 10x in transfer, which is likely dependent on environment. The specific physical
-effects that lead to the scatter in these relations will be discussed in a follow-up
-paper.
+The galaxy formation sub-grid model clearly has a significant effect on the 
+baryonic make-up of halos at redshift $z=0$. The fraction of mass from outside
+any lagrangian region have increased to 20-40\% (it is unclear whether we should
+compare the total baryonic component or the gaseous component to the non-radiative
+run). This increase is explained by the inclusion of sub-grid cooling, with particles
+now able to form cool accretion flows that can lose angular momentum at a much higher
+rate than the dark matter component is able to.
+
+Around 10\% of the baryonic mass of halos is now made up of gas that has
+experienced inter-lagrangian transfer. It is important to recall that this is transfer
+between bound structures at redshift $z=0$, and that it only takes into account
+the initial and final conditions of the simulation; we do not know the complete history
+of these particles.
+
+
+The transfer has several possible sources: stripped gas from nearby galaxies that are
+still classified as their own bound structures at redshift $z=0$, gas that has 
+been expelled from galaxies through stellar winds or AGN feedback and re-captured
+by a halo, and spurious transfer in the initial conditions due to the way that
+we have classified our lagrangian regions. With the non-radiative simulation
+showing zero transfer between bound structures, and there being little transfer
+before redshift $z=2$, we believe that the contribution from this component is
+likely very small. Turning off the AGN winds reduces this transfer by a small amount,
+but it still remains at the 10\% level as shown here; if this transfer
+is powered by feedback events it must be dominated by the expulsion
+(or preventative feedback) from stellar winds.
+
+A given mass bin contains halos that entertain a range of 10x in transfer,
+which is likely dependent on environment as shown in Figure
+\ref{fig:bigtransferpic}. The specific physical effects that lead to the
+scatter in these relations will be discussed in a follow-up paper.
 
 The overall fraction of baryonic mass that is retained by a given lagrangian
 region does begin to turn over around $10^{13} \msolar{}$, however it is unclear
@@ -233,28 +206,19 @@ is also important to note that the shaded regions in Figure
 and explicitly do \emph{not} include any errors that would occur from a finite
 sampling of halos or halo assembly bias.
 
-
-By considering the results at higher redshift, shown for cosmic noon at redshift
-$z=2$ in Fig. \ref{fig:z2resultlt}, it is possible to see that the transfer
-between halos is a distinctly late-time effect. Gas must have time to cool and
-move between halos after being ejected by feedback to contribute to the mass
-of a $z=0$ halo in this way. It is important to note that these halo masses are
-shown for the halos at $z=2$, i.e. no progenitor matching is performed, and hence
-the horizontal axis in Fig. \ref{fig:z2resultlt} is different to that in other
-figures.
-
 \subsection{Transfer \emph{out} of Lagrangian Regions}
 
 \begin{figure}
 	\centering
-	\includegraphics{figures/s50j7k/inverse_component_fraction.pdf}
+	\includegraphics{figures/s50j7kAHF/inverse_component_fraction.pdf}
 	\vspace{-0.7cm}
 	\caption{The fate of gas that begins in lagrangian regions, as a function of
-	initial lagrangian region mass. The normalisation in this plot is incorrect
-	(i.e. bins do not sum to one) because of the differing particle masses at 
-	$z=0$ and the initial conditions, however the overall trends are still 
-	accurate. \blue{Will include the $z=2$ line here, which
-	is significantly different.} }
+	initial lagrangian region mass. This shows the impact of AGN
+	feedback with the dip between $10^{12}\msolar{}$ and $10^{13}\msolar{}$
+	representing an overall ejection of baryons as this pathway
+	becomes efficient. The peak at just below $10^{12}\msolar{}$
+	for retained gas corresponds to the halo mass where AGN feedback
+	and stellar feedback are both relatively inefficient.}
 	\label{fig:transferoutoflrs}
 \end{figure}
 
@@ -279,7 +243,7 @@ surrounds the galaxies in these halos.
 
 \begin{figure}
 	\centering
-	\includegraphics{figures/s50j7k/baryon_fraction_breakdown.pdf}
+	\includegraphics{figures/s50j7kAHF/baryon_fraction_breakdown.pdf}
 	\vspace{-0.7cm}
 	\caption{The baryon fraction $f_b$ relative to the cosmic baryon fraction
 	$f_{b, c}$ shown as a function of halo mass. The coloured bands show the

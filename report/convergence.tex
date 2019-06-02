@@ -4,16 +4,21 @@
 The above halo-based metrics will have a certain level of dependence on the
 choice of halo finder used. In an attempt to ensure independence of the results
 from such factors, the above analysis was repeated both with the 3D
-friends-of-friends halo finder included in the {\tt yt} package \citep{Turk2011}.
-This is simpler than the \velociraptor{} method used for the main analysis, and
-is unable to disentangle mergers. However, as active mergers make up a small
+friends-of-friends (FoF) halo finder included in the {\tt yt} package \citep{Turk2011}.
+We also repeated the analysis with the \velociraptor{} 6D FoF finder.
+The latter will disentangle active mergers, but as active mergers make up a small
 fraction of the galaxy population, the above results are qualitatively
-unaffected and are only change quantitatively to the 5\% level. The above
-analyses were also re-ran with the \velociraptor{} catalogue by re-finding
-halos manually by selecting all particles within $R_{\rm BN98}$, the halo
-radius as defined by \citet{Bryan1998}, of the halo center, rather than using
-the non-spherical particles catalogue provided. This, again, left the results
-qualitatively and quantitatively unchanged.
+unaffected and are only change quantitatively to the 5\% level.
+The use of a FoF finder, rather than the spherical overdensity finder found
+in AHF, did not qualitatively change the results.
+
+In the below, we discuss ways to extend the lagrangian region definition to include
+more particles, whilst still retaining the ability to have non-uniform shapes. We
+find that, in general, including more particles in the definition of the lagrangian
+region (than are present in the halo) leads to a fractionally higher level
+of inter-lagrangian transfer and more self-contribution to the final halo mass
+at the expense of transfer from outside any lagrangian region. This is expected, as
+now many more particles are classified as being present in the lagrangian region.
 
 
 \subsection{Filling in Holes}
@@ -45,45 +50,66 @@ deviation from the fiducial result.
 	\includegraphics{figures/convergence_smoothing.pdf}
 	\vspace{-0.7cm}
 	\caption{The gas transfer mass function reproduced from Fig.
-		\ref{fig:maintransferresult}. Each line, coded by transparency,
-		shows the fraction of baryonic mass in a halo from each component
-		when the lagrangian regions have been smoothed by 1 (i.e. the fiducial result), 2, 4, 8, 16,
-		or 32 particles (from lightest to darkest respectively). The dashed
-		line shows the result for the 32-smoothing case where the particles are
-		given to the highest, rather than lowest, mass halos. See the
-		text for the details of how this smoothing is constructed.
-	}
+     \ref{fig:maintransferresult}. Each line, coded by transparency, shows the
+     fraction of baryonic mass in a halo from each component when the lagrangian
+     regions have been smoothed by 1 (i.e. the fiducial result), 2, 4, 8, 16, or
+     32 particles (from darkest to lightest respectively). The white dashed line
+     shows the result for the 32-smoothing case where the particles are given to
+     the highest, rather than lowest, mass halos; no difference is seen here
+     suggesting that there is little overlap between the lagrangian regions on
+     these scales. See the text for the details of how this smoothing is
+     constructed.}
 	\label{fig:smoothconv}
 \end{figure}
 
-The results are shown in Fig. \ref{fig:smoothconv}. Note how smoothing the
+The results are shown in Figure \ref{fig:smoothconv}. Note how smoothing the
 lagrangian regions does have the expected effect of inducing more internal
-transfer, and does increase the proportion of baryons that are classified
-as retained as the lagrangian regions are filled out.
+transfer, and does increase the proportion of baryons that are classified as
+retained as the lagrangian regions are filled out. Despite this, the overall
+trends with respect to halo mass remain.
 
 \subsection{The sizes of halos}
 
-\blue{Currently there is a bug in the code that needs to be rectified before
-this plot can be re-made with the current version of the code.}
+The `size' of a halo is always a choice that is imposed, with larger or
+smaller halo radii (as long as these are consistent between halos) also being
+completely valid characterisations of the halo mass and size. In Figure
+\ref{fig:bigtransferpic} we saw that there was a large amount of gaseous matter
+inside halos from outside any lagrangian region. It may be reasonable to assume
+that this gas corresponds to dark matter that is simply sitting just outside of
+the halo edge, perhaps within the so-called `splashback radius'. The estimates
+for this radius range between 0.8 and 1.5$R_{\rm vir}$ \citep{More2015}, and hence
+below we consider the situation where we extend the region around the halo that
+contributes to the lagrangian region. This is done in the following way:
+\begin{enumerate}
+	\item For every halo, find its current virial radius $R_{vir}$. This contains
+	      all particles at redshift $z=0$ that we consider to be within the halo.
+	\item Increase this to $R_{\rm LR}$, and find all dark matter particles within
+		  this region. These dark matter particles are now defined to lie within
+		  the lagrangian region of that halo.
+	\item ID match these particles and extend to the gas in the usual way.
+\end{enumerate}
+We chose this specific process, increasing the radius of our lagrangian region
+rather than the whole halo, to prevent us from simply re-defining our halo size
+and including more gas as well (as in this case, the transfer across the halo
+boundary would simply be moved to a larger radius). The effects of this process
+on the gas component of the BTMF (where it is most significant) are shown
+in Figure \ref{fig:radius_dependence}.
 
 \begin{figure}
     \centering
-    \vspace{-0.5cm}
-    \includegraphics{report/figures/radius_convergence.pdf}
-    \vspace{-0.5cm}
-    \caption{Convergenece with increasing virial radius for the lagrangian region.
-    \blue{TODO: note that these were made with AHF.} Darker colours correspond
+    \includegraphics{figures/radius_convergence.pdf}
+    \vspace{-0.7cm}
+    \caption{Convergence with increasing virial radius for the lagrangian region.
+    Lighter colours correspond
     to large radii, going in steps of $0.1R_{\rm vir}$ from 1.0 to 1.5.}
-    \label{fig:my_label}
+    \label{fig:radius_dependence}
 \end{figure}
 
-\begin{itemize}
-	\item Virial radius dependence
-		\begin{itemize}
-			\item Transfer from outside dominated by nearby particles
-			\item Must re-find halos to do this analysis
-			\item Describe algorithm
-			\item We have the plots!
-			\item Not the case
-		\end{itemize}
-\end{itemize}
+Here we see that there is a significant change in the fraction of mass in the
+halo at redshift $z=0$ from outside any lagrangian region, especially when going to
+$R_{\rm LR} = 1.5 R_{\rm vir}$. This large change is expected, though, as we now
+have included a volume that is three times larger than the initial halo in the
+lagrangian region classification; taking this extreme value for all halos
+really is a `worst-case' scenario. The inter-lagrangian transfer remains at a similar level
+despite the increase in radius. Note that there will be no extra mass included in the
+halos here, with particles simply changing their lagrangian allegiances.
