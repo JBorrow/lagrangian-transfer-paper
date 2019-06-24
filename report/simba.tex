@@ -20,18 +20,16 @@ supernova energy minus the kinetic energy of the wind. The mass
 loading factor of these winds scales with stellar mass using scalings from
 \citet{AnglesAlcazar2017}, obtained from particle tracking in the FIRE zoom-in simulations.
 
-Black hole growth and feedback is included in \simba{}, using the torque-limited
+Black hole growth is included in \simba{} using the torque-limited
 accretion model from \citet{AnglesAlcazar2017b} for cold gas and \citet{Bondi1952}
-accretion for the hot gas. The AGN feedback model includes both kinetic
-(winds) and energetic (X-ray) feedback. At high Eddington ratios or low black holes mass ($M_{\rm BH} < 10^{7.5}$
+accretion for the hot gas. The AGN feedback model includes both kinetic winds and X-ray feedback. At high Eddington ratios ($f_{\rm Edd} > 0.02$) or low black holes mass ($M_{\rm BH} < 10^{7.5}$
 M$_\odot$), the
-radiative-mode winds are ejected at interstellar medium (ISM) temperature at low velocity $\sim 10^3 \kms{}$. At low Eddington ratios and high black holes mass, the jet-mode winds are ejected at velocities approaching $\sim 10^4\kms{}$. We refer the interested reader to the full description of this
+radiative-mode winds are high mass-loaded and ejected at interstellar medium (ISM) temperature with velocities $\lesssim 10^3 \kms{}$. At low Eddington ratios and high black hole mass, the jet-mode winds are ejected at velocities approaching $\sim 10^4\kms{}$. We refer the interested reader to the full description of this
 feedback model in \citet{Dave2019}.
 
-In addition to the fiducial model, we also use two comparison models. The first, described as \nojet{}, includes all of the \simba{} physics, has the high-energy black hole jet-mode winds disabled.  All other star formation and AGN feedback is included.  The second, described as non-
-radiative, uses the same initial conditions as the fiducial model but only
-includes gravitational dynamics and hydrodynamics, i.e. without a sub-grid
-model. This latter simulation was performed with the {\sc Swift} simulation
+In addition to the fiducial model, we also use two comparison models. The first, described as \nojet{}, includes all of the \simba{} physics but has the high-energy black hole jet-mode winds disabled.  All other star formation and AGN feedback is included.  The second, described as non-radiative, uses the same initial conditions as the fiducial model but only
+includes gravitational dynamics and hydrodynamics, i.e. without sub-grid
+models. This latter simulation was performed with the {\sc Swift} simulation
 code \citep{Schaller2016} using a Density-Entropy Smoothed Particle
 Hydrodynamics (SPH) solver as it performs orders of magnitude faster than the
 original GIZMO code \citep{Borrow2018}. The use of this hydrodynamics model,
