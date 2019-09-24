@@ -10,12 +10,16 @@
  white/grey map shows the dark matter at redshift $z=0$ to enable comparisons
  between the initial and final comoving positions for various bound
  structures. For each selected halo, the dashed black circles show their
- virial radii as defined in \ref{sec:simba}. For some haloes in crowded
+ virial radii as defined in \S \ref{sec:simba}. For some haloes in crowded
  regions, we have overlaid a circle and arrows showing which blob of dark
  matter and gas in the initial conditions collapses to form this halo.
- Finally, for each halo we show a small bar chart showing their final
- Lagrangian make-up, as described later in the text. This figure illustrates
- the significant differences in origin between the gas (blue) and dark matter
+ Finally, for each halo we show a small bar chart showing how their gas is
+ composed from Lagrangian components, as described later in the text. The
+ blue bar shows the fraction of gas in each halo that originated from that
+ haloes own Lagrangian region, the red bar shows the gas from another haloes
+ Lagrangian region, and the purple bar shows the fraction of gas that
+ originated outside any Lagrangian region. This figure illustrates the
+ significant differences in origin between the gas (blue) and dark matter
  (red) for these selected haloes of various masses. We also see how the
  environment of each halo changes its Lagrangian make-up. In particular,
  group 431 shows a large baryonic component originating from the Lagrangian
@@ -63,6 +67,11 @@ dark matter. In this section, we consider the movement of baryons relative to
 dark matter haloes and their corresponding Lagrangian regions. The definitions of
 haloes and Lagrangian regions used here are described in \S \ref{sec:simba}.
 
+This topic has been considered recently by \citet{Liao2017}, where they used
+a $10\hmpc{}$ non-radiative simulation to show that the gas in haloes may
+originate from different places than the dark matter in those same haloes in
+the initial conditions.
+
 \subsection{The different origins of baryons and dark matter in haloes}
 
 Fig. \ref{fig:bigtransferpic} illustrates the mixed origins of the gas and
@@ -75,40 +84,41 @@ angular momentum as efficiently. This is consistent with the larger values of
 the spread metric for gas in haloes relative to the dark matter in haloes, as
 shown in Fig. \ref{fig:distbaryon}.
 
-The origin of the dark matter in the initial conditions corresponds
-exactly to our definition of Lagrangian region for that component in \S
-\ref{sec:simba}. These Lagrangian regions have very complex shapes, with them
-becoming more complex with lower halo mass (as objects become less powerful
-attractors) and increasing amounts of transfer (see below). Larger haloes tend
-to have more spherical Lagrangian regions, as can be seen with the largest
-halo in the box (Group 0) in Fig. \ref{fig:bigtransferpic}. These
-non-spherical shapes are why we chose to identify our Lagrangian regions for
-gas in the way that we did (i.e. through neighbour searching, rather than
-through a fixed 3D aperture), as anything else would leave us unable to
-capture the surprisingly intricate structure that is at play here.
+The origin of the dark matter in the initial conditions corresponds exactly
+to our definition of Lagrangian region for that component in \S
+\ref{sec:simba}. These Lagrangian regions have very complex shapes, with
+larger haloes tending to have more spherical Lagrangian regions, as can be
+seen with the largest halo in the box (Group 0) in Fig.
+\ref{fig:bigtransferpic}. These complex non-spherical shapes are why we
+chose to identify our Lagrangian regions for gas through neighbour searching,
+as other methods (e.g. constructing a convex hull enclosing all dark matter
+particles that end up in a given halo) would not allow us to capture the
+surprisingly intricate structure that is at play here.
 
 There are many possible reasons for the complex shapes that we see here.
 Consider a simple case where we have one `main' halo, and a satellite that is
-being accreted. This has several possible fates. As the satellite begins to
-fall into the main halo, its gas may be shocked and halted in the CGM, with
-the dark matter continuing to fall in, separating baryonic and dark
-component. The gas may then be expelled by a feedback event, simply rise out
-of the halo boundary due to its buoyancy, or cool and join the dark matter in
-the centre of the halo. In the case where both the dark matter and gas fall
-into the central, there is yet another chance for them to be separated, with
-the gas being subject to feedback events. Once the gas has been removed from
-the halo, it is free to be `picked up` by other passing haloes, or lie
-outside of the halo in the IGM. The other possibility for the fate of this
-substructure is the dark matter failing to accrete onto the central. In this
-case, the dark matter continues moving out into the IGM, with the gas being
-shocked and captured by the main halo. In this case, the gas would be
-classified as originating outside any Lagrangian region.
+being accreted. The gas and dark matter in the satellite galaxy have several
+potential fates. For instance, when accreting onto the main halo, the gas in
+the satellite may be shock heated, and stalled in the CGM, with the dark
+matter being able to continue to move towards the center of the main halo.
+This process dynamically separates the dark matter and gas, and now the gas
+may have several fates; it could be pushed out in a feedback event, rise out
+of the halo due to buoyancy, or fall to the centre of the halo after cooling
+and re-join the dark matter. Once the gas has been removed from the CGM into
+the IGM, it is free to be picked up by other passing galaxies.
+
+The other possibility for the fate of this substructure is the dark matter
+failing to accrete onto the central. In this case, the dark matter continues
+moving out into the IGM, with the gas being shocked and captured by the main
+halo. It is this complex difference in assembly between dark matter and
+baryons, due to the latter behaving as a collisional fluid, that we aim to
+capture here.
 
 \subsection{Computing transfer between Lagrangian regions}
 
 Given the definitions of haloes and Lagrangian regions in
 \S \ref{sec:simba}, it is possible to classify every particle in the
-simulation according to their Lagrangian ID and Halo ID (if any) in the
+simulation according to their Lagrangian ID and halo ID (if any) in the
 initial and final conditions. The algorithm is as follows:
 
 \begin{enumerate}
@@ -134,6 +144,8 @@ initial and final conditions. The algorithm is as follows:
 	      of the above components is computed and stored.
 \end{enumerate}
 
+
+
 A visualisation of this particle classification scheme is shown in
 Fig.~\ref{fig:lrtransfer}, where we split the gas distribution in the
 \simba{} $50\hmpc{}$ box into the four main Lagrangian components that we
@@ -144,13 +156,14 @@ we see a population of spherical shapes corresponding to every halo in the
 box, with their sizes corresponding to $R_{\rm vir}$ as defined by AHF. The
 centers of haloes, where the gas is densest, are the brightest.
 
+
 In the top right panel we have the gas that is outside any halo at $z=0$, but
 is assigned to a Lagrangian region at $z=99$; this is the gas that should
 have ended up in haloes by the end of the simulation if the baryonic matter
 was also collisionless. We see that this component traces gas primarily
 around massive haloes, resembling the large-scale bubbles that the AGN jets
 power in \simba{} \citep{Dave2019}. Note that some of this gas piles up just
-outside of haloes owing to the somewhat arbitrary boundary defined by the
+outside of haloes due to the somewhat arbitrary boundary defined by the
 virial radius of haloes. This gas resides primarily in filaments, with some
 reaching out into the voids.
 
@@ -166,6 +179,9 @@ own halo (top left), but this component originates from regions where the
 dark matter now resides outside of haloes. This gas is likely dragged into
 these bound structures by cooling flows, while the dark matter
 is not able to lose angular momentum quickly enough to assemble by $z=0$.
+
+
+
 
 \subsection{Transfer in a non-radiative Model}
 
@@ -188,6 +204,56 @@ is not able to lose angular momentum quickly enough to assemble by $z=0$.
 	\label{fig:nonradiativetransfer}
 \end{figure}
 
+
+Before considering the numerical results of the full model, we first present
+the non-radiative simulation as a null model to investigate the effects of
+hydrodynamics alone. In this case, we run the simulation without cooling,
+star formation, or feedback, only including hydrodynamics, cosmology, and
+gravity. In Fig. \ref{fig:nonradiativetransfer} we present the fraction of
+baryonic mass for each halo contributed from each Lagrangian component, as a
+function of halo mass. The blue line shows the fraction of mass in each halo
+from its own Lagrangian region (top left in Fig. \ref{fig:lrtransfer}), the
+red shows transfer into a halo from another Lagrangian region, and the purple
+line shows the fraction of baryonic mass from outside any Lagrangian region
+(bottom left in Fig. \ref{fig:lrtransfer}). There is no dependence on halo
+mass (as the simulation is effectively scale-free above some resolution
+limit), and apart from some small level of transfer from outside any
+Lagrangian region (of around $10-15\%$), the baryonic mass in each halo
+consists of that which originated in its own Lagrangian region.
+
+The difference in origins of the baryons in the final haloes, from
+hydrodynamical effects alone, is then around the $10-15\%$ level. This is
+close to the 25\% level of segregation between gas and dark matter reported
+by \citet{Liao2017} (who also used a non-radiative simulation), with the
+difference likely rooted in the different definitions that we use. We
+consider the fraction of gas particles in the final redshift $z=0$ halo whose
+initially pairing dark matter is also resident in that halo; hence what we
+are really counting is the `contamination' of the halo by gas particles from
+outside of its Lagrangian region. \citet{Liao2017} count all particles in the
+final halo, treating gas and dark matter equally, then finding all particles
+that were gas-dark matter pairs in the initial conditions. Their higher level
+of segregation is expected due to our approach not counting dark matter that
+is resident in that halo, but has lost its initial gas neighbour. Fundamentally this
+represents the difference in our approaches; here we are interested in
+treating the dark matter as a ground source of truth, and asking if the gas
+nearest to that dark matter follows it into the same haloes.
+\citet{Liao2017}, on the other hand, were interested in treating \emph{all}
+occupants of the final halo as the ground source of truth, and asking
+what differences there were in their origin.
+
+The causes for our contamination here are less clear than in the case of
+\citet{Liao2017}; we would report a halo that has had gas only \emph{removed}
+as being completely uncontaminated, and hence stripping of gas is
+an unsatisfactory explanation of these differences. The likeliest explanation
+for the contamination in this case is that the baryons and dark matter go through
+a phase of mixing as they enter the cosmic web, before going on to fully
+collapse into bound structures.
+
+
+\subsection{Transfer \emph{into} haloes}
+\label{sec:transferinto}
+
+
 \begin{figure*}
 	\centering
 	\includegraphics{figures/s50j7kAHF/component_fraction_mixed.pdf}
@@ -202,28 +268,6 @@ is not able to lose angular momentum quickly enough to assemble by $z=0$.
 	}
 	\label{fig:maintransferresult}
 \end{figure*}
-
-Before considering the numerical results of the full model, we first present
-the non-radiative simulation as a null model to investigate the effects of
-hydrodynamics alone. In this case, we run the simulation without cooling,
-star formation, or feedback, only including hydrodynamics, cosmology, and
-gravity. In Fig. \ref{fig:nonradiativetransfer} we present the fraction of
-baryonic mass for each halo contributed from each Lagrangian component, as a
-function of halo mass. The blue line shows the fraction of mass in each halo
-from its own Lagrangian region (top left in Fig. \ref{fig:lrtransfer}), the
-red shows transfer into a halo from another Lagrangian region (top right in
-Fig. \ref{fig:lrtransfer}), and the purple line shows the fraction of
-baryonic mass from outside any Lagrangian region (bottom left in Fig.
-\ref{fig:lrtransfer}). There is no dependence on halo mass (as the simulation is
-effectively scale-free above some resolution limit), and apart from some
-small level of transfer from outside any Lagrangian region, the baryonic mass
-in each halo consists of that which originated in its own Lagrangian region.
-This difference is likely to be caused caused by gas that piles up on the
-outside of each halo due to accretion shocks while the collisionless dark
-matter is stripped by passing straight through or around the bound structure.
-
-\subsection{Transfer \emph{into} haloes}
-\label{sec:transferinto}
 
 Moving on to the full \simba{} model, we consider again the fractions of
 baryonic mass as a function of halo mass, split by Lagrangian component. Fig.
@@ -244,20 +288,21 @@ stellar component. This combines nicely with the distance metrics shown in \S
 \ref{sec:feedbackmetrics}, which showed that the dark matter and stars have
 very similar dynamics and hence should be similarly well bound.
 
+
 This transfer into, and between, Lagrangian regions can have several physical
 origins. The first, as shown in the non-radiative run, is caused by the
 collisional dynamics of the gas preventing gas from following the dark matter
-in all cases. We see that this can account for up to 15\% of the baryonic
+in all cases. We found that this can account for up to 15\% of the baryonic
 mass of a bound structure at redshift $z=0$ originating from a different
-region than the dark matter, but this could not account for any
-\emph{inter-Lagrangian} region transfer.
+region than the dark matter (see Fig. \ref{fig:nonradiativetransfer}), but this
+could not account for any \emph{inter-Lagrangian} region transfer.
 
 The galaxy formation sub-grid model clearly has a significant effect on the
 baryonic make-up of haloes at redshift $z=0$. The fraction of mass from
-outside any Lagrangian region have increased to 20-40\%. This increase is
+outside any Lagrangian region has increased to 20-40\%. This increase is
 explained by the inclusion of sub-grid cooling and feedback processes, with
-particles now able to form cool accretion flows that can lose angular
-momentum at a much higher rate than the dark matter component is able to.
+the baryons now able to cool before accreting and lose angular momentum at a
+much higher rate than the dark matter component is able to.
 
 Around 10\% of the baryonic mass of haloes is now made up of gas that has
 experienced inter-Lagrangian transfer. It is important to recall that this is transfer
@@ -268,28 +313,89 @@ of these particles.
 The transfer between haloes has several possible sources: stripped gas from
 nearby galaxies that are still classified as their own bound structures at
 redshift $z=0$, gas that has been expelled from galaxies through stellar
-winds or AGN feedback and re-captured by a halo, and spurious transfer in the
-initial conditions due to the way that we have classified our Lagrangian
-regions. With the non-radiative simulation showing zero transfer between
-haloes, and there being little transfer before redshift $z=2$ in the fiducial
-model, we believe that the contribution from this component is likely very
-small. When repeating this analysis with the \nojet{} run, the
+winds or AGN feedback and re-captured by a halo, and possibly also spurious
+transfer due to boundary effects caused by the complex shapes of Lagrangian
+regions according to the definition adopted. With the non-radiative
+simulation showing zero transfer between haloes, and there being little
+transfer before redshift $z=2$ in the fiducial model, we believe that the
+contribution from pure dynamics alone to inter-Lagrangian transfer is likely
+very small. When repeating this analysis with the \nojet{} run, the
 inter-Lagrangian transfer is reduced by a small amount, but still remains at
 the 10\% level. If this transfer is powered by feedback events it must be
-dominated by the expulsion (or preventative feedback) from stellar winds and
-the residual thermal AGN feedback.
+dominated by the expulsion (or alternatively preventative pathways) from
+stellar winds and the residual thermal AGN feedback.
 
 A given mass bin contains haloes that entertain a range of 10x in transfer,
-which is likely dependent on environment as shown in Fig.
-\ref{fig:bigtransferpic}. Future work should investigate in more detail
+which is likely dependent on environment. Future work should investigate in more detail
 the physical mechanisms driving the scatter in these relations.
 
-The results above $10^{13} \msolar{}$ are quite uncertain, as there are
-very few haloes above this mass present in the box (less than 50), with the
-small scatter being misleading. It is also important to note that the shaded
-regions in Fig. \ref{fig:maintransferresult} represent the $1\sigma$
-scatter in a given bin and explicitly do \emph{not} include any errors that
-would occur from a finite sampling of haloes or halo assembly bias.
+The level of transfer above a halo mass of $10^{13} \msolar{}$ must be
+interpreted carefully, as there are very few haloes above this mass present
+in the box (less than 50), with the small scatter being misleading. It is
+also important to note that the shaded regions in Fig.
+\ref{fig:maintransferresult} represent the $1\sigma$ scatter in a given bin
+and explicitly do \emph{not} include any dispersion that would occur from a
+finite sampling of haloes or halo assembly bias.
+
+\subsection{Redshift evolution of transfer into Lagrangian Regions}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/component_fraction_multi_z.pdf}
+    \vspace{-0.7cm}
+    \caption{The fraction of gas mass in haloes at redshift $z=0$ (solid) and
+    redshift $z=2$ (dashed) as a function of halo mass at that redshift, split by
+    Lagrangian component. Scatter is shown only for the $z=2$ results. The top panel
+    shows the results from the \nojet{} simulation, with the bottom showing the
+    full \simba{} model.}
+    \label{fig:ltzevo}
+\end{figure}
+
+To further investigate the origin of the inter-Lagrangian transfer, in Fig.
+\ref{fig:ltzevo}, we consider the \nojet{} model and show how the gas in
+haloes at redshift $z=2$ is composed in this and the full \simba{} model.
+
+We see that both the \nojet{} and \simba{} models broadly reproduce the same
+fractions of gas in each Lagrangian component, with some minor differences.
+In the full model, a higher fraction ($25-50\%$) of the halo gas originates
+from inter-Lagrangian transfer than the \nojet{} model at all masses, with no
+change in the shape of this function observed. The fraction of gas
+originating outside of any Lagrangian regions shows a dip at around
+$10^{12}\msolar{}$ being removed in the \nojet{} model, however this is well
+within the scatter that we observe in the full model results.
+
+All of this is despite both models producing very different $z=0$ halo baryon
+fractions (see Fig. \ref{fig:baryonfraction} for the full model; the \nojet{}
+model produces baryon fractions at approximately the cosmic mean for all halo
+masses above $\sim10^{11}\msolar{}$). For a further investigation, halo matching
+should be performed between the two models and individual cases compared, but
+this is out of the scope of the current work.
+
+The fraction of gas in haloes originating from the different Lagrangian
+components shows an even closer match at redshift $z=2$, with the shape and
+normalisation of all components being well within the reported scatter. The
+higher-mass end of these results ($M_H > 10^{13}\msolar{}$) also lacks
+objects here, with there being even fewer in this mass range than at $z=0$.
+
+We see that between redshift $z=2$ and redshift $z=0$ a change in the slope
+of these functions takes place, and that the level of inter-Lagrangian transfer
+increases significantly. The fraction of gas originating from the Lagrangian 
+regions of other haloes increases by a factor of two (or more) at all halo
+masses, with the fraction of transfer from outside Lagrangian regions remaining
+constant or again increasing by a factor of two dependent on the resident halo mass.
+
+All of this must be explained within the context of very different baryon
+fractions for all haloes at redshift $z=0$. One possibility is that the
+majority of gas gained from outside of a haloes own Lagrangian region remains
+in the CGM, with very little of it making it into the disk (this is supported
+by the very low fraction of halo stars that originate from transfer, see Fig.
+\ref{fig:maintransferresult}). This gas can then be swept out of the halo by
+either stellar winds or (ejective) AGN feedback. Alternatively, if
+the main pathway for feedback is preventative, and the gas outside of haloes
+is well mixed, then this assembly of baryons would be curtailed equally for
+all Lagrangian components. A further investigation of these transfer
+properties (considering differences between the galaxy disks and the CGM)
+would be well suited for follow-up work using higher resolution simulations.
 
 \subsection{Transfer \emph{out} of Lagrangian Regions}
 
@@ -297,15 +403,89 @@ would occur from a finite sampling of haloes or halo assembly bias.
 	\centering
 	\includegraphics{figures/s50j7kAHF/inverse_component_fraction.pdf}
 	\vspace{-0.7cm}
-	\caption{The fate of gas that begins in Lagrangian regions, as a function of
-	initial Lagrangian region mass. The blue line shows the fraction of baryons
-	that reside in the halo that defines the Lagrangian region at redshift $z=0$,
-	the red line shows the the fraction of baryons that lie in a different halo,
-	and the purple line shows the baryons that lie outside of any halo at redshift
-	$z=0$. All but the most massive objects in the box struggle to retain more than
-	20\% of their baryons due to various factors, see the text for details.}
+ \caption{The fate of gas that begins in Lagrangian regions, as a function of
+ initial Lagrangian region mass. The blue line shows the fraction of baryons
+ that reside in the halo that defines the Lagrangian region at redshift
+ $z=0$, the red line shows the the fraction of baryons that lie in a
+ different halo, and the purple line shows the baryons that lie outside of
+ any halo at redshift $z=0$. All but the most massive objects in the box
+ struggle to retain more than 30\% of their baryons due to various factors,
+ see the text for details. The fraction of mass retained in the corresponding
+ halo (blue) is the lowest in the mass range $10^{12} - 10^{13}\msolar{}$.}
+
 	\label{fig:transferoutoflrs}
 \end{figure}
+
+
+
+Let us now consider the fates of baryons that begin their lives in Lagrangian
+regions. This material has three possible fates, as shown in Fig.
+\ref{fig:transferoutoflrs}: it can end up in the same halo as the dark matter
+from that Lagrangian region (blue line), in another halo (red line), or
+outside of any halo in the IGM (purple line). Here, we we plot the fraction
+of LR mass at $z=0$ from each component as a function of their Lagrangian
+region mass (this is the sum of the baryons and dark matter contained within
+that Lagrangian region). The Lagrangian region mass is somewhat higher than
+the eventual halo mass due to the baryon fractions of redshift $z=0$ haloes
+being below the cosmic mean. We see that, below a halo mass of
+$10^{13.5}\msolar{}$, only around 20-30\% of the baryons initially present in
+the Lagrangian region make it in to the halo by $z=0$. Only above a halo mass
+of $10^{13.5}\msolar{}$ do haloes become strong enough attractors to retain
+the majority of their baryons. Despite the clear trend, this result is
+somewhat uncertain due to the very small number of these very large haloes
+present in our $50\hmpc{}$ box. On top of this initial structure, we see that
+there is a dip in the retained fraction of baryons between $10^{12}$ and
+$10^{13}\msolar{}$. We speculate that this is due to the increased efficiency
+of AGN feedback in haloes in this mass range, allowing for more
+gas in central objects to be expelled, however making a direct connection
+would require significant investigation out of the scope of this work. It is
+worth noting that without the AGN jets (i.e. in the \nojet{} run), the baryon
+fraction of haloes in this mass range is approximately $f_b / f_{b,c} = 1$.
+
+Finally, we find that up to 10\% of the Lagrangian region gas of low-mass
+haloes ($<10^{12} \msolar{}$) can be transferred to other haloes, decreasing at
+higher masses. A larger cosmological volume with more objects is required for
+a full study of objects at masses higher than $M_H > 10^{13}\msolar{}$, but
+these trends point towards inter-Lagrangian transfer being fuelled by
+accretion of gas that is either expelled or stripped from lower mass haloes
+by higher mass objects. A plausible physical scenario is that early
+feedback leading up to redshift $z=2$, where star formation (and hence
+stellar feedback) peaks, expels significant quantities of gas from lower mass
+haloes that can then be swept up at later times from the IGM by all haloes.
+Higher mass haloes at this redshift may have a strong enough gravitational
+potential to enable their stellar winds to be more efficiently recycled,
+preventing them from being sources of inter-Lagrangian transfer.
+
+The combination of the baryons that are retained by haloes (Fig.
+\ref{fig:transferoutoflrs}) and the baryons that they manage to accrete from
+sources outside their Lagrangian region (Fig. \ref{fig:maintransferresult})
+is seen in the baryon fraction of haloes, shown in Fig.
+\ref{fig:baryonfraction} split by Lagrangian component. Here, we split the
+overall baryon fraction (relative to the cosmic mean) into three Lagrangian
+components, coloured by the baryons from the haloes own Lagrangian region
+(blue), other Lagrangian regions (red), and from outside any Lagrangian
+region (purple). In general, we see that there is a trough in the baryon
+fractions of haloes with a mass between $10^{12}\msolar{}$ and
+$10^{13}\msolar{}$, with the baryon fraction reaching the cosmic mean for the
+largest objects in the box (with a halo mass of $10^{14}\msolar{}$). The
+baryon fraction returning to $f_b = 1$ for these very large haloes is not due
+to these haloes retaining all of their Lagrangian gas, however; it is a
+complex interplay between their accretion from outside, from other Lagrangian
+regions, and from the significant component that originates outside of any
+Lagrangian region. These objects are clearly able to mix outside of their
+halo boundaries, swapping gas with the IGM, as has been shown in several
+studies \cite{Mansfield2017, Diemer2017} through `splashback'.
+
+The dip in baryon fraction between $10^{12}\msolar{}$ and $10^{13}\msolar{}$ in halo
+mass corresponds to the dip in retained baryons in a similar mass range in
+Fig. \ref{fig:transferoutoflrs}. However, within this mass range, it appears
+that the fraction of baryons originating from outside the Lagrangian region is
+more significantly affected than the fraction of baryons from the haloes own
+Lagrangian region (reduced by 50\% as opposed to 20\%). This points
+to a more complex accretion history for these objects, with a mixture of
+ejective feedback (in general reducing the amount of retained baryons) and preventative
+feedback (in general reducing the amount of baryons from outside of the
+corresponding Lagrangian region) shaping their baryonic content.
 
 
 \begin{figure}
@@ -317,72 +497,3 @@ would occur from a finite sampling of haloes or halo assembly bias.
 	contributions to the baryon fraction from various Lagrangian components.}
 	\label{fig:baryonfraction}
 \end{figure}
-
-Let us now move on to consider the fates of baryons that begin their lives in
-Lagrangian regions. This material has three possible fates, as shown in Fig.
-\ref{fig:transferoutoflrs} it can: end up in the same halo as the dark matter
-from that Lagrangian region (blue line); end up in another halo (red line),
-or outside of any halo in the IGM (purple line). Here, we plot the results as
-a function of their Lagrangian region mass (this is the sum of the baryons
-and dark matter contained within that Lagrangian region). This is somewhat
-higher than the eventual halo mass due to the baryon fractions of redshift
-$z=0$ haloes being below the cosmic mean. We see that, below a halo mass of
-$10^{13}\msolar{}$, only around 20\% of the baryons initially present in the
-Lagrangian region make it in to the halo at $z=0$. Only above a halo mass of
-$10^{14}\msolar{}$ do haloes become strong enough attractors to retain the
-majority of their baryons. This latter result is somewhat uncertain, however,
-due to the very small number of these very large haloes present in our
-$50\hmpc{}$ box. On top of this initial structure, we see that there is a dip
-in the retained fraction of baryons between $10^{12}$ and $10^{13}\msolar{}$.
-We speculate that this is due to the increased efficiency of AGN feedback in
-haloes in this mass range, allowing for more of the dense gas in central
-objects to be expelled, however making a direct connection would require 
-significant investigation out of the scope of this work. It is worth noting that
-without the AGN jets (i.e. in the \nojet{} run), the baryon fraction of haloes
-in this mass range is approximately $f_b / f_{b,c} = 1$.
-
-Finally, we see that the fraction of baryons transferred out of the Lagrangian
-region into other haloes drops of slowly with halo mass. A larger cosmological
-volume with more objects is required for a full study here, but these trends
-point towards inter-Lagrangian transfer being fuelled by accretion of gas
-that is either expelled or stripped from lower mass haloes by higher mass
-objects. This appears consistent with the results in \S \ref{sec:transferinto},
-where we found that little transfer between objects occurs before redshift
-$z=2$. A plausible physical scenario is that early feedback leading up to
-redshift $z=2$, where star formation (and hence stellar feedback) peaks,
-expels significant quantities of gas from lower mass haloes that can then be
-swept up at later times from the IGM by all objects. Higher mass haloes at this
-redshift may have a strong enough gravitational potential to enable their stellar
-winds to be more efficiently recycled, preventing them from being sources
-of inter-Lagrangian transfer.
-
-The combination of the baryons that are retained by haloes (Fig.
-\ref{fig:transferoutoflrs}) and the baryons that they manage to accrete from
-sources outside their Lagrangian region (Fig. \ref{fig:maintransferresult})
-is seen in the baryon fraction of haloes, shown in Fig.
-\ref{fig:baryonfraction} here split by Lagrangian component. Here, we split
-the overall baryon fraction (relative to the cosmic mean) into three
-Lagrangian components, coloured by the baryons from the haloes own Lagrangian
-region (blue), other Lagrangian regions (red), and from outside any
-Lagrangian region (purple). In general, we see that there is a trough in the
-baryon fractions of haloes with a mass between $10^{12}$ and
-$10^{13}\msolar{}$, with the baryon fraction reaching the cosmic mean for the
-largest objects in the box (with a halo mass of $10^{14}\msolar{}$). The
-baryon fraction returning to $f_b = 1$ for these very large haloes is not
-caused by these haloes retaining all of their Lagrangian gas, however; it is
-caused by a complex interplay between their accretion from outside, from
-other Lagrangian regions, and from the significant component that originates
-outside of any Lagrangian region. These objects are clearly able to mix
-outside of their halo boundaries, swapping gas with the IGM, as has been
-shown in several studies \cite{Mansfield2017, Diemer2017} through `splashback'.
-
-The dip in baryon fraction between $10^{12}$ and $10^{13}\msolar{}$ in halo
-mass corresponds to the dip in retained baryons in a similar mass range in
-Fig. \ref{fig:transferoutoflrs}. However, within this mass range, it appears
-that the fraction of baryons originating from outside the Lagrangian region is
-more significantly affected (reduced by 50\% as opposed to 20\%). This points
-to a more complex accretion history for these objects, with a mixture of
-ejective (in general reducing the amount of retained baryons) and preventative
-feedback (in general reducing the amount of baryons from outside of the
-corresponding Lagrangian region) shaping their baryonic content.
-

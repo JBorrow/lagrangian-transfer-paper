@@ -3,7 +3,7 @@
 
 The above halo-based metrics will have a certain level of dependence on the
 choice of halo finder used. In an attempt to ensure independence of the
-results from such factors, the above analysis was repeated both with the 3D
+results from such factors, the above analysis was repeated  with the 3D
 friends-of-friends (FoF) halo finder included in the {\tt yt} package
 \citep{Turk2011}. We also repeated the analysis with the \velociraptor{} 6D
 FoF finder \citep{Elahi2019}. The latter will disentangle active mergers, but
@@ -12,8 +12,9 @@ above results are qualitatively unaffected and only change quantitatively
 to the 5\% level. The use of a FoF finder, rather than the spherical
 overdensity finder found in AHF, did not qualitatively change the results.
 
-In the below, we discuss ways to extend the Lagrangian region definition to include
-more particles, whilst still retaining the ability to have non-uniform shapes. We
+
+In this section, we explore the implications of extending the Lagrangian
+region of haloes while retaining the ability to capture non-uniform shapes. We
 find that, in general, including more particles in the definition of the Lagrangian
 region (than are present in the halo) leads to a fractionally higher level
 of inter-Lagrangian transfer and more self-contribution to the final halo mass
@@ -40,9 +41,9 @@ The choice to assign the particles to the lowest mass halo, rather than the
 higher mass halo, was made to ensure that spurious transfer into the lower mass
 halo was avoided wherever possible. This means that the expectation is that
 with this metric the level of inter-Lagrangian transfer will increase with
-respect to the fiducial Lagrangian region identification method. The results
-with the particles given to the haloes of a higher mass show negligible
-deviation from the fiducial result.
+respect to the fiducial Lagrangian region identification method. This results
+with the particles given to the haloes of a higher mass showing negligible
+deviation from the fiducial result (see Fig \ref{fig:smoothconv}).
 
 \begin{figure}
 	\centering
@@ -50,7 +51,7 @@ deviation from the fiducial result.
 	\vspace{-0.7cm}
  \caption{The same as Fig. \ref{fig:maintransferresult}, but including
  Lagrangian region smoothing. Each line, coded by transparency, shows the
- fraction of baryonic mass in a halo from each component when the Lagrangian
+ fraction of gas mass in a halo from each component when the Lagrangian
  regions have been smoothed by 1 (i.e. the fiducial result), 2, 4, 8, 16, or
  32 particles (from darkest to lightest respectively). The white dashed line
  shows the result for the 32-smoothing case where the particles are given to
@@ -61,11 +62,12 @@ deviation from the fiducial result.
 	\label{fig:smoothconv}
 \end{figure}
 
-The results are shown in Fig. \ref{fig:smoothconv}. Note how smoothing the
-Lagrangian regions does have the expected effect of inducing more internal
-transfer, and does increase the proportion of baryons that are classified as
-retained as the Lagrangian regions are filled out. Despite this, the overall
-trends with respect to halo mass remain.
+Note how smoothing the Lagrangian regions does have the expected effect of
+inducing more inter-Lagrangian transfer, and does increase the proportion of
+baryons that are classified as retained as the Lagrangian regions are filled
+out. Despite this, the overall trends with respect to halo mass remain, with
+a significant (>20\%) contribution from gas from outside Lagrangian regions
+in haloes.
 
 \subsection{The sizes of Lagrangian regions}
 
@@ -80,27 +82,27 @@ the Lagrangian region. This is done in the following way:
 \begin{enumerate}
 	\item For every halo, find its current virial radius $R_{\rm vir}$. This contains
 	      all particles at redshift $z=0$ that we consider to be within the halo.
-      \item Now consider, $R_{\rm LR}$, and find all dark matter particles within
-            this region from the halo centre. These dark matter particles are now
-            defined to lie within the Lagrangian region of that halo.
-	\item ID match these particles and extend to the gas in the usual way.
+    \item Now consider a new radius, $R_{\rm vir} \leq R_{\rm LR} \leq 1.5
+		R_{\rm vir}$, and find all dark matter particles within this region
+		from the halo centre. These dark matter particles are now defined to
+		lie within the Lagrangian region of that halo.
+    \item ID match these particles in the initial conditions to define the new
+        Lagrangian region, extending to the gas in the usual way.
 \end{enumerate}
-We chose this specific process, increasing the radius of our Lagrangian
-region rather than the whole halo, to prevent us from simply re-defining our
-halo size and including more gas as well (as in this case, the transfer
-across the halo boundary would simply be moved to a larger radius). The
+The
 effects of this process on the gas component of Fig.
 \ref{fig:maintransferresult} (where it is most significant) are shown in Fig.
 \ref{fig:radius_dependence}.
+
 
 \begin{figure}
     \centering
     \includegraphics{figures/radius_convergence.pdf}
     \vspace{-0.7cm}
-    \caption{Again, the same as Fig. \ref{fig:maintransferresult}, but now
-    showing how the Lagrangian make-up of haloes is changed with an increasing
-    radius for the Lagrangian region. Lighter colours correspond to larger
-    radii, going in steps of $0.1R_{\rm vir}$ from 1.0 to 1.5.}
+    \caption{The same as Fig. \ref{fig:maintransferresult}, but now showing
+    how the Lagrangian make-up of haloes is changed with an increasing radius
+    for the definition of the Lagrangian region. Lighter colours correspond
+    to larger radii, going in steps of $0.1R_{\rm vir}$ from 1.0 to 1.5.}
     \label{fig:radius_dependence}
 \end{figure}
 
@@ -112,3 +114,8 @@ Lagrangian region classification; taking this extreme value for all haloes
 really is a `worst-case' scenario. The inter-Lagrangian transfer remains at a similar level
 despite the increase in radius. Note that there will be no extra mass included in the
 haloes here, with particles simply changing their Lagrangian allegiances.
+
+We chose this specific process, increasing the radius of our Lagrangian
+region rather than the whole halo, to prevent us from simply re-defining our
+halo size and including more gas as well (as in this case, the transfer
+across the halo boundary would simply be moved to a larger radius). 

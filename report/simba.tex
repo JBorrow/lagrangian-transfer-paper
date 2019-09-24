@@ -54,7 +54,7 @@ e.g.][]{Sembolini2016}.
 
 \subsection{Defining haloes}
 
-Halos are defined using a modified version of the Amiga Halo Finder
+Haloes are defined using a modified version of the Amiga Halo Finder
 \citep[AHF, ][]{Gill2004, Knollmann2009} presented in \citet{Muratov2015}.
 This spherical overdensity finder determines the halo centers by using a
 nested grid, and then fits parameters based on the Navarro-Frenk-White
@@ -65,18 +65,20 @@ code only returned main haloes.
 
 \subsection{Defining Lagrangian regions}
 
-The Lagrangian region associated with a halo is the volume in the initial conditions
+The Lagrangian region (LR) associated with a halo is the volume in the initial conditions
 that contains the dark matter that will eventually collapse to form that halo.
 
 Many methods exist for defining Lagrangian regions \citep[see e.g. ][ for a
 collection of methods]{Onorbe2014}. In this work the Lagrangian regions are
 defined in the following way:
 \begin{enumerate}
-	\item Find all haloes at $z=0$, and assign them a unique halo ID.
+	\item Find all haloes at redshift $z=0$, and assign them a unique halo ID.
 
-    \item For each halo, ID match the particles contained within it with those
-		  in the initial conditions. This defines the initial Lagrangian region
-		  based on the dark matter.
+    \item For each halo, match the particles contained within it with those
+		  in the initial conditions. These particles are then assigned a Lagrangian
+		  region ID that is the same as this halo ID, with particles outside of haloes
+		  (and hence Lagrangian regions) assigned an ID of -1. This defines the initial
+		  Lagrangian regions based on the dark matter.
 
 	\item In some cases, discussed below, fill in the holes in this Lagrangian
 		  region by using a nearest-neighbour search. In the fiducial case, skip

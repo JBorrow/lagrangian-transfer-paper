@@ -68,7 +68,7 @@ ax.set_ylabel("Baryon fraction $f_b / f_{b, c}$")
 ax.set_xlabel("Halo mass [M$_\odot$]")
 
 ax.set_xlim(halo_mass[0], halo_mass[-2])
-ax.set_ylim(0, 1)
+ax.set_ylim(0, 1.0)
 
 ax.legend()
 

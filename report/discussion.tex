@@ -6,22 +6,24 @@ throughout a cosmological simulation with respect to the dark matter, and
 employed them to investigate the \simba{} simulations and sub-grid model.
 The first of these metrics, the {\it spread metric}, shows that:
 \begin{itemize}
-    \item Dark matter can be spread up to $7.5\hmpc{}$ away from its
-          initial neighbour (of which the separation was only $80\hkpc{}$
-          initially) throughout the course of a cosmological simulation. This
-          has been validated with two simulation codes, \gizmo{} and \swift{}.
+    \item Dark matter can be spread up to $7.5\hmpc{}$ away from their inital
+          mass distribution throughout the course of a cosmological simulation.
+          This has been validated with two simulation codes, \gizmo{} and \swift{}.
     \item Gas can be spread to even larger distances, with the distance
-          dependent on the physics included in the sub-grid model. For the \simba{}
-          galaxy formation model with AGN jets, we find that gas can be spread to
-          up to $12\hmpc{}$ throughout the course of the simulation in a box that
-          is only $50\hmpc{}$ large. This is despite this powerful form of feedback
-          only directly interacting with 0.4\% of particles, and points towards
-          significant quantities of gas being entrained by these jets. It remains
-          to be seen if this will increase further with higher mass objects in
-          larger boxes.
+          dependent on the physics included in the sub-grid model. For the
+          \simba{} galaxy formation model with AGN jets, we find that gas can
+          be spread to up to $12\hmpc{}$ throughout the course of the
+          simulation in a box that is only $50\hmpc{}$ in size, with 40\% of
+          baryons having moved $> 1\hmpc{}$ ($3\hmpc{}$). This is despite
+          this powerful form of feedback only directly interacting with 0.4\%
+          of particles, and points towards significant quantities of gas
+          being entrained by these jets. It remains to be seen if this will
+          increase further with higher mass objects in larger boxes.
     \item Stars in the simulation show a very similar level of spread to the
           dark matter, suggesting that the gas particles that stars form out
-          of remain tightly coupled to the dark matter.
+          of remain tightly coupled to the dark matter. This implies that the
+          spreading of stars by gravitational dynamics dominates over the
+          spreading of their gas particle progenitors by feedback.
     \item Using the spread metric to select particles, we have shown that
           dark matter that is spread to large distances forms the diffuse
           structure within and around haloes, with lower spread dark matter
@@ -44,70 +46,96 @@ at $z=0$ split by the Lagrangian origin of the particles, shows that:
           transfer} is prevalent throughout the simulation, with haloes interchanging
           particles between $z=2$ and $z=0$ thanks to energetic feedback pathways.
     \item The majority of the stellar component of haloes (90\% above a halo mass
-          $10^{12}\msolar{}$) originates from the Lagrangian region of that halo,
-          aligning with the results from the spread metric that these particles
-          are very tightly coupled to the dark matter.
+          $10^{12}\msolar{}$) originates from the Lagrangian region of the
+          same halo, as expected given the similar large-scale spreads of the
+          stellar and dark matter.
     \item Below a halo mass of $10^{13}\msolar{}$, haloes can only retain
-          approximately 20\% of the baryons from their Lagrangian region,
+          approximately 20-30\% of the baryons from their Lagrangian region,
           with the majority of these baryons being lost to the IGM. Above
-          this mass, haloes become strong enough gravitational wells to retain
-          the majority of their baryons by around $10^{14}\msolar{}$ halo mass,
-          although this result is somewhat uncertain due to the $50\hmpc{}$ boxsize
-          used here.
-    \item These very large haloes, despite having a baryon fraction comparable
-          to the cosmic mean, still show significant levels of transfer from other
-          haloes and from outside any Lagrangian region. This suggests a complex
-          cycling of baryons through these haloes, with approximately 20\% of their
-          baryonic mass being `swapped' with the IGM by $z=0$.
-    \item We have found that a very small fraction of the stellar mass of haloes
-          can be made up from inter-Lagrangian transfer. Inter-galactic transfer,
-          such as that presented in \citet{AnglesAlcazar2017}, that can provide
-          up to a third of the stellar mass of the galaxy, appears to be confined
-          within Lagrangian regions themselves. However, we do find significant levels
-          ($\sim10\%$) of gas transfer between haloes by redshift $z=0$.
+          this mass, haloes become strong enough gravitational wells to
+          retain the majority of their baryons (up to 60\%) by around
+          $10^{14}\msolar{}$ halo mass, although this result is somewhat
+          uncertain due to the lack of objects in this mass range in the
+          $50\hmpc{}$ simulation box used here.
+    \item Haloes with mass $M_H > 10^{13.5}\msolar{}$, despite having a baryon
+          fraction comparable to the cosmic mean, still show significant
+          levels of transfer from other haloes and from outside any
+          Lagrangian region. This suggests a complex cycling of baryons with
+          approximately 20\% of their baryonic mass being `swapped' with the
+          IGM by $z=0$.
     \item Different Lagrangian components, as they make up the baryon
-          fraction of haloes, are affected differently by feedback mechanisms at
-          different halo masses. In the halo mass range
+          fraction of haloes, are affected differently by feedback mechanisms
+          at different halo masses. In the halo mass range
           $10^{12}$--$10^{13}\msolar{}$, the component of baryonic mass from
-          outside of the Lagrangian region is halved, whereas the component from
-          the haloes own Lagrangian region is only reduced within 20\%; this
-          suggests that preventative feedback in late-stage formation could be more
-          efficient at preventing baryon assembly in this mass range.
+          outside of the Lagrangian region is halved, whereas the component
+          from the haloes own Lagrangian region is only reduced within 20\%;
+          this highlights the importance of preventive feedback for the
+          baryon fraction of haloes.
 \end{itemize}
+
+Our results add a new perspective to the connection between baryon cycling
+and galaxy evolution. Using large volume simulations including
+momentum-driven winds, \citet{Oppenheimer2010} showed that most stars likely
+form out of gas that has previously been ejected in winds, and more recent
+zoom-in simulations agree with the prevalence of wind recycling
+\citep{Christensen2016, AnglesAlcazar2017, Tollet2019}. Using the FIRE
+simulations, \citet{AnglesAlcazar2017} further showed that the intergalactic
+transfer of gas between galaxies via winds can provide up to a third of the
+stellar mass of Milky Way-mass galaxies. Here we have introduced the concept
+of inter-Lagrangian transfer, which represents the extreme case of transfer
+of baryons between individual central haloes. For the \simba{} simulations,
+we find that only a small fraction (<5\%) of the stellar mass of haloes can
+be made up from inter-Lagrangian transfer gas, suggesting that most
+intergalactic transfer originates from satellite galaxies and is thus
+confined within Lagrangian regions. It is nonetheless quite significant that
+gas exchanged between Lagrangian regions can fuel star formation in a
+different halo at all. In addition, we do find a significant contribution
+(<20\%) of inter-Lagrangian transfer to the gas content of haloes at z = 0.
+Recently, \citet{Hafen2019} has highlighted the contribution of satellite
+winds to the gas and metal content of the CGM in the FIRE simulations. Our
+results suggest that the origin of the CGM of galaxies is linked to larger
+scales than previously considered.
+
 These results provide two possible main implications for current works. The
 first is the implications for semi-analytic models of galaxy formation. These
 models, by construction, tie the baryonic matter to dark matter haloes; they
 contain no prescription for gas that explicitly originates from regions where
 the dark matter does not end the simulation in a bound object. Also, whilst
-there has been some effort by \citet{Henriques2015} and others to include
-wind recycling into these models, there is currently no semi-analytic model
-that includes any concept of baryon transfer between un-merged haloes. The
-mixed origins of the baryons in the $z=0$ haloes point to a different
-physical origin for many fundamental galaxy properties.
+there has been some effort by \citet{Henriques2015, White2015} and others to
+include wind recycling into these models, there is currently no semi-analytic
+model that includes any concept of baryon transfer between un-merged haloes
+or baryonic accretion rates significantly different to that expected from the
+dark matter component.
 
-The second implication is for zoom-in simulation suites.These suites
+
+The second implication is for zoom-in simulation suites. These suites
 typically construct their initial conditions by considering the cubic volume,
-ellipsoid, or convex hull in the ICs containing the dark matter particles
-that are located within a given distance of the selected halo at $z=0$
-\citep[see e.g. ][]{Onorbe2014}. However, the above results highlight that
-the shapes of the causally connected regions in gas and dark matter may be
-significantly different. For example, the Latte \citep{Wetzel2016} suite uses
-an exclusion region for high resolution particles of around $1.5 \hmpc{}$.
-Whilst they do not find contamination of low-resolution particles into the
-high-resolution region, the above metrics suggest that perhaps low resolution
-\emph{gas} particles are not present due to a lack of sub-grid physics in the
-unrefined region, preventing spread from the unrefined regions into the main
-volume. This will be somewhat mitigated by the usual choice of very isolated
-haloes for zoom-in simulations, but future work should focus on these
-considerations for suites that have a full hydrodynamical simulation for
-their parent.
+ellipsoid, or convex hull in the initial conditions containing the dark
+matter particles that are located within a given distance (typically
+$2-3R_{\rm vir}$) of the selected halo at $z=0$ \citep[see e.g.][]{Onorbe2014}.
+However, our results highlight that the shapes of the
+causally connected regions in gas and dark matter may be significantly
+different. For example, the Latte \citep{Wetzel2016} suite uses an exclusion
+region for high resolution particles of around $1.5 \hmpc{}$ while we find
+that 10\% of cosmological baryons can move >3 Mpc away relative to the
+original neighbouring dark matter distribution. While zoom-in simulations are
+constructed to avoid contamination of low-resolution particles into the
+high-resolution region, our results suggest that they may miss a flux of
+external baryons into the high resolution region. In practice, contamination
+from external sources will be somewhat mitigated by the usual choice of
+isolated haloes, but future work should consider these effects for zoom-in
+suites that have a full hydrodynamical simulation for their parent.
 
 
-Finally, we note that these metrics are only valid for the \simba{} model.
-Other galaxy formation models may give different results, especially those
-with drastically different implementations for AGN feedback such as the
-purely thermal feedback in EAGLE. Future work should focus on the differences
-between these models, as differences in their spread metrics or levels of
-inter-Lagrangian transfer may be tied to differences in potential predicted
-observables for these simulations, such as the metallicity distribution in
-the CGM.
+The results presented here are based on the \simba{} model, which is in good
+agreement with a wide range of galaxy \citep{Dave2019} and black hole
+\citep{Thomas2019} observables, but are clearly dependent on the feedback
+implementation. Other galaxy formation models may yield different results,
+especially those with drastically different implementations for AGN feedback,
+such as the purely thermal feedback in the EAGLE simulation
+\citet{Schaye2015}. The spread metric represents a unique tool to
+characterize the global effects of feedback and will enable novel comparisons
+between existing cosmological simulations. Future work should also address
+the connection between baryon spreading and galaxy/CGM observables, as well
+as investigate baryonic effects on cosmological observables
+\citep{Schneider2015, Chisari2018} in the context of the spread metric.
