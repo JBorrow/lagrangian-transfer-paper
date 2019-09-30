@@ -24,6 +24,24 @@ now many more particles are classified as being present in the Lagrangian region
 
 \subsection{Filling in Holes in Lagrangian Regions}
 
+
+\begin{figure}
+	\centering
+	\includegraphics{figures/convergence_smoothing.pdf}
+	\vspace{-0.7cm}
+ \caption{The same as Fig. \ref{fig:maintransferresult}, but including
+ Lagrangian region smoothing. Each line, coded by transparency, shows the
+ fraction of gas mass in a halo from each component when the Lagrangian
+ regions have been smoothed by 1 (i.e. the fiducial result), 2, 4, 8, 16, or
+ 32 particles (from darkest to lightest respectively). The white dashed line
+ shows the result for the 32-smoothing case where the particles are given to
+ the highest, rather than lowest, mass haloes; no difference is seen here
+ suggesting that there is little overlap between the Lagrangian regions on
+ these scales. See the text for the details of how this smoothing is
+ constructed.}
+	\label{fig:smoothconv}
+\end{figure}
+
 Our method for producing Lagrangian regions simply uses the dark matter
 particles from a given halo; this naturally leads to a very diffuse
 Lagrangian region. To see how the diffuse nature of these regions affects our
@@ -45,22 +63,6 @@ respect to the fiducial Lagrangian region identification method. This results
 with the particles given to the haloes of a higher mass showing negligible
 deviation from the fiducial result (see Fig \ref{fig:smoothconv}).
 
-\begin{figure}
-	\centering
-	\includegraphics{figures/convergence_smoothing.pdf}
-	\vspace{-0.7cm}
- \caption{The same as Fig. \ref{fig:maintransferresult}, but including
- Lagrangian region smoothing. Each line, coded by transparency, shows the
- fraction of gas mass in a halo from each component when the Lagrangian
- regions have been smoothed by 1 (i.e. the fiducial result), 2, 4, 8, 16, or
- 32 particles (from darkest to lightest respectively). The white dashed line
- shows the result for the 32-smoothing case where the particles are given to
- the highest, rather than lowest, mass haloes; no difference is seen here
- suggesting that there is little overlap between the Lagrangian regions on
- these scales. See the text for the details of how this smoothing is
- constructed.}
-	\label{fig:smoothconv}
-\end{figure}
 
 Note how smoothing the Lagrangian regions does have the expected effect of
 inducing more inter-Lagrangian transfer, and does increase the proportion of
@@ -89,12 +91,6 @@ the Lagrangian region. This is done in the following way:
     \item ID match these particles in the initial conditions to define the new
         Lagrangian region, extending to the gas in the usual way.
 \end{enumerate}
-The
-effects of this process on the gas component of Fig.
-\ref{fig:maintransferresult} (where it is most significant) are shown in Fig.
-\ref{fig:radius_dependence}.
-
-
 \begin{figure}
     \centering
     \includegraphics{figures/radius_convergence.pdf}
@@ -105,15 +101,18 @@ effects of this process on the gas component of Fig.
     to larger radii, going in steps of $0.1R_{\rm vir}$ from 1.0 to 1.5.}
     \label{fig:radius_dependence}
 \end{figure}
-
-Here we see that there is a significant change in the fraction of mass in the
-halo at redshift $z=0$ from outside any Lagrangian region, especially when going to
-$R_{\rm LR} = 1.5 R_{\rm vir}$. This large change is expected, though, as we now
-have included a volume that is three times larger than the initial halo in the
-Lagrangian region classification; taking this extreme value for all haloes
-really is a `worst-case' scenario. The inter-Lagrangian transfer remains at a similar level
-despite the increase in radius. Note that there will be no extra mass included in the
-haloes here, with particles simply changing their Lagrangian allegiances.
+The effects of this process on the gas component of Fig.
+\ref{fig:maintransferresult} (where it is most significant) are shown in Fig.
+\ref{fig:radius_dependence}.Here we see that there is a significant change in
+the fraction of mass in the halo at redshift $z=0$ from outside any
+Lagrangian region, especially when going to $R_{\rm LR} = 1.5 R_{\rm vir}$.
+This large change is expected, though, as we now have included a volume that
+is three times larger than the initial halo in the Lagrangian region
+classification; taking this extreme value for all haloes really is a
+`worst-case' scenario. The inter-Lagrangian transfer remains at a similar
+level despite the increase in radius. Note that there will be no extra mass
+included in the haloes here, with particles simply changing their Lagrangian
+allegiances.
 
 We chose this specific process, increasing the radius of our Lagrangian
 region rather than the whole halo, to prevent us from simply re-defining our

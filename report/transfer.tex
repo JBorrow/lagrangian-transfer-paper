@@ -225,21 +225,21 @@ The difference in origins of the baryons in the final haloes, from
 hydrodynamical effects alone, is then around the $10-15\%$ level. This is
 close to the 25\% level of segregation between gas and dark matter reported
 by \citet{Liao2017} (who also used a non-radiative simulation), with the
-difference likely rooted in the different definitions that we use. We
-consider the fraction of gas particles in the final redshift $z=0$ halo whose
-initially pairing dark matter is also resident in that halo; hence what we
-are really counting is the `contamination' of the halo by gas particles from
-outside of its Lagrangian region. \citet{Liao2017} count all particles in the
-final halo, treating gas and dark matter equally, then finding all particles
-that were gas-dark matter pairs in the initial conditions. Their higher level
-of segregation is expected due to our approach not counting dark matter that
-is resident in that halo, but has lost its initial gas neighbour. Fundamentally this
+difference likely rooted in the definitions that we use. We consider the
+fraction of gas particles in the final redshift $z=0$ halo whose initially
+pairing dark matter is also resident in that halo; hence what we are really
+counting is the `contamination' of the halo by gas particles from outside of
+its Lagrangian region. \citet{Liao2017} count all particles in the final
+halo, treating gas and dark matter equally, then finding all particles that
+were gas-dark matter pairs in the initial conditions. Their higher level of
+segregation is expected due to contributions from dark matter particles that
+are resident in a halo but whose initial gas pair is not. Fundamentally this
 represents the difference in our approaches; here we are interested in
 treating the dark matter as a ground source of truth, and asking if the gas
 nearest to that dark matter follows it into the same haloes.
 \citet{Liao2017}, on the other hand, were interested in treating \emph{all}
-occupants of the final halo as the ground source of truth, and asking
-what differences there were in their origin.
+occupants of the final halo as the ground source of truth, and asking what
+differences there were in their origin.
 
 The causes for our contamination here are less clear than in the case of
 \citet{Liao2017}; we would report a halo that has had gas only \emph{removed}
@@ -313,17 +313,17 @@ of these particles.
 The transfer between haloes has several possible sources: stripped gas from
 nearby galaxies that are still classified as their own bound structures at
 redshift $z=0$, gas that has been expelled from galaxies through stellar
-winds or AGN feedback and re-captured by a halo, and possibly also spurious
-transfer due to boundary effects caused by the complex shapes of Lagrangian
-regions according to the definition adopted. With the non-radiative
-simulation showing zero transfer between haloes, and there being little
-transfer before redshift $z=2$ in the fiducial model, we believe that the
-contribution from pure dynamics alone to inter-Lagrangian transfer is likely
-very small. When repeating this analysis with the \nojet{} run, the
-inter-Lagrangian transfer is reduced by a small amount, but still remains at
-the 10\% level. If this transfer is powered by feedback events it must be
-dominated by the expulsion (or alternatively preventative pathways) from
-stellar winds and the residual thermal AGN feedback.
+winds or AGN feedback and re-captured by a halo, and transfer due to boundary
+effects caused by the complex shapes of Lagrangian regions according to the
+definition adopted. With the non-radiative simulation showing zero transfer
+between haloes, and there being little transfer before $z=2$ in the fiducial
+model (see below in Fig. \ref{fig:ltzevo}), we believe that the contribution
+from pure dynamics alone to inter-Lagrangian transfer is likely very small.
+When repeating this analysis with the \nojet{} run, the inter-Lagrangian
+transfer is reduced, but still remains at the 10\% level. The feedback events
+that power this transfer must be dominated by the expulsion (or alternatively
+preventative pathways) from stellar winds and the residual thermal AGN
+feedback.
 
 A given mass bin contains haloes that entertain a range of 10x in transfer,
 which is likely dependent on environment. Future work should investigate in more detail
@@ -337,7 +337,7 @@ also important to note that the shaded regions in Fig.
 and explicitly do \emph{not} include any dispersion that would occur from a
 finite sampling of haloes or halo assembly bias.
 
-\subsection{Redshift evolution of transfer into Lagrangian Regions}
+\subsection{Redshift evolution of transfer into haloes}
 
 \begin{figure}
     \centering
@@ -356,7 +356,7 @@ To further investigate the origin of the inter-Lagrangian transfer, in Fig.
 haloes at redshift $z=2$ is composed in this and the full \simba{} model.
 
 We see that both the \nojet{} and \simba{} models broadly reproduce the same
-fractions of gas in each Lagrangian component, with some minor differences.
+fractions of gas in each Lagrangian component, with some interesting differences.
 In the full model, a higher fraction ($25-50\%$) of the halo gas originates
 from inter-Lagrangian transfer than the \nojet{} model at all masses, with no
 change in the shape of this function observed. The fraction of gas
@@ -372,12 +372,12 @@ should be performed between the two models and individual cases compared, but
 this is out of the scope of the current work.
 
 The fraction of gas in haloes originating from the different Lagrangian
-components shows an even closer match at redshift $z=2$, with the shape and
+components shows a closer match at $z=2$, with the shape and
 normalisation of all components being well within the reported scatter. The
 higher-mass end of these results ($M_H > 10^{13}\msolar{}$) also lacks
 objects here, with there being even fewer in this mass range than at $z=0$.
 
-We see that between redshift $z=2$ and redshift $z=0$ a change in the slope
+We see that between redshift $z=2$ and $z=0$ a change in the slope
 of these functions takes place, and that the level of inter-Lagrangian transfer
 increases significantly. The fraction of gas originating from the Lagrangian 
 regions of other haloes increases by a factor of two (or more) at all halo
@@ -385,17 +385,17 @@ masses, with the fraction of transfer from outside Lagrangian regions remaining
 constant or again increasing by a factor of two dependent on the resident halo mass.
 
 All of this must be explained within the context of very different baryon
-fractions for all haloes at redshift $z=0$. One possibility is that the
-majority of gas gained from outside of a haloes own Lagrangian region remains
-in the CGM, with very little of it making it into the disk (this is supported
-by the very low fraction of halo stars that originate from transfer, see Fig.
-\ref{fig:maintransferresult}). This gas can then be swept out of the halo by
-either stellar winds or (ejective) AGN feedback. Alternatively, if
-the main pathway for feedback is preventative, and the gas outside of haloes
-is well mixed, then this assembly of baryons would be curtailed equally for
-all Lagrangian components. A further investigation of these transfer
-properties (considering differences between the galaxy disks and the CGM)
-would be well suited for follow-up work using higher resolution simulations.
+fractions for all haloes at $z=0$. One possibility is that the majority of
+gas gained from outside of a haloes own Lagrangian region remains in the CGM,
+with very little of it making it into the disk (this is supported by the very
+low fraction of halo stars that originate from transfer, see Fig.
+\ref{fig:maintransferresult}). This gas can then be swept out of the halo
+either by stellar winds or (ejective) AGN feedback. Alternatively, if the
+main pathway for feedback is preventative, and the gas outside of haloes is
+well mixed, then this assembly of baryons would be curtailed equally for all
+Lagrangian components. A further investigation of these transfer properties
+(considering differences between the galaxy disks and the CGM) would be well
+suited for follow-up work using higher resolution simulations.
 
 \subsection{Transfer \emph{out} of Lagrangian Regions}
 
@@ -436,11 +436,11 @@ somewhat uncertain due to the very small number of these very large haloes
 present in our $50\hmpc{}$ box. On top of this initial structure, we see that
 there is a dip in the retained fraction of baryons between $10^{12}$ and
 $10^{13}\msolar{}$. We speculate that this is due to the increased efficiency
-of AGN feedback in haloes in this mass range, allowing for more
-gas in central objects to be expelled, however making a direct connection
-would require significant investigation out of the scope of this work. It is
-worth noting that without the AGN jets (i.e. in the \nojet{} run), the baryon
-fraction of haloes in this mass range is approximately $f_b / f_{b,c} = 1$.
+of AGN feedback in haloes in this mass range, allowing for more gas in
+central objects to be expelled, however making a direct connection would
+require significant investigation. It is worth noting that without the AGN
+jets (i.e. in the \nojet{} run), the baryon fraction of haloes in this mass
+range is approximately $f_b / f_{b,c} = 1$.
 
 Finally, we find that up to 10\% of the Lagrangian region gas of low-mass
 haloes ($<10^{12} \msolar{}$) can be transferred to other haloes, decreasing at
@@ -474,7 +474,7 @@ complex interplay between their accretion from outside, from other Lagrangian
 regions, and from the significant component that originates outside of any
 Lagrangian region. These objects are clearly able to mix outside of their
 halo boundaries, swapping gas with the IGM, as has been shown in several
-studies \cite{Mansfield2017, Diemer2017} through `splashback'.
+studies through `splashback' \citep{Mansfield2017, Diemer2017}.
 
 The dip in baryon fraction between $10^{12}\msolar{}$ and $10^{13}\msolar{}$ in halo
 mass corresponds to the dip in retained baryons in a similar mass range in
