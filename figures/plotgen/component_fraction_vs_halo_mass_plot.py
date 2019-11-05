@@ -145,8 +145,8 @@ lr_mass = get_fancy_halo_mass(data_inverse)
 
 halo_switch = {
     "Own Halo": "mass_fraction_to_halo",
-    "Other Halos": "mass_fraction_to_other_halo",
-    "Outside Halos": "mass_fraction_to_outside_halo" 
+    "Other Haloes": "mass_fraction_to_other_halo",
+    "Outside Haloes": "mass_fraction_to_outside_halo" 
 }
 
 for color, label in zip(colors, halo_switch.keys()):
