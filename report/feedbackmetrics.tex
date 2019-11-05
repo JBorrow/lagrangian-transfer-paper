@@ -48,7 +48,7 @@ due to feedback. This {\it spread metric}, illustrated in Fig.
 
 \begin{figure}
     \centering
-    \includegraphics{figures/s50j7kAHF/dark_matter_distance_figure_s50j7k_AHF}
+    \includegraphics{figures/s50j7kAHF/dark_matter_distance_figure_s50j7k_AHF_updated.pdf}
     \vspace{-0.7cm}
     \caption{The redshift $z=0$ spread metric distribution for the dark
     matter component in the full \simba{} model. The distribution is split
@@ -114,33 +114,17 @@ metric does not depend much on the number of neighbours considered, but we
 find that larger choices of $n$ yield a more direct connection between spread
 distance and hierarchical structure (with low-spread particles dominating
 substructures and high-spread particles corresponding to more diffuse
-components, as shown in Fig. \ref{fig:bigdistanceimage}).
+components, as shown in Fig. \ref{fig:bigdistanceimage}). The only minor difference
+when considering changes in the choice of neighbours is the placement of the
+`bump' in gas outside haloes at around $0.2\hmpc{}$. In the case with no averaging,
+this bump corresponds to approximately the mean inter-particle separation, with
+the distance increasing as a function of $\sqrt[3]{n}$.
 
 \subsection{Baryon Spreading in \simba{}}
 
-Fig. \ref{fig:distbaryon} shows how the distribution of spread distances
-for the gas particles is significantly different to that for the dark matter.
-Gas particles are able to spread to much larger distances, up to $12\hmpc{}$
-(approximately 10 times the virial radius of the largest halo in the box!),
-compared to the $7\hmpc{}$ that dark matter can reach. We also see that even
-gas inside of haloes at $z=0$ has spread significantly more than the dark
-matter when explicitly selecting for this component. This suggests a
-different origin for the gas and dark matter content of haloes.
-
-Another interesting component is the gas that originated in Lagrangian
-regions (i.e. next to the dark matter that will reside in haloes at $z=0$),
-indicated by the blue dashed line. With the baryon fraction of haloes being
-typically less than $50\%$ of the cosmic mean, we should expect that a
-significant amount of Lagrangian gas is lost over time, possibly spreading to
-large distances out of haloes due to high energy feedback events, either
-through galactic winds or AGN feedback. In \simba{}, we see that gas from
-Lagrangian regions indeed spreads systematically further, with a factor of
-$\sim 2$ more particles at distances larger than $\sim 4 \hmpc{}$ than an
-unbiased selection would suggest.
-
 \begin{figure}
     \centering
-    \includegraphics{figures/s50j7kAHF/distance_plot_split_by_component+AHF.pdf}
+    \includegraphics{figures/s50j7kAHF/distance_plot_split_by_component+AHF_updated.pdf}
     \vspace{-0.7cm}
     \caption{Spread distance distribution for gas at $z=0$ (blue) compared to
     that of the dark matter component (purple). Solid lines indicate the full
@@ -155,6 +139,7 @@ unbiased selection would suggest.
     unbiased selection at large spread distances.}
     \label{fig:distbaryon}
 \end{figure}
+
 
 \begin{figure*}
     \centering
@@ -185,16 +170,6 @@ unbiased selection would suggest.
     \label{fig:bigdistanceimage}
 \end{figure*}
 
-A visualisation of the projected surface densities corresponding to the low-
-and high-spread particles is shown in Fig. \ref{fig:bigdistanceimage} for
-both dark matter and gas, for the fiducial \simba{} model. We define
-`low-spread' particles as those in the lower tertile (33\%) of the
-distribution, and `high-spread' particles as those in the upper tertile. By
-making these cuts in the distance distribution, we are able to show that the
-low-spread particles correspond to substructure, with the high-spread
-particles contribution being the larger-scale, more diffuse, CGM and
-intergalactic medium (IGM).
-
 
 \begin{figure*}
     \centering
@@ -214,6 +189,39 @@ intergalactic medium (IGM).
     (compared to gas or dark matter) in the simulation.
     }\label{fig:feedbackdistance}
 \end{figure*}
+
+
+Fig. \ref{fig:distbaryon} shows how the distribution of spread distances
+for the gas particles is significantly different to that for the dark matter.
+Gas particles are able to spread to much larger distances, up to $12\hmpc{}$
+(approximately 10 times the virial radius of the largest halo in the box!),
+compared to the $7\hmpc{}$ that dark matter can reach. We also see that even
+gas inside of haloes at $z=0$ has spread significantly more than the dark
+matter when explicitly selecting for this component. This suggests a
+different origin for the gas and dark matter content of haloes.
+
+Another interesting component is the gas that originated in Lagrangian
+regions (i.e. next to the dark matter that will reside in haloes at $z=0$),
+indicated by the blue dashed line. With the baryon fraction of haloes being
+typically less than $50\%$ of the cosmic mean, we should expect that a
+significant amount of Lagrangian gas is lost over time, possibly spreading to
+large distances out of haloes due to high energy feedback events, either
+through galactic winds or AGN feedback. In \simba{}, we see that gas from
+Lagrangian regions indeed spreads systematically further, with a factor of
+$\sim 2$ more particles at distances larger than $\sim 4 \hmpc{}$ than an
+unbiased selection would suggest.
+
+
+A visualisation of the projected surface densities corresponding to the low-
+and high-spread particles is shown in Fig. \ref{fig:bigdistanceimage} for
+both dark matter and gas, for the fiducial \simba{} model. We define
+`low-spread' particles as those in the lower tertile (33\%) of the
+distribution, and `high-spread' particles as those in the upper tertile. By
+making these cuts in the distance distribution, we are able to show that the
+low-spread particles correspond to substructure, with the high-spread
+particles contribution being the larger-scale, more diffuse, CGM and
+intergalactic medium (IGM).
+
 
 Considering first the dark matter in the largest halo (top row), we see that
 the very small-scale substructure of the halo is preferentially picked up by
@@ -330,6 +338,22 @@ now that a crucial energy injection mechanism from the AGN jets is missing.
     \label{fig:cumulativehistogram}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/neighbour_analysis_hist_redshift.pdf}
+    \vspace{-0.7cm}
+    \caption{Spread metric distributions shown again for the
+    \nojet{} (top) and full \simba{} model (bottom) simulations, now including
+    the redshift $z=0$ (solid) and $z=2$ (dashed) results. We see that at all
+    redshifts the \nojet{} model produces spread metric distributions that
+    are highly similar for all three particle types, with the full \simba{}
+    model showing divergence between the dark matter and gas even at
+    redshift $z=2$. The AGN jets cause a significant difference between
+    these gas distributions, and are able to power winds out to a spread of
+    $5\hmpc{}$ even by $z=2$.}
+    \label{fig:zevodist}
+\end{figure}
+
 This result is surprising given that less than $0.4\%$ of gas particles in
 the simulation have ever interacted directly with the AGN jets; this has been
 enough to significantly decouple the gas from the dark matter dynamically.
@@ -360,21 +384,6 @@ moved > $1\hmpc{}$ ($3\hmpc{}$) by $z = 0$, with a slow tail off ending with
 nearly all of the mass being constrained to be spread less than $5\hmpc{}$.
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth]{figures/neighbour_analysis_hist_redshift.pdf}
-    \vspace{-0.7cm}
-    \caption{Spread metric distributions shown again for the
-    \nojet{} (top) and full \simba{} model (bottom) simulations, now including
-    the redshift $z=0$ (solid) and $z=2$ (dashed) results. We see that at all
-    redshifts the \nojet{} model produces spread metric distributions that
-    are highly similar for all three particle types, with the full \simba{}
-    model showing divergence between the dark matter and gas even at
-    redshift $z=2$. The AGN jets cause a significant difference between
-    these gas distributions, and are able to power winds out to a spread of
-    $5\hmpc{}$ even by $z=2$.}
-    \label{fig:zevodist}
-\end{figure}
 
 \subsection{Redshift evolution of the Spread Metric}
 
